@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zirlai 2 - VOP</title>
+    <style>
+        @font-face {
+            font-family: 'MizoCustomFont';
+            src: url('VNT-ARL.TTF') format('truetype');
+        }
+
+        body {
+            font-family: 'MizoCustomFont', Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+            line-height: 1.6;
+        }
+
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px #aaa;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        .q-box {
+            margin-bottom: 20px;
+            background: #eef;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .q-box p {
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        .q-box label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #008CBA;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .back-btn {
+            background-color: #555;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>🎉 Lawmpuiawm! 🎉</h2>
+            <p id="modalMessage">I chhang dik vek e. Lesson thar i zir chhunzawm thei tawh.</p>
+            <button id="modalContinueBtn" class="modal-btn" onclick="goToNext()">Lesson 3 ah Kalna ➔</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">⬅ Dashboard ah Letna</a>
+
+        <h1>ZIRLAI PAHNIHNA</h1>
+
+        <h2>Khawvel Chanchin Tlangpui dik Taka Hril Lawkna</h2>
+
+        <blockquote>
+            Châng Pawimawh: “Tin, hril lâwkna thu nghet lehzual chu kan nei a ni, khua a lo vâr a, vârparh arsi chu in
+            thinlunga a lo chhuah hma loh zawng chu chu khâwnvâr hmun thima êng a ngaihsak anga in ngaihsak chuan in ti
+            ṭha ang.” 2 Petera 1:19.
+        </blockquote>
+
+        <blockquote>
+            “HRILHLAWKNA hi Pathian thawk khum a ni tih huai taka ṭan tlat ngamtu chu Kristian sakhua chauh hi a ni.
+            Khawvêl thiltihtheihnain a phâk bak chhinchhiahna chiang tak a neihna ngawt pawh hi a dikzia lantirtu pakhat
+            chu a ni ngei mai. Thuthlung Hlui hian hun lo la thleng tûra thilte chu an thlen hma daihin chiang tak leh
+            fiah takin a tarlang diam tawh a, tin, chung hril lâwknate chu Pathian aṭanga chhuak vek an ni tih a târlang
+            bawk. Kristian sakhua chuan khawvel chanchin te, hmasang thil chanchin zirna te, finna te leh mihring
+            thiamna leh finna pêng hrang hrang te hian hril lawkna thleng famkim thei lo pakhat chauh pawh sawi tur an
+            hriat chuan sawi chhuak tûrin huai takin a ngên a ni.”..A.T.Pierson.
+        </blockquote>
+
+        <h2>ZIRLAI INṬANNA</h2>
+
+        <p>Kum engemawti chhûng chu Europe-a mipuite khuan an zân mut dâwn apiangin zinga tho leh tur an awm dâwn nge
+            dâwn lo tih leh, an mut hlanin chatuan atân bomb den hlum zawh vek an ni dawn em ni tih an ngaihtuah
+            atalakin mutmu pawh an tuah thei ngai lo va. Europe pal tlanga ram hnehtu hrang hrang an kal vêl zut lai
+            chuan khawvel ram tina mite, ngun taka thil kal dân lo thlîr leh lo enthlithlaitute rilruah chuan hêng
+            zawhna pahnihte hi an lo lang ṭhin:</p>
+
+        <ol>
+            <li>Rorêltu pakhat chauhin Europe hi a hnehin a ṭhuikhâwm thei ang em?</li>
+            <li>Europe ram mi chêngte, a hmei a pa nunaute nên lama râwt chiamna awm ṭhîn hian reh hun a nein gang dâwn
+                lo em ni?</li>
+        </ol>
+
+        <p>Kum zabi sâwmpali lai kal ta chhûng khân mi malin emaw, mi ṭhenkhat ṭangrualin emaw Europe hi hneh tumin an
+            lo bei tawh ṭhin a, nimahsela tumah hlawhtling rêng an la awm ngai lo. Engnge a chhan ni ang le? Eng vângin
+            nge mi thiltithei tak takte pawhin hriamhrei leh hmanraw ṭha tak takte nên meuha an beih pawha an tum chu an
+            hlen theih ngai loh?</p>
+
+        <p>Herodotus-a, khawvêl chanchin pa an tih ṭhin chuan a chanchin ziak tûr inhmu rem lo tak tak leh inralkah tak
+            takte a lâwr khâwm hmain Daniala Pathian zâwlneite zinga pakhat chuan khawvêl tawp hun thlenga khawvel pum
+            pui chunga rorêltu lalram hrang hrang lo ding chhuak turte chu, an hun indawt dân chenin a lo sawi lâwk diam
+            tawh a ni.</p>
+
+        <p>Kum sanghnih leh zanga lai a ni ta. Babulonah lalram pakhat rorêltu pakhat chauh kuta thuneihna innghat chu
+            din a ni a; chu lalram chu Nebukanezara sipai ram lâkte aṭanga lo piang chhuak a ni. Mimal thuneihna hmanga
+            rorelnaah hian chakna lehchak lohna a awm ṭhinzia he lalram hian a tilang chiang hle. Chutiang rorelna din
+            chhuaktute rêng rêng chuan an lalram din thar chu helh din reng theih a nih dâwn leh dâwn loh te, ram
+            enkawlna leh rêlbawlnaa harsatna tam tak lo chhuak turte an ngaihtuah châwk ṭhin. Nebukanezara pawh hian
+            chutiang bawkin a lalram la awm zêl dan tûrte chu a ngaihtuah nep nep a, chutia a ngaihtuah lai chuan
+            Pathianin mumang mak tak mai a rawn mantir ta a.</p>
+
+        <p>Pathianin Daniela hmanga Nebukadnezara mumang a hrilhfiahna hian khawvêl pum pui chunga rorêltu lalram
+            chanchin te a fûn khawm kim ber âwm e. Chang tawi tê tê pariat lekah chu mi chanchin chu kan hmu a,
+            nimahsela khawvêl thiltihtheihna leh ropuina thute chu an khaikhâwm kim tâwk hle si a ni. Tin, chutianga
+            thil tam tak chanchin, thu tlêm têa fûn khawm theih si chu mihring finna phak bak a ni. Tin khawvêl chanchin
+            dik tak, huap zau êm êm si, thu tlêm tea tarlan vek bawk si chu mihring ṭawngin tun hma lamin ziak a lang
+            chiang hle. Mi malin Europe hi hneh a la ni ngai lo. He thilah hian Pathian kut a tel a tih vek theih ang
+            em? tih zawhna chu thu pasarih leka chhân a ni a,</p>
+
+        <p>He zirlai hi ngunthlûk taka zir lâk a ni. Hmasâng lehkhabutea hril lâwkna leh Baibl-a hril lâwknate hi ang
+            khata en mai tur an ni love. Pathiana inchhâlte zawng zawng chunga lêng, Pathian nung pakhat chauh a awm a,
+            Ani chuan engkim a hre vek a. Baibl hril lâwknate Bulpui hi a ni.</p>
+
+        <h2>HRIL LAWKNA TUM</h2>
+
+        <div class="question">Hril lâwkna thu zirna aṭangin eng malsâwmna pahnih nge lo thleng?</div>
+
+        <blockquote>
+            “Dik takin Lalpa Pathian chuan a rawngbâwltu, a zawlneite hnênah a <span class="uppercase">THURUK
+                HRILH</span> lovin engmah a ti lo vang.” Amosa 3:7.
+        </blockquote>
+        <blockquote>
+            “Tun achinah a lo thlen hmain ka hrilh che u hi, <span class="uppercase">A LO THLEN HUNAH</span> amah kha ka
+            ni tih <span class="uppercase">IN RIN THEIHNA TURIN</span>.” Johana 13:19.
+        </blockquote>
+        <blockquote>
+            “Hrilh lâwkna <span class="uppercase">THU NGHET LEHZUAL</span> kan nei, khua a lo vâr a, vârparh arsi chu in
+            thinlunga a lo chhuah hma loh zawng chu chu khawnvâr hmun thima <span class="uppercase">ENG</span> an
+            ngaihsak anga in ngaihsak chuan in ti ṭha ang.” 2Petera 1:19.
+        </blockquote>
+
+        <p>A hmasain hrilh lâwkna chuan Pathian thu dik zia te, rinawmzia te leh thâwk khum a nihzia te min rin nghehtir
+            a. Baibl hrilh lâwkna thleng famkimte kan hmuhin, a bul aṭanga a tawp thlenga hre tlang vektu kan Pathian
+            leh, A thâwk khum Lehkha Thute min rin ngheh zualtir sauh bawk a ni.</p>
+
+        <p>A dawt lehah chuan hrilh lâwkna chu thim zinga êng, hun lo la thleng tûr pawh va chhun êng phût thei khawp
+            hiala thiltihtheihna nei a ni. Thil lo thleng tûrte chu A fate hnênah Pathianin a hriattir a, kum 2,500 lai
+            kal taa hrilh lâwkna thu ziakte pawh naktuk lawka thil lo thleng tûr chanchin mihringten an hrilh lâwknate
+            ai chuan an la dik zâwkin an la rinawm zawk a ni.</p>
+
+        <h2>LALBER MUMANG</h2>
+
+        <div class="question">Babulon lal, Nebukanezaran eng a ngaihtuah laiin nge mumang tak tak a lo neih?</div>
+
+        <blockquote>
+            “Aw Lalber, nang chuan i khum laizâwlah chuan tun hnua thil lo awm turte i ngaihtuah a, thil inthupte puang
+            ṭhintu chuan tun hnua thil lo la awm tûrte chu a hriattir che a ni e.”
+        </blockquote>
+        <blockquote>
+            “Nebukadnezzara rorêl kum hnihnaah chuan Nehukadnezzara chuan muamang a nei a; a rilru a lo buai zo ta a, a
+            muhil thei ta lo va.”Daniela 2:29, 1
+        </blockquote>
+
+        <p>Nebukanezzara hi lal naupang tak la ni mah sela, thiltithei tak a nih avângin râl a beihna zawng zawngah te
+            chuan ropui taka hnehtu a ni zêl a. A Babulon lalram ropui tak chu chatuana ding reng tûrin leh, khawvêl
+            zawng zawng chunga rorêltu ni kumkhua tûrin siam dân kawng a ngaihtuah ta a. Zan khat chu, chûng thilte,
+            “tûn hnua thil lo thleng tur thu” ngaihtuah avanga a rilru a buai hle laiin a lo muhil a, mang a lo nei ta
+            a.</p>
+
+        <div class="question">Lal Nebukanezzara chuan a mangah engnge a hmuh?</div>
+
+        <blockquote>
+            “Aw Lalber, i han dâk chhuak a, ngai teh, milim ropui tak a lo awm a. Chu milim hrawlpui, tle êm êm mai chu,
+            i hmaah a ding a; a landan pawh ṭihbaiawm tak a ni. Chu milim chu a lu rangkachak thianghlim tak a ni a, a
+            âwm leh a bânte chu tangkarua a pum leh a malpuite dâr, a kete thîr, a kephah chu a ṭhen thir, a ṭhen bellei
+            a ni a. Nang chuan lung, kut lova laih chhuah thlengin i lo en a, chu chuan milim chu a kephah thir leh
+            belleiah chuan a han delh a, a tikeh sawm ta vek a. Tichuan, thir te, bellei te, dâr te, tangkarua te,
+            rangkachak te chu arualin an kehsawm ta vek a, nipui lai hrui zâwla buhsi ang mai an lo nita a. tin, thliin
+            anmahni a lên bova, an awmna hmun rêng hriat a nita lo va: tin, milim delhtu lung chu tlang lian takah a lo
+            chang a, lei pum hi a khat ta a.”Daniela 2:31-35.
+        </blockquote>
+
+        <p>He mumang chungchânga thil danglam tak pakhat awm chu lalber, a mang neitu ber pawhin a mang rêng rêng a hre
+            chhuak zo ta lo hi a ni. Mumang a neih apianga a tih dan fo ṭhin angin he mi ṭum pawh hian a mi fingte
+            –aienthiam-te dawivaihthiam te, dawithiam te a ko khâwm a. Nimahsela, chûng mi fingho, mumang awmze
+            hrilhfiah thiam inti ṭhinte pawh chu lal hmaah chuan mangang tak leh hrilhhai takin an ding ta reng a.
+            Lalber lah chuan a mumang hrilhfiah tûr leh a awmzia pawh hrilh nghal turin a phût tlat mai si a. A mi
+            fingten mumang chu an hnêna a hrilh theih phawt chuan a awmzia chu an hrilh mai ang an tih pawhin, “Mumang
+            chu min hrilh ula, a hrilhfiahna min entir thei tih ka hria ang,” tiin, a chhâng then mai a. Thil ngiat mak
+            tak leh danglam tak a ni i ti ngei ang le. Amaherawhchu nakin hnua thil lo thleng tûr chanchin sawi lâwk
+            theia inchhâl si, engatinge hun rei lo te kal taa thil thleng chanchin an hriat chhuah theih si loh? Hre
+            ngei tûra beisei theih an ni dâwn lawm ni? Lal berin a mi fingte tlâktlai lohzia leh dâwt an lo sawi tawh
+            ṭhinzia a hmuh chuan an zaa tihhlum nghâl turin thu a pe ta a. Chûng mi finghoten thihna an pumpelh leh
+            theih dân chu chanchin ngaihnawm tak a ni. Chutih laia Babulona Pathian dik betu mi pakhat avangin chûng mi
+            fingte chuan thihna an pumpelh ta a ni.</p>
+
+        <p>Babulon khawpuiah chuan Juda mi pakhat, Daniela, Jerusalem khua aṭanga sal mante zinga mi a awm a. Pathian
+            dik betu a ni a, lalber thupêk a hriat veleh a ṭhian pathumte nên ṭawngṭaina bik an nei nghâl a (Daniela
+            2:17-19). An ṭawngṭaina chu Pathianin a chhâng a, mumang leh a awmze hrilhfiahna pawh chu Daniela hnênah
+            chuan hriattir a nita a. Hetah hian Pathian Thu aṭanga thutak hmuh chhuah tuma thinlunga tih tak zetna neia
+            zawngtute tan zir tur ropui tak a awm. Pathian Lehkha Thu ṭhenkhata hriat thiam loh leh buaina deuh i neih
+            chuan hriat thiamna dîlin Pathian hnênah ṭawngṭai la, kaihruai tur chein Amah chu sâwm ṭhin ang che.</p>
+
+        <div class="question">Mangang taka lalber awm hnênah chuan eng thu nge Danielan a va hrilh?</div>
+
+        <blockquote>
+            “Nimahsela, thil inthupte puangtu Pathian chu vanah a awm a, lal Nebukadnezzara hi tun hnua thil lo la awm
+            tûrte chu a hriattir a nih hi.” Daniela 2:28.
+        </blockquote>
+
+        <p>“Ni hnuhnung,” tûn lai hun thu hril lâwkna hi kan ngai pawimawh êm êm tur a ni. Kum 2,500 chhûng zawng hian
+            he mumang hi Pathian hrilh lawkna dikzia lantirtu a ni. Pathian hrilh lâwkna chuan hun lo la awm tura thilte
+            chu chiang taka kan hmuh theih nan hliahtu puanzâr chu a hlîp kiang a, bumna leh sualnaina min phuar theihna
+            lak ata min chhanchhuak a, kan rinna a tinghet bawk a. Arsi ngaihtuahtuten entlang ṭha tak hmanga vânte an
+            thlîr ṭhin ang hian hrilh lâwkna thu zirtute chuan ni hnuhnunga thil lo thleng tûrte chu an thlîr ṭhin a ni.
+        </p>
+
+        <h2>KHAWVEL LALRAM PALITE</h2>
+
+        <h3>A lu rangkachakin Daniela hun laia khawvêl pum pui chunga rorêltu, Babulon lalram a entir. (606-538 B.C.)
+        </h3>
+
+        <blockquote>
+            “Aw lalber, nang hi lalte lal, vân Pathianin ram te, thiltihtheihna te, chakna te, ropuina te a pêka chu i
+            ni a…rangkachak lu chu nang hi i ni.” Daniela 2:37,38.
+        </blockquote>
+
+        <p>A lu rangkachakin a lalram leh thuneihna a entir tih thu han hriat chu Nebukanezzara tân chuan thil lâwmawm a
+            va ni dâwn tehlul êm!</p>
+
+        <p>Babulon ropui, rangkachak lalram, tihchhiat theih rual loh khawpui chu khawpui nghet ber leh chak berte zinga
+            mi a ni a. Chu khawpui chunga rorêltu leh a chhûnga mi chêngte rêng rêngreng chuan chu khawpui chu tlâwm
+            theiin an ring ngai lo a ni. Chu khaw kulh bang chhah lam chu hlam sawm dâwn lai a ni a, a sân lam pawh hlam
+            50 lai a ni. A khaw pum chu lei laih khuarin a hual chhuah vek avangin hmelma lak aṭangin a him tâwk hle a.
+            Tin, kulh bang chhûng lamah chuan hmêlma kawng dâltu atan bang sâng pui a kual chhuak leh bawk a. Chu
+            khawpui chu hmelmaten ṭâm chhuah tuma hun rei tak chhûng hual a nih thulh pawha invên nân a chhungah chuan
+            kum sâwm chhung tla tawk ei tur chhêk khawl sa diam a ni bawk.</p>
+
+        <p>Kil li nei a ni a, a kil tin chu mel 56 zela sei a ni. Chhak lam leh thlang lam hawi zâwngin kawtthlêr 25 an
+            kal tlang a; chhim leh hmar zâwngin chuti zat bawk chu an kal tlang sung bawk a. Nimahsela chu khaw ropui
+            tak mai chu lalram dang thuneihna hnuaiah a la awm ang a, a la tlâwm dâwn a ni. (Jeremia 51:37, 26,58; Isaia
+            13:29, 20 te hi en la).</p>
+
+        <h3>A âwm leh bân tangkaruain khawvêl lal ram pahnihna Medo-Persia chu an entir a. (539 – 331 B.C) Daniela 8:20
+            en la).</h3>
+
+        <blockquote>
+            “Tin, a hnuah hian ram dang nang aia tenau zâwk a lo ding ang.” Daniela 32:39.
+        </blockquote>
+
+        <p>Babulon lalram ropui chu hnam dang kuta awm tûrin tihtlâwm a la ni ang a, chu lalram chu khawvêl zawng zawng
+            chunga rorêltu pahnihna a ni ang tih thu han hriat chu lalber tân chuan a va beidawnthlâk dâwn êm!</p>
+
+        <p>Babulon lalram ropui tak hneh tûr chuan Pathianin Persia sipai hotu Kura chu a thlang chhuak a, ani chuan a
+            sipaite hruaiin Babulon chu a va hneh ta a ni. Kura leh a hote chuan Babulon khawpui tan tlanga luang,
+            Euphrates Lui chu khawpui pawn lamah khuapin, an luan sawntir a, tichuan Lui luanna hlui chu zawhin khawpui
+            chhungah chuan an lût ta ruih ruih a, lui kama kawngkharahte chuan sipaite chu an lût ta chiam a.</p>
+
+        <h3>A dull eh malpui dârin lalram pathumna, Grik lalram a entir a. (331-168 B.C)</h3>
+
+        <blockquote>
+            “Tin, dâr, ram thumna, lei chung zawng zawnga rorêl tûr chu a awm le hang.” Daniela 2:39.
+        </blockquote>
+
+        <p>Kum nga chhûng lekin Alexander Ropuia chu tuma er ngam rual lohin hnehtu ropui takah a in siam a. A Grik
+            sipai huaisen tak takte chuan Medo Persia sipaite chu an rawn do va (Grik sipai pakhat leh Medo Persia sipai
+            sawmhnih inbei ang an ni a), intam hleih hle mah sela, Alexander Ropuia hote chuan an hneh ta zâwk a,
+            tichuan khawvcêl pum puia thuneitu, lalram pathumna chu a lo ding chhuak ta a ni.</p>
+
+        <p>Grik lalramin Medo-Persia lalram chu a rawn luahlân ang tih chu hril lâwkna dangah pawh chiang takin kan hmu.
+            (Daniela 8:20,21).</p>
+
+        <h3>A ke thirin a entir chu lalram palina, lei chung zawng zawnga thuneitu lalram hnuhnung ber, Rom lalram a ni.
+            (168 B.C 476 A.D)</h3>
+
+        <blockquote>
+            “Tin, ram lina chu thir anga khauh a ni ang: thir chuan a tikehsawmin thil zawng zawng a tikeh ang bawkin
+            ani chuan a tikehsawmin a râwt dip ang.” Daniela 2:40.
+        </blockquote>
+
+        <p>Rom lalram Baibl hril lâwkna a tihthlen tak kimzia chu khawvêl chanchin aṭangin chiang takin kan hmu thei:
+            “Rangkachak te, tangkarua te, dâr te, lalram leh lalte entirtute chu Rom thîr lalram chuan a rawn titlâwm ta
+            vek a.” – Gibbon’s History of the Decline and Fall of the Roman Empire, chap 38; para 1</p>
+
+        <blockquote>
+            Rom lalram chu lalram panganaina rawn hneh tur a ni ve lova, a kête chu thir, a ṭhen bellei an ni angin ram
+            hrang hrangah ṭhen darh seuhin a awm ang. Tin, chung ram hrangte chu khawvêl tâwp thlenga awm turte an ni.
+            Tin, a kephah leh a zungṭangte chu, a ṭhen belvawtu hlum, a ṭhen thir nia i hmuh ang ngei khan ram inṭhen a
+            ni ang a, mahse amahah chuan thir khauhna chu a awm tho vang. thir leh hlum nêm inpawlh i hmuh ang ngei
+            khân. Tin, a ke zungṭang a ṭhen thir, a ṭhen hlum a ni ang bawk khân ram chu a ṭhenah chuan a chak ang a, a
+            ṭhenah chuan a chhe awl ang. Tin, thir leh hlum nêm inpawlh i hmuh ang ngei khan anni chu mihring chiin an
+            inpawlh ang a; mahse thir leh hlum a inpawlh tak tak thei lo ang bawkin an inzawm reng lovang.” Daniela
+            2:41-43.
+        </blockquote>
+
+        <p>He Baibl hril lâwkna thlen famkim dikzia hi hmasâng leh tun lai Europe chanchin zirtute chuan chiang takin an
+            hre thei ang. Heng lalram hrang hrang –Alemani (Germans) te Granchs (French) te, Burgundians (Switzerland
+            leh Franch ṭhenkhat te, Visigoths (Spanish) te, Suevi (Portuguese) te, Anglo-Saxons (English) te, Lombards
+            (Italians) te, leh a dang ṭhenkhatah te Rom lalram chu a inṭhendarh ta vek a ni. Tin, thir leh bellei a
+            inbelh bawm nghet tak tak ngai lo angin hêng lalramte pawh hi an inzawm thei ngai lo vang a. Rom lalram chu
+            pumkhata ṭhuikhâwm a nil eh tawh ngai lo vang.</p>
+
+        <p>Tun lai hun thleng hian hêng lalram hrangte hi an la inzawm khâwm thei ngai lova, inzawm khawm ahnehin
+            innghirnghona leh indona hlir an kârah a la tla ta reng zawk a ni. Hun hrang hrangah heng mite hian
+            thuneihna pumbil tumin, lalram pakhatah siam an tum tawh a, nimahsela hlawhtling ta rêng an awm lo.</p>
+
+        <ul>
+            <li>Kum zabi 8-na - Charlamagne</li>
+            <li>Kum zabi 16-na - Charles V</li>
+            <li>Kum zabi 18-na - Louis XIV</li>
+            <li>Kum zabi 19-na - Napoleon</li>
+            <li>Kum zabi 20-na - Kaiser – Indopui 1, Hitler – Indopui 11</li>
+        </ul>
+
+        <p>Hêngte hian Europe ram zawng zawng khu pum khata suihfin tumna an nei vek a, chutiang tumna chu a la
+            hlawhchham zelzia tilangtu chauh an ni. Hruaitu ropui eltiang leh indonaa mihrâtkhawkhêng berte pawhin
+            Europe ram hi hnehin inzawm khâwmna siamin emaw Europe hi lalram pakhata ṭhuikhâwm tumna a awm a ni thei e,
+            amaherawhchu hril lâwkna THU PANGA lek, “AN INZAWM RENG LO VANG” tih hian a tâwpna tur chu a lo hril lâwk
+            diam tawh a ni. Daniela 2:43.</p>
+        <p>“Europe Lalramte Insuihfinna” tura pâwl hrang tam tak ṭangrualin an beih chiamna te kha ngaihtuah the. An la
+            hlawhchham zêl a ni!</p>
+        <p>Nupui pasal inneih pawlha inzawm khâwmna neih an han tum pawhin, hril lâwkna vêkin, “Nupui pasal an inneih
+            pawlh ang a: nimahsela, an inzawm khâwm lo rêng rêng ang,” a lo tih tawh angin inzawm khâwmna rêng a hring
+            chhuak thei chuang lo. Nupui pasal inneih pawlha Europe lalramte suih khawm tumna leh hlawhchhamna chu
+            hetiang hian lo entir ila:</p>
+
+        <p>Denmark lal Christian IX fate:</p>
+        <ul>
+            <li>Fapa Pakhat – Denmark rorêltu; Fanu pakhat – England lalnu (Edward VII nupui) Fapa dang – Grik lal; Fanu
+                dang – Russia lal nupui.</li>
+            <li>Tin, England te, Russia te, Grik te, Norway te, Germany te leh Denmark ram roreltute hi unau an ni hlawm
+                a; unau chiah ni lote pawh pate inunau tal an ni.</li>
+        </ul>
+
+        <div class="question">Lalram lo ding chhuak leh tûrah tunge rorêl ang?</div>
+
+        <blockquote>
+            “Tin, chûng lalte niah chuan van Pathianin ram a rawn din ang a, chu chu a chhe ngai tawh lo vang a, a lalna
+            pawh mi dangte tân hnutchhiah a ni hek lo vang; hêng ram zawng zawngte hi a tikehsawmin a tiral zawk ang a,
+            kumkhuain a ding reng ang.” Daniela 2:44
+        </blockquote>
+
+        <p>Pathian ram entirtu lung chuan milim chu a keah a zuk dêng a. He laic hâng thu tlêm tê hian Pathian chatuan
+            lalram chu rawn din thuai a ni taw hang a, chu lalram chu din a nih hunah chuan thisen chhuahna tre leh
+            indonate hi a awm tawh lo vang tih chiang takin an tarlang.</p>
+
+        <p>Chu lalrama Rorêltu tûr chanchin chu Baibl-ah mawi takin hetiangin ziak a ni:</p>
+        <blockquote>
+            “Kan tan naupang a lo piang a, fapa pêkin kana wm ta a; rorêlna chu a kokiah a chuan gang a; a hmingah chuan
+            Maka, Remruattua, Pathian chaka Chatuan Pa, REMNA LAL an ti dâwn si a. Davida ṭhutphah chungah leh a ram
+            chungah a rorêlna punzia leh remain tawpintai a nei lo vang, tinghet tûr leh tûn aṭanga chatuan thleng pawha
+            rorêlna leh felnaa tungding turin.” Isaia 9:6,7.
+        </blockquote>
+
+        <p>Kum sangkhat leh zakua lai tawhah khan he khawvel tlan tur hian A lo kal a. Ama thisen ngeia A lei lalram chu
+            rawn din turin “heng lalramte lal lai hian” A lo kal leh dawn a ni. Chutih hunah chuan “rorelna chu a kokiah
+            a chuan gang a…chatuan thleng pawha rorelna leh felna tungding turin ro a rel tawh ang.</p>
+
+        <p>Tunah hian he hril lâwkna milim kezungṭang hunah hian kan chêng mêk a ni. A hma lam thil zawng zawngte chu
+            dik tak leh mak takin an hunbi teah ṭheuh an thleng famkim zo ta. Tuna kan thlîr leh nghah tur chu khawvêl
+            zawng zawng chunga Rorêltu REMNA LAL lo lan a ni. Hêng lalte inkara innghirnghona te, inelrelna te, in hriat
+            thiam lohna te leh indonate a awm lai hian Rorêltu Ropui, ISUA KRISTA chuan A chautan lalram chu A rawn din
+            ang. Chu hun chu a hnai tak meuh ta. I inpeih em le?</p>
+
+        <p>Danielan lal mumang hriat chhuah zawh tawh loh a sawi chhuah theihna leh, a awmzia a hrilhfiah dân ang thlap
+            zela a thlen famkimna hian hun lo la awm tûr chanchin hril lâwkna – khawvêl awm zel dan tur- pawh dik tak
+            bawkin a thleng famkim ang tih rinna nghet tak min neihtir tûr a ni.</p>
+
+        <h2>LALBER INPUANNA</h2>
+
+        <p>A mumang chanchin zawng zawng leh a hrilhfiahna, rilru khawih tak mai a han hriat chuan, lal chuan a hun lai
+            aṭanga tun hun thleng pawha thutak zawngtuten an puan chhuah ṭhin ang chu a puang chhuak ta a. “In Pathian
+            hi PATHIANTE PATHIAN, LALTE LALPA, thurûkte Puangtu chu a ni tak zet mai tih he thuruk i puan theihah hian a
+            lang a ni.” Tiin. Daniela 2:47. Zirtu duh tak hetianga i puan chhuah ve theih hi kan duhpui che a ni.</p>
+
+        <!-- ZIRLAI TEXT DANG HETAH HIAN DAH ZEL RAWH -->
+
+        <hr style="margin: 40px 0;">
+        <h3>Zirlai Pahnihna Zawhna:</h3>
+
+        <div class="q-box">
+            <p>1. Mihring zawn ber engnge ni?(Thuhmahruai)</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>2. Pathian leh mihring inkara inhmachhawna inpâwlna awm \hin kha enginnge tichat ta? </p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>3. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>4. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>5. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>6. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>7. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>8. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>9. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>10. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+
+        <!-- QUESTION 2 ATANGA 10 HETAH HIAN DAH LUT RAWH -->
+
+        <button class="submit-btn" onclick="submitQuiz()" id="submitBtn">Submit Answer</button>
+        <p id="errorMsg" class="error-msg"></p>
+    </div>
+
+    <script>
+        // ==========================================
+        // HEI CHIAH HI FILE DANG ATAN THLAK A NGAI:
+        // ==========================================
+        const currentLessonNumber = 2;
+        const nextLessonFile = "lesson3.html";
+
+        // Lesson 2 Chhanna dik
+        const correctAnswers = {
+            "q1": "B", "q2": "A", "q3": "C", "q4": "B", "q5": "C", "q6": "A", "q7": "B", "q8": "C", "q9": "A", "q10": "B"
+        };
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwuk-FMfvgUsc4Do49O9D1XkEnE3qga-4M7hsbB9FPGuapxzMfOtVEryKvXugRfbBg-6A/exec'; // Apps Script URL
+
+        // Heta \anga a hnuai lam hi chu thlak a ngai lo
+        window.onload = function () {
+            let savedEmail = localStorage.getItem("vop_email");
+            let unlockedLessons = parseInt(localStorage.getItem("vop_progress"));
+
+            if (!savedEmail || !unlockedLessons) {
+                alert("Login hmasak a ngai!");
+                window.location.href = "index.html";
+            }
+            if (currentLessonNumber > unlockedLessons) {
+                alert("He lesson hi i la unlock lo!");
+                window.location.href = "index.html";
+            }
+        };
+
+        function submitQuiz() {
+            let allCorrect = true;
+            let wrongQuestions = [];
+            let totalQuestions = Object.keys(correctAnswers).length;
+            let questionNumber = 1;
+
+            for (let qName in correctAnswers) {
+                let selectedOption = document.querySelector(`input[name="${qName}"]:checked`);
+                if (!selectedOption || selectedOption.value !== correctAnswers[qName]) {
+                    allCorrect = false;
+                    wrongQuestions.push(questionNumber);
+                }
+                questionNumber++;
+            }
+
+            let errorMsgElement = document.getElementById("errorMsg");
+
+            if (!allCorrect) {
+                errorMsgElement.innerText = `A dik lo awm! Question no: ${wrongQuestions.join(", ")} te hi han chhang tha leh rawh.`;
+                return;
+            }
+
+            errorMsgElement.innerText = "Saving progress...";
+            document.getElementById("submitBtn").disabled = true;
+
+            let currentProgress = parseInt(localStorage.getItem("vop_progress"));
+            let nextLesson = currentLessonNumber + 1;
+
+            if (currentLessonNumber < 25) {
+                if (nextLesson > currentProgress) {
+                    localStorage.setItem("vop_progress", nextLesson);
+                    let formData = new URLSearchParams();
+                    formData.append("action", "update_progress");
+                    formData.append("email", localStorage.getItem("vop_email"));
+                    formData.append("progress", nextLesson);
+
+                    fetch(scriptURL, { method: 'POST', body: formData }).then(() => {
+                        document.getElementById("successModal").classList.remove("hidden");
+                    });
+                } else {
+                    document.getElementById("successModal").classList.remove("hidden");
+                }
+            } else {
+                // Lesson 25 zawhah Certificate trigger
+                document.getElementById("modalContinueBtn").classList.add("hidden");
+                document.getElementById("modalMessage").innerHTML = "Course zawng zawng i zo ta! Lawmpui a che.<br><br>⏳ I E-Certificate kan siam mek a, i email ah kan rawn thawn nghal e...";
+                document.getElementById("successModal").classList.remove("hidden");
+
+                let formData = new URLSearchParams();
+                formData.append("action", "finish_course");
+                formData.append("email", localStorage.getItem("vop_email"));
+                formData.append("name", localStorage.getItem("vop_name"));
+                fetch(scriptURL, { method: 'POST', body: formData }).then(res => res.json()).then(data => {
+                    if (data.status === "success") {
+                        document.getElementById("modalMessage").innerHTML = "Course i zo ta! ✅ I e-Certificate thawn a ni ta.";
+                    }
+                    document.getElementById("modalContinueBtn").classList.remove("hidden");
+                    document.getElementById("modalContinueBtn").innerText = "Dashboard ah Letna";
+                    document.getElementById("modalContinueBtn").onclick = function () { window.location.href = "index.html"; };
+                });
+            }
+        }
+
+        function goToNext() {
+            window.location.href = nextLessonFile;
+        }
+    </script>
+</body>
+
+</html>

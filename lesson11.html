@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zirlai 11 - VOP</title>
+    <style>
+        @font-face {
+            font-family: 'MizoCustomFont';
+            src: url('VNT-ARL.TTF') format('truetype');
+        }
+
+        body {
+            font-family: 'MizoCustomFont', Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px #aaa;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        .q-box {
+            margin-bottom: 20px;
+            background: #eef;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .q-box p {
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        .q-box label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #008CBA;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .back-btn {
+            background-color: #555;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>🎉 Lawmpuiawm! 🎉</h2>
+            <p id="modalMessage">I chhang dik vek e. Lesson thar i zir chhunzawm thei tawh.</p>
+            <button id="modalContinueBtn" class="modal-btn" onclick="goToNext()">Lesson 12 ah Kalna ➔</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">⬅ Dashboard ah Letna</a>
+
+        <h1>ZIRLAI SAWM LEH PAKHATNA</h1>
+
+        <h2>CHHINCHHIAHNA MAK TAKTE</h2>
+
+        <blockquote>
+            Châng Thlan: “Chûng zawng zawng chu in hmuh hun chuan, amah chu a lo hnai tawh a, kawngka bulah ngei a awm
+            tih hria ang che u.” Matthaia 24:33.
+        </blockquote>
+
+        <p>“KA LO KIR LEH ANG” ...NIMAHSELA, CHU MI NI LEH HUN THU CHU... TUMAN AN HRE LO”..... “IN RIN LOH HUNAH” ....
+            “CHUVÂNGIN, INRING RENGIN AWM RAWH U.” Hêng ngenna leh inrin lâwkna tûra thuchahte hi Pathian thinlung
+            aṭanga lo chhuak an ni. Zirlai sâwmpanganaah khân he hun ropui tak lo thleng tûr chanchin hi kan zir tawh a,
+            chu hun chu lo la thleng ngei tûr a nihzia Pathian Lehkhabuin uar taka a sawi thu kan hmu tawh bawk. Chu hun
+            lo thleng thuai tûr chu ngaihven leh hrethiam tûrin Pathianin min duh ṭheuh a ni.</p>
+
+        <p>Indo laia hmêlma thlawhnaten rûn an tum hmun an va thlen chuan, thlawhna kâptu sipai pâwlten chûng hmêlma
+            thlawhnate chu chiang taka an hmuh theih nân, êng chak tak hmangin an lo chhun êng ruih ṭhîn. Chutiang deuh
+            chuan Isua lo kal hma lawk hun hi Pathianin a rawn chhun êng phût a, chu hun rawn chhun êngtu chu Pathian
+            thâwk khûm hrilh lâwknate hi an ni. “Tin, hrilhlâwkna thu nghet lehzual chu kan nei a ni, khua a lo vâr a...
+            chu chu khâwnvâr hmun thima êng an ngaihsak anga in ngaihsak chuan in ti ṭha ang.” 2 Petera 1:19. “Keimah
+            ang rêng rêng an awm lo; keiin a tâwp tûr chu a tîr aṭang rêngin ka sawi thei a,” tiin, Pathianin a Puang
+            bawk. Isaia 46:9, 10. Pathian Lehkhabu hi Pathian thâwk khum a nihzia tilang fiahtu ber pakhat chu
+            hrilhlâwkna theng famkimte hi an ni a, Isua lo kal leh hma lawka hril lâwkna thleng famkim mêkte phei hi chu
+            a ropuiin a mak lehzual bîk a ni.</p>
+
+        <h2>Chhinchhiahna Ropui Takte</h2>
+
+        <p>Vân lama chhinchhiahna awm tûr hrilhlâwknate leh a thlen famkimna chanchin kan thlûr bîk deuh ang a. Hêng
+            chhinchhiahnate hi a makin a ropui tak zet hlawm a ni. Khawvêla thil lo thlengte hi chu mihringin thunun
+            theihna an nei thei a, nimahsela, ni leh thla leh ariste nên khian chuan an inkâr hlat êm avângin han thunun
+            phâk theihna rêng an nei lo. Hun bi dik tak vawnga Pathianin a hertîr vêl avângin ni emaw, thla emaw âwkin a
+            lem hun tûrte chu dik tak takin an sawi lâwk thei a; amaherawhchu, vâna thil DANGLAM bîk thlengte chu an
+            hrilhlâwk thei lo va, an awmtîr thei hek lo.</p>
+
+        <p>He zirlai van lam chanchin târlante hi Krista lo kal lehna a hnaih tawhzia kan hriat theih nâna Pathianin a
+            rawn hmante an ni a, min tibuaitu tûr an ni lo ve.</p>
+
+        <h2>VÂNAH CHHINCHHIAHNA MAK TAKTE</h2>
+
+        <div class="question">1. Isuan A lo kallehna a hnaih tawhzia hriatna tûrin eng chhinchhiahna chanchin nge a
+            sawi?</div>
+
+        <blockquote>
+            “Nimahsela, chûng ni hrehawm hnu lawkah chuan NI TIHTHIMIN A AWM ANG A, THLA A ÊNG TAWH LOVANG A, VAN
+            AṬANGIN ARSITE AN LO TLA ANG... chûng zawng zawng in hmuh hunah chuan, amah chu a lo hnai tawh a, kawngka
+            bul ngeiah a awm tih hria ang che u.” Matthaia 24:29-33.
+        </blockquote>
+
+        <p>He laia Kristan “ni hrehawm” a tih hi A.D 538 leh A.D 1798 inkâr chhûnga pope-in tihduhdahna a thlentîr hun
+            kha a ni.</p>
+
+        <div class="question">2. Vâna chhinchhiahnate awm hmain thil engnge lo thleng hmasa tûr?</div>
+
+        <blockquote>
+            “Tin, chhinchhiahna parukna chu a han phelh lai ka en reng a, tin, LIR NASA TAKIN A LO NGHING TA A; tin, NI
+            chu sahmul saiip puan angin a lo DUM a, THLA pawh chu a pumin THISEN angin a lo awm ta a; tin, vâna ARISITE
+            chu, theipui kung thlipuiin a nuai a, a helte a ṭil ang maiin, leiah a TLA ta a.” Thupuan 6:12, 13
+        </blockquote>
+
+        <h2>LISBON LIRNGHING RAPTHLAK</h2>
+
+        <p>November 1, 1755 khân Lisbon khuaah nasa tak maiin lîr a nghing chiam a. Chu chu tihduhdahna reh lam tawh
+            khân a ni. A chanchin chu hetiangin kan chhiar a. “November 1, 1755-a lîrnghîng rapthlak chuan a tlêm berah
+            mêl kili 4,000,000 a huam a, a nghîng hriat tham tawh meuh lohna ramah te pawh tui lamah chuan a la lang
+            cheu va; Europe leh Africa leh America khawmual puite pangkhing aia zau zâwk a huam tel a, a nghîn nasat
+            zualna erawh chu Europe chhim lam pangah a ni.” – Sears in Wonders of the World, pp. 50, 58. Hrilhlâwkna
+            chuan “LÎR NASA TAKIN A LO NGHING ANG,” tiin min hrilh a, khawvel chanchin ziakna chuan Lisbon lîrnghîng chu
+            ‘NASA TAKA NI’ tih min hrilh bawk. Chu lîrnghîng chu ni tihthima a awm hma lawka lo thleng tûr a ni.</p>
+
+        <h2>NI TIHTHIM</h2>
+
+        <div class="question">3. Vâna chhinchhiahnate zîngah a engnge hmasa ber?</div>
+
+        <blockquote>
+            “Chûng ni hrehawm hnu lawkah chuan ni tihthimin a awm ang.” Matthaia 24:29.
+        </blockquote>
+
+        <p>Ni tihthim thu hi Markan chiang zâwk deuhin min hrilh a: “Nimahsela, chûng ni, (Pope thuneihna hun chhûng)
+            hrehawmna hnuah chuan, ni tihthimin a awm ang a,” tiin, Marka 13:24.</p>
+
+        <p>He châng aṭang hian ni tihthima a awm hun tûr chu kum 1776 leh 1798 inkârah, “Chûng hrehawmna” leh pope
+            thuneihna a tlâk hniam dâwn lai inkârah a ni ang tih kan hre thei. Khawvêl chanchin lamin engtinnge a sawi i
+            lo en thung teh ang. Webster’s Dictionary of 1833-ah chuan hetiangin chhinchhiah a ni:</p>
+
+        <blockquote>
+            “May 19, 1780-a Ni Thim tih ṭhin hian CHU MI NIA KHUA A THIM KHUP AVÂNGA a hming hi pu hlen ta a ni ......
+            Zîng dâr 10 aṭangin a thîm ṭan a, a tûk chhûn thlengin a thim khup mai a. HE THIL DANGLAM TAK LO AWM CHHAN
+            DIK TAK HI HRIAT A NI LO.” Tin, Lehkhabu dang pakhat Memoirs of the American Academy of Arts and Science, an
+            tih Boston khuaa A.D 1785-a chhutah chuan, May 19, 1780-a THIMNA MAK TAK CHANCHIN, tih thupuia hmangin
+            hetiang hian ziak a ni. “A thim hun chhung chu he hmunah hian a tlêm berah dâr kâr sâwmpali a ni... Hnai
+            teah pawh thil hriat hran theih loh khawpin a thim a; ZAN ANG MAI A NI ZO TA VEK A.” (Phek 234-246 en la)
+            Arsi chanchin ngaihtuah mi, Herschel chuan, “North America-a KHAW THIM TA MUP mai hi leilung thilmak ropui,
+            ngaihnawm ti taka a chanchin miten an la chhiar ṭhin tûr, KHAWVÊL FINNAIN A HRILH FIAH THEIH SI LOH a ni,”
+            tiin, a sawi. Dr. Adam-an a sawi dân ve thung chuan CHHUN PACHANG HI ZAN LAIA LO INLET THUT ang mai a ni ber
+            e.... A lo thim thutna chhan hrilh fiah thiam lo, sâng tam takte chu nasa takin an thlabârin an chî-ai a;
+            LEI HI A NGUI RUAI MAI A NI. Arsi chanchin hre mi, Dr. Samuel Stearns-a chuan a ngaihdân zâwttute a
+            chhânnaah hetiangin a sawi: “AWK LEM AVANGA THIMNA CHU LO THLENG A NI LO TIH CHU NI VELA HERTE DINHMUN
+            AṬANGIN A HRIAT THEIH A: HE THIMNA LO THLEN LAI HIAN THLA AWMNA CHU NI AṬANGA DEGREE ZA LEH SAWMNGA AIA TAM
+            MAH A NI SI A. CHUVÂNGIN HE THIMNA RAWN AWMTIRTU CHU VAN KUALKHUNGA KAL TLANGA, VANTE KHI PUAN IN CHUNG ANGA
+            KAI PHARAHTU A NI NGEI ANG,” tiin.....
+        </blockquote>
+
+        <p>Hetiang hian Pathian Lehkhabu châng tam takin lo thleng tûra an sawi ang ngeiin a lo thleng famkim ta a,
+            Isuan a hun a sawiah chiah a lo thleng ta a ni. He thil hi Isua lo kal lehna hnaih tawhzia min hriattîrtu
+            pawimawh tak pakhat a ni. He hrilhlâwkna dikzia hi en teh, phat rual loha dik a ni a, Setana emaw,
+            mihringten emaw han tih ve theih rual a ni lo ve. Chuvângin, kan ngaihven hle a ṭûl a ni.</p>
+
+        <h2>THLAAH THILMAK</h2>
+
+        <div class="question">4. Vâna chhinchhiahna dang awm chu engnge ni?</div>
+
+        <blockquote>
+            “THLA a ÊNG tawh lo vang a.” Matthaia 24:29. “THLA .... chu apumin THISEN angin a lo awm ta a.” Thupuan
+            6:12.
+        </blockquote>
+
+        <p>He hi vâna chhinchhiahna pahnihna a ni a, a chanchin pawh sawi tam a ngai âwm lo ve. Ni tihthima a awm ṭum
+            bawka he thil hi lo thleng a ni. Ni a thim chuan thlain ênna rêng a nei thei si lo va.</p>
+
+        <p>Dr. Adams chuan thla thim thu chu hetiangin a ziak:</p>
+
+        <blockquote>
+            “Chu mi tlaia lêng chhuak zawng zawng deuh thaw chuan mahni in kawng an hloh hlawm a. A hma zâna khawvêl a
+            chhun ên un avângin a lo thim ta thut mai chu, chhûn lama thimna a awm ta ang bawk chuan, thil danglam tak a
+            tling a ni,” tiin. New Hampshire biala mi pakhat, Tenny-a pawhin, “Engkimtitheian êng a siam tirh aṭang khân
+            he mi zâna thimna hi a la nasa ber âwm e. A thim vâng lai tak phei chuan thil siam zawng zawnga ênna nei
+            zawng zawngte hi bo ta duak sela, chu ai pawha thim leh chuang tûr awmin ka ring lo hial,” tiin thim
+            nasatzia a hril fâk bawk.
+        </blockquote>
+
+        <h2>ARSI TLA</h2>
+
+        <div class="question">5. Vâna chhinchhiahna pathumna engnge ni?</div>
+
+        <blockquote>
+            “VÂN aṭangin ARSITE an lo tla ang.” Matthaia 24:29.
+        </blockquote>
+        <blockquote>
+            “Vâna ARSITE chu.... leiah an TLA ta a.” Thupuan 6:13.
+        </blockquote>
+
+        <p>He chhinchhiahna hi ni leh thla tihthim hnua lo awm tûr a ni. Khawvêl chanchin ziakna kan en chuan chutiang
+            ngeiin a lo awm tih kan hmu thei ang. Yale University-a Arsi lam chanchin ziaktu, Denison Olmstead chuan,
+        </p>
+
+        <blockquote>
+            “November 13, 1833 tûk zîng chuan tûn hma lam zawng zawnga arsi thlâwk ṭhinte aia ropui zâwk leh nasa zâwkin
+            arsite an tla chuai chuai a..... he ram luah tirh aṭangin hetiang rênga nasa hian vân lamah thilmak a la awm
+            ngai âwm lo ve. Mi tam takin ennawm mak tak anga ngaiin an thlir ṭhuap a, thlabâr chunga thlîr tâwk an awm
+            bawk a,” tiin, a ziak. – “American Journal of Science,” vol. 25, pp. 363, 364. “DAR KAR THUM CHHÛNG, reh lai
+            awm miah lova arsite an tlâk chum chum lai chuan Rorelna ni chuan ni chhuah chauh lo chu nghâk tawhin a lang
+            lo hial a.” Our First Century, p. 329. “Arago chhût dânin arsi tla chum chumte chu Boston aṭanga han hmuh
+            theih maiah pawh 240,00 aia tlêm lo an ni.”
+        </blockquote>
+
+        <p>Hêng chhinchhiahnate hi Isua Krista lo kal ruala lo thleng tûr an ni lova, A lo kal hun chu a hnai ta tih
+            entîrtute an ni zâwk. Chuvângin, hun rei lote chhûng atân chauha ruat an ni. Tin, hêng thil lo thleng mak
+            takte hi Pathian rawn awmtîr emaw, Pathian remtih avâng chauha lo thleng emaw an nih avângin, hrilhlâwkna
+            thleng famkim an ni kan ti lo thei lo vang, Pathian chuan A mite chu chhinchhiahna lem hmangin a fakder dâwn
+            si lova. Hêng chhinchhiahnate lo thlen hmaa lo awm tûr, ni hrehawm chanchin, zirlai danga kan la zir tûrten
+            vâna chhinchhiahnate chu an thlen famkim tawhzia chiang takin min la hriattîr ang.</p>
+
+        <h2>HMUH CHHUAH THARTE LEH RANG TAK TAKA VEIVAHNA</h2>
+
+        <div class="question">6. Ni hnuhnunga thil thar hmuh chuah tûr chanchin eng angin nge hril lâwk a nih?</div>
+
+        <blockquote>
+            “Mahse nang, aw Daniel, thu chu thup la, lehkhabu chu châr tlat rawh, tâwpna hun thlengin: mi tam tak an
+            tlân vêl ang a, hriatnate a pung dâwn a ni.” Daniela 12:4.
+        </blockquote>
+
+        <p>He hrilhlâwkna ropui tak, kum sânghnih lai kal taa lo ziak tawhah hian kan hun laia thil hmuh chhuah thar tam
+            takte zînga a ṭhen a zâr – Boruaka awihawm loh khawpa chaka kal thei, thlawhtheihnate, khawvêl ram kil khâwr
+            ber hmun pawha mihring aw thawn darh theihna, Radio te, ram tina mi zawng zawngten thil lo tlengte an hmuh
+            theihna tûr khâwlte-hi kan zuk hmu thei a ni.</p>
+
+        <p>Ṭhang khat lian chhûng mai pawh hian hriatna a va pung nasa hman êm! Ni hnuhnung atân hmuh chhuah thar tûr a
+            va lo inthup nasa kher êm! “Hriatnate a pung dâwn a ni.” Kum 2,500 lai kal taa hrilhlâwkna thlen famkimna,
+            tûn lai thil thar tam tak hmuh chhuahte hi ngaihtuah teh. BIAK HLATNA KHÂWL TE, THÎRHRUILO KHÂWL TE, RADIO
+            TE, X-RAY TE, HNIMHLUM TE, ROCKET LEH THLALEM te, etc., hêngte hi tûn lai huna thil hmuh chhuah thar
+            tamtakte zînga ṭhenkhat chauh an ni.</p>
+
+        <p>Tin, hêng bâkah hian zirna lamah hmasâwnna nasa tak a awm bawk. Zirlai bute leh zirna hmunte a kum a têlin a
+            pung zêl a, finna pêng hrang hrang, damdawi lamah te, chemistry-ahte, physics-ah te nasa taka ṭhanna a awm
+            zêl bawk a, atom chakna – “thil siam thurûk leh bul” – hial pawh hmuh chhuah a lo ni ta.</p>
+
+        <p>Khawvêl tâwp a hnai tawh a ni tih chhinchhiahnate kan zawng a nih chuan hawi vêl ila, kan vêla hi an awm
+            thliah thluah mai. Thil thar hmuh chhuah tinrêng leh mihring tlân tawn ruai leh thlâwk tawn sekte hian
+            “tâwpna hun” a hnai tawh a ni tih an puang ṭheuh a ni.</p>
+
+        <blockquote>
+            “A inbuatsaihna niah chuan tawlailîrte chu kahphathîr tlein a tle zawr zawr a, feite chu rapthlak takin a
+            phe zawk zawk a. Tawlailirte chu kawtthlêrah an tlân bur bur a, lamlian zauvah te chuan an insu sawk sawk a;
+            meichher angin an lang a, kâwlphe angin an tlân thuak thuak a ni.” Nahuma 2:3,4.
+        </blockquote>
+
+        <p>Thîrhlûm râltu thei tlân ri rum rum leh meialh a kah chhuah zuai zuai te han thlîr hian Pathian zâwlnei,
+            Nahuma thu sawite hi ngaihtuah tel loh theih an ni lo. Tûn lai chhuak, thîr tawlailir (Motor, Tramcar leh
+            Rêl) te phei hi chu kâwlphe angin an tlân thuak thuak tak meuh a ni. Motor tlân ri bur bur leh an insu sawk
+            sawk thâwmte hi ngaithla teh. “A inbuatsaihna ni chu” kawngka bulah mai a awm tawh a ni tih hi tunge
+            ringhlel ang?</p>
+
+        <h2>KHAWVÊL MANGANNA</h2>
+
+        <div class="question">7. Vân lama chhinchhiahnate lo lan hnuin Isuan leia hnamte zîngah engnge lo thleng dâwn a
+            tih?</div>
+
+        <blockquote>
+            “Tuifinriat rûm leh a fâwn avângin- leiah pawh hnam tin hrehawmna leh MANGANNA a thleng ang: MITE THLABAR
+            AVÂNG leh khawvêla thil lo thleng tûr chu ngaihtuah avângin, an thidang ang; vân thiltihtheihna chu a nghîng
+            dâwn si a. Chutih hunah chuan Mihring Fapa hi thiltihtheihna leh ropuina nasa tak nên chhûm zinga lo kal an
+            hmu ang.” Luka 21:25-27.
+        </blockquote>
+
+        <p>He lai châng thu tawi tê, fûn khâwm kim hle si ang hian kan hun awm dân chanchin hi a sawi theih chuang âwm
+            lo ve. Tin, hmun dangah, kan chenna hun chanchin lo sawi lâwkna thu hetiangin kan chhiar bawk:</p>
+
+        <blockquote>
+            “HNAMTE CHU AN THINUR A, TIN, I THINUR CHU A LO THLENG VE THUNG A, MITTHI RORÊL SAK HUN leh, i bawih
+            zâwlneite hnênah te, mithianghlimte hnênah te, i hming zah mi lian leh mi tête hnênah te, an lâwmman pêk hun
+            leh, lei tichhetute tihchhiat ve thung hun chu a lo thleng bawk a.” Thupuan 11:18.
+        </blockquote>
+
+        <p>Kum za kal ta hun chhûng khân “hnamte an thinurin” an innghirngho châmchi tih kan hria a. Tin, indona a
+            chhuak zût a, chûng chuan indopui vawihnih a paw chhuak tawh tih kan hre bawk. He ṭhangthar ral hma hian
+            Indopui vawi thumna a chhuak lo vang, tia sawi lâwk thei tunge awm? Hnamte chu mangangin an la awm reng
+            hlawm a, atom bomb siam an thiam thar hnu lek phei hi chuan khawvêl pum pui mai hi a mangang tak meuh a ni.
+            “Mite, thlabâr avâng leh khawvêla thil lo thleng tûr chu ngaihtuah avângin, an thidang ang,” tiin, Isua
+            pawhin min hrilh. Kum 1900 zet kal taa Isua thu sawite hian kan chênna huna mite buaina leh manganna
+            chanchin hi a lo va sawi dik tak êm!</p>
+
+        <p>Isua ṭâwngkate hi tûn lai khawvêl awm dân nêna han hmehbelin Isua lo kal leh dâwn huna chêng kan ni tih kan
+            hre thei. Amah Isua ngei hi he hrilhfiahna siamtu a ni a; hun lo la awm tûr chanchin lama A hriat vekzia
+            leh, a hrilhlâwknate tithleng famkim tûra thiltihtheihna A neihzia a lang chiang êm êm a ni.</p>
+
+        <h2>MI HAUSA LEH INHLAWHFATE</h2>
+
+        <div class="question">8. Hnamte manganna belhchhahtu engnge ni?</div>
+
+        <blockquote>
+            “MI HAUSATE u, ngai teh u khai! In chunga hrehawm lo thleng dâwn mêk avâng chuan ṭap ula, chiau vak vak rawh
+            u. In rote a chhe ta a, in puante sûlrûlin a ei zo ta. In rangkachak leh in tangkate a tuiek zo ta a; a
+            tuiêk chu in thiam lohzia hriattîrna a ni ang a, in tisa chu mei kâng ang in a ei ang. NI HNUHNUNGAH CHUAN
+            RO IN KHAWL KHAWM A NIH HI. Ngai teh u, in LOVA BUH ATA INHLAWHFATE HLAWH, TIHDERA IN PÊK LOH KHA... a
+            âttute mangang au thâwm pawh MIPUITE LALPA bengah a lo lût ta a. Khawvêlah hian nuamsa takin in awm a, in
+            inkhawhral mai mai a; inthah niin in thinlung in titlai a. Mifel chu thiam loh in chantir a, in that ta
+            a....... a dodâl lova che u. Chutichuan, unaute u, LALPA LO KAL HMA LOH ZAWNG CHHEL TAKIN AWM RAWH
+            U.....LALPA LO KALNA CHU A HNAI TAWH SI A.” Jakoba 5:1-8.
+        </blockquote>
+
+        <p>Hêng hrilhlâwkna thu ziaktu hian a ziah laiin, tûn lai huna mi hausate leh inhlawhfate inkâra innghirnghona
+            awm hi a rawn thlîr tih a lang chiang hle. Tin, kan tûn lai khawvêl buai nuak nuak han thlîr hian ni
+            hnuhnungah chuan kan chêng ta tak zet a ni tih a lang bawk. Hêng buainate hi tûn hnai lawka lo chhuak ṭan an
+            ni a, ni hnuhnunga thil awm dan tûr pakhat a ni ve rêng a ni. Lalpa ni lo thlen a hnaih tawhzia min
+            kawhhmuhtu an ni bawk.</p>
+
+        <h2>ISUA LO KAL LEHNA CHHINCHHIAHNA TlÂNG PUI</h2>
+
+        <div class="question">9. Eng thilin nge Krista lo kal leh a hnai tawh tih lantir?</div>
+
+        <blockquote>
+            “Hnam hrang leh hnam hrang an indo vang a, ram hrang leh ram hrang an indo vang a; hmun hrang hrangah ṬAM te
+            a tla ang a, HRITE a lêng bawk ang a, vân aṭângin THIL HLAUHAWMTE leh chhinchhiahna nasa takte a lo awm
+            ang.” Luka 21:12.
+        </blockquote>
+
+        <p>Indopui hmasa khan manganna leh chhiatna nasa takin a rawn zui nghâl a. India ramah te, China ramah te leh
+            Russia ramah te phei chuan mi maktaduai tam tak rilṭâmin an thi a ni. Influenza-in a rawn zui bawk a, “thlei
+            bîk nei hauh lovin,” mi lian leh mi tête, mi maktaduai riat laiin an thih phah a ni. Tin, tûn hma lam zawng
+            zawng aiin tûn hnaia lîrnghîngte hi an nasa zâwkin, chhiatna an rawn thlen nasa zâwk. Hêng zawng zawngte
+            hian Krista lo kal lehna a hnaih tawhzia an entîr vek a ni.</p>
+
+        <p>Sakhaw lama tlâk hniamna te, khawlohna leh suahsualnate pawh hi NI HNUHNUNG awm dân tilangtu an ni.</p>
+
+        <blockquote>
+            “Tin, hei hi hre rawh, ni hnuhnungahte chuan hun khirh takte a lo awm ang. Mi mahni inhmangaihtu te, tangka
+            ngainatu te, intivei te, chapo te, Pathian sawichhetu te, nu leh pa thu awi lote, lâwm nachâng hre lo te,
+            thianghlim lote, hmangaihna pianpui nei lo te, huaikhawm bâwlte, hêktu te, insûm thei lo te, mi kawlhsen te,
+            inngaihlu te, PATHIAN HMANGAIH AIA mahni lâwmna mai hmangaih zâwktute an ni dâwn si; Pathian ngaihsak anna
+            an nei ang a, nimahsela, a thiltihtheihna chu an awih lo vang.” 2 Timothea 3:1-5.
+        </blockquote>
+
+        <h2>A TÂWPA CHHINCHHIAHNA ROPUI</h2>
+
+        <div class="question">10. Krista lo kal lehna chu eng chungah nge a innghah?</div>
+
+        <blockquote>
+            “HE RAM CHANCHIN ṬHA hi hnam zawng zawng hriattirna tûrin khawêl zawng zawngah hrilhin a awm ang; CHU MI
+            ZAWHAH chuan TAWPNA chu a lo thleng ang.” Matthaia 24:14.
+        </blockquote>
+
+        <p>Pathian ram Chanchin Ṭha, Krista lo kal lehna chanchin chu, ṭawng chi hrang sangkhat dâwn laiin puan darh mêk
+            a ni a, khawvêl mihring zawng zawng za zêla 95 hnênah hril mêk a ni.</p>
+
+        <p>Khawvêla Voice of Prophecy hnathawh hi a ropuiin a mak hle mai. He Râlchhân sikul hian mi maktaduai tam tak
+            hnênah chanchin ṭha a pung reng a, chu mi thlâwptu atân khawvêl pum pui huamin Radio-in puan darh chum chum
+            a ni reng bawk. Hetiang hian khawvêl ram tina hriattirna tûrin hmanrua ṭha leh kawng ṭha tak tak an awm a
+            ni.</p>
+
+        <p>Tâwpna chu a hnai tak meuh ta. Nang, Isua lo kal lehna hnai tawh tak chanchin puan darh mêk hian i thinlung a
+            chawk harh ve em? Amah chu tâwk tûrin i inpeih em? Kawngka bul ngeiah a awm tawh a ni.</p>
+
+        <!-- ZIRLAI TEXT DANG HETAH HIAN DAH ZEL RAWH -->
+
+        <hr style="margin: 40px 0;">
+        <h3>Zilai Sawmpakhatna Zawhna:</h3>
+
+        <div class="q-box">
+            <p>1. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+
+        <!-- QUESTION 2 ATANGA 10 HETAH HIAN DAH LUT RAWH -->
+
+        <button class="submit-btn" onclick="submitQuiz()" id="submitBtn">Submit Answer</button>
+        <p id="errorMsg" class="error-msg"></p>
+    </div>
+
+    <script>
+        // ==========================================
+        // HEI CHIAH HI FILE DANG ATAN THLAK A NGAI:
+        // ==========================================
+        const currentLessonNumber = 11;
+        const nextLessonFile = "lesson12.html";
+
+        // Lesson 11 Chhanna dik
+        const correctAnswers = {
+            "q1": "B" // q2: "A", q3: "C" tiin 10 thleng i dah dawn nia
+        };
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwuk-FMfvgUsc4Do49O9D1XkEnE3qga-4M7hsbB9FPGuapxzMfOtVEryKvXugRfbBg-6A/exec'; // Apps Script URL
+
+        // Heta \anga a hnuai lam hi chu thlak a ngai lo
+        window.onload = function () {
+            let savedEmail = localStorage.getItem("vop_email");
+            let unlockedLessons = parseInt(localStorage.getItem("vop_progress"));
+
+            if (!savedEmail || !unlockedLessons) {
+                alert("Login hmasak a ngai!");
+                window.location.href = "index.html";
+            }
+            if (currentLessonNumber > unlockedLessons) {
+                alert("He lesson hi i la unlock lo!");
+                window.location.href = "index.html";
+            }
+        };
+
+        function submitQuiz() {
+            let allCorrect = true;
+            let wrongQuestions = [];
+            let totalQuestions = Object.keys(correctAnswers).length;
+            let questionNumber = 1;
+
+            for (let qName in correctAnswers) {
+                let selectedOption = document.querySelector(`input[name="${qName}"]:checked`);
+                if (!selectedOption || selectedOption.value !== correctAnswers[qName]) {
+                    allCorrect = false;
+                    wrongQuestions.push(questionNumber);
+                }
+                questionNumber++;
+            }
+
+            let errorMsgElement = document.getElementById("errorMsg");
+
+            if (!allCorrect) {
+                errorMsgElement.innerText = `A dik lo awm! Question no: ${wrongQuestions.join(", ")} te hi han chhang tha leh rawh.`;
+                return;
+            }
+
+            errorMsgElement.innerText = "Saving progress...";
+            document.getElementById("submitBtn").disabled = true;
+
+            let currentProgress = parseInt(localStorage.getItem("vop_progress"));
+            let nextLesson = currentLessonNumber + 1;
+
+            if (currentLessonNumber < 25) {
+                if (nextLesson > currentProgress) {
+                    localStorage.setItem("vop_progress", nextLesson);
+                    let formData = new URLSearchParams();
+                    formData.append("action", "update_progress");
+                    formData.append("email", localStorage.getItem("vop_email"));
+                    formData.append("progress", nextLesson);
+
+                    fetch(scriptURL, { method: 'POST', body: formData }).then(() => {
+                        document.getElementById("successModal").classList.remove("hidden");
+                    });
+                } else {
+                    document.getElementById("successModal").classList.remove("hidden");
+                }
+            } else {
+                // Lesson 25 zawhah Certificate trigger
+                document.getElementById("modalContinueBtn").classList.add("hidden");
+                document.getElementById("modalMessage").innerHTML = "Course zawng zawng i zo ta! Lawmpui a che.<br><br>⏳ I E-Certificate kan siam mek a, i email ah kan rawn thawn nghal e...";
+                document.getElementById("successModal").classList.remove("hidden");
+
+                let formData = new URLSearchParams();
+                formData.append("action", "finish_course");
+                formData.append("email", localStorage.getItem("vop_email"));
+                formData.append("name", localStorage.getItem("vop_name"));
+                fetch(scriptURL, { method: 'POST', body: formData }).then(res => res.json()).then(data => {
+                    if (data.status === "success") {
+                        document.getElementById("modalMessage").innerHTML = "Course i zo ta! ✅ I e-Certificate thawn a ni ta.";
+                    }
+                    document.getElementById("modalContinueBtn").classList.remove("hidden");
+                    document.getElementById("modalContinueBtn").innerText = "Dashboard ah Letna";
+                    document.getElementById("modalContinueBtn").onclick = function () { window.location.href = "index.html"; };
+                });
+            }
+        }
+
+        function goToNext() {
+            window.location.href = nextLessonFile;
+        }
+    </script>
+</body>
+
+</html>

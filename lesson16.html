@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zirlai 16 - VOP</title>
+    <style>
+        @font-face {
+            font-family: 'MizoCustomFont';
+            src: url('VNT-ARL.TTF') format('truetype');
+        }
+
+        body {
+            font-family: 'MizoCustomFont', Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px #aaa;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        .q-box {
+            margin-bottom: 20px;
+            background: #eef;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .q-box p {
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        .q-box label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #008CBA;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .back-btn {
+            background-color: #555;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>🎉 Lawmpuiawm! 🎉</h2>
+            <p id="modalMessage">I chhang dik vek e. Lesson thar i zir chhunzawm thei tawh.</p>
+            <button id="modalContinueBtn" class="modal-btn" onclick="goToNext()">Lesson 17 ah Kalna ➔</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">⬅ Dashboard ah Letna</a>
+
+        <h1>ZIRLAI SAWMPARUKNA</h1>
+
+        <h2>SETANA PHUARNA</h2>
+
+        <blockquote>
+            ChângThlan: “Hêng hi mak ti suh u, a hun a thleng dâwn ta, chutih hunah chuan thlâna awm zawng zawngin a âw
+            an hria ang a, an chhuak vek ang; thil ṭha titute chu nunna changin an tho leh ang a, thil sual titûte chu
+            thiam loh changin an tho leh ang,” Johana 5:28, 29.
+        </blockquote>
+
+        <p>A va ropui êm! Hei ngei hi hriat i lo duh fo chu a nih hi. Setana hi a hnathawh huatthlala tak aṭanga
+            chawlhtîr han ni ta sela, mihringte tâna a vânneih thlâk tûrzia hi i ngaihtuah tawh ngai em? Engtikah emaw
+            chuan Setana hi kum sângkhat chhûng phuar a la ni dâwn a ni.</p>
+
+        <p>Pathian Lehkhabuah chuan hun lo la awm tûr leh tun lai hun daidangtu puanzâr chu kaihhlîmin a awm a, thil lo
+            la thleng tûr tam takte chu an hun indawt dân tein kan hmu thei a. Tin, chûng thilte chu, Setana thanga kan
+            awh hlauh loh nân, kan hriat a ṭûl a ni. Hriat thiam awlsam taka Pathianin min rawn puan chhuahsak avâng
+            hian a va tihzia em! Chûng thil avâng chuan hun lo la awm tûrte chiang taka hmuh theihna leh huai taka tâwn
+            theihna kan nei ta a ni.</p>
+
+        <p>He zirlai chhûnga zir tûr ropui tak awmte i hnêna rawn thlen hi phûrawm kan ti ngawt mai. <span
+                class="uppercase">KUM SÂNG ROREL INṬAN LAIA THIL LO THLENGTE, KUM SÂNG CHHÛNGA THIL THLENGTE LEH KUM
+                SÂNG TÂWPA THIL THLENG CHANCHIN</span> a ni ber a. He kum sângkhat hun chhûng hi Sapṭawngin Millenium a
+            ni a, amaherawhchu, Baibul-ah millenium tih i a chuang lova, kum sângkhat tihna a ni. Latin ṭawnga thu
+            pahnih, mille (sângkhat) leh, annus (kum) tih infin khâwm a ni.</p>
+
+        <h2>THUPUAN PAWIMAWH</h2>
+
+        <div class="question">Isua Krista lo kal leh hma lawkin eng thupuan pawimawh tak nge puan ni ang?</div>
+
+        <blockquote>
+            “<span class="uppercase">MI FEL LO CHU, TIHFEL LOHIN AWM RENG RAWH SE</span>; mi bawlhhlawh chu,
+            tihbawlhhlawhin awm reng rawh se; <span class="uppercase">MI FEL CHU, TIHFELIN AWM RENG RAWH SE</span>; mi
+            thianghlim chu, tihthianghlimin awm reng rawh se. Ngai teh, ka lo kal thuai dâwn e; mi tin an thiltih ang
+            zêla pêk tûrin ka lâwmman ka hnênah a awma.” Thu puan 22:11, 12.
+        </blockquote>
+
+        <p>He thil pawimawh tak puan a nih hian mihringte chûng thu zawng zawng chu rêl fel diam a ni tawh ang a,
+            Pathian hmaa tu dinhmun mah tihdanglam a ni tawh lo vang.</p>
+
+        <h2>CHHANDAM LOHTE MANGANNA</h2>
+
+        <div class="question">Isua Krista lo kal lehna chuan chhandam lohte chu eng angin nge a rawn khawih ang?</div>
+
+        <blockquote>
+            “Vân chu lehkhabu zial mi ziala a bo angin, a bo ta a. Tlâng leh thliarkâr tinrêng chu an awmna ata sawnin
+            an awm ta hlawm a. Leia lal te, mi lian te, sipai hotu ber te, mi hausa te, mi chak te, bawi leh bawi lo
+            tinrêngte chu pûkah leh tlânga lungpuiah chuan an biru a: tin, tlângte leh lungpuite hnênah chuan, ‘Min delh
+            ula, lalṭhutphaha ṭhua hmêl lakah leh Berâm No thinurna lakah min hliah rawh u, an thinurna ni ropui tak chu
+            a lo thlen tak hi; tichuan, tunge ding thei ang i le?’ an ti a,” Thupuan 6:14-17.
+        </blockquote>
+
+        <blockquote>
+            “Chu mi niah chuan miten an tangka milemte leh an rangkachak milem te, biak tûra an siam sakte chu,
+            bui-kelek hnênah te leh bâk hnênah te chuan an paih ang a; lei hi nasa tak taka tinghîng tûra a thawh hunah,
+            Lalpa hlauhawmna lak aṭang leh a mawina ropuina lak aṭang chuan, lungpui pûkahte leh khâm lungpui khî-ahte
+            chuan an lût ang,” Isaia 20:20, 21.
+        </blockquote>
+
+        <blockquote>
+            “Chutih hunah chuan Mihring Fapa chhinchhiahna chu vânah a lang ang. Chu mi hunah chuan leia chitinin an
+            âwmte an chûm ang a, mihring Fapa hi thiltihtheihna leh ropuina nasa tak nen vân chhûm chunga lo kal an hmu
+            ang. Vântirhkohte chu tawtawrâwt ri nasa tak nên a tîr chhuak ang.” Matthaia 24:30, 31.
+        </blockquote>
+
+        <p>Tunlai mite hi thiltihtheihna te, hlimhlawpna leh hlêpna te ûmin an phî ruai hlawm a. Chu mi niah chuan mi
+            suaksualte leh nawmsip bâwlnaa inchiahpiahte chanvo chu nasa taka lungngaia rûmna a ni ang. Chu mi niah
+            chuan duhâmte chuan an rangkachak milem ngaihhlut êm êmte chu ṭih leh hlau êm êm chungin an hawisan tawh
+            ang.</p>
+
+        <p>Inbuatsaihna nei lote leh, inbuatsaihna nei tûra mi dangte ṭanpui ngai lote tân chuan Isua lo kal lehna chu
+            inchhîr ngawih ngawihna nî a ni ang.</p>
+
+        <blockquote>
+            “Lalpa ni duhte u, in chung a pik e! Engatinge Lalpa nî chu in duh? <span class="uppercase">ÊNG NI LOVIN,
+                THIM A NI ZÂWK E</span>,” Amosa 5:18.
+        </blockquote>
+
+        <p>Zahngaihna kawng a la inhawn avâng hian kan lâwm a va ṭûl êm! Nunna kawng kan zawhnaah hian tih tak zetna kan
+            va ngai tak êm ve le!</p>
+
+        <h2>KHAWVEL CHHIATNA</h2>
+
+        <div class="question">Isua Krista lo kal lehna chuan lei hi eng angin nge a rawn khawih danglam ang?</div>
+
+        <blockquote>
+            “A pasarihna chuan berhbu chu boruakah a leih bua a; tichuan, pindan chhûngnung aṭangin Lalṭhutphah ata, ‘A
+            kin ta,’ tiin, aw ring tak a lo chhuak a. Kâwlphê te, âw te, khawpuirî te a lo awm ta a; <span
+                class="uppercase">LÎR</span> pawh <span class="uppercase">NASA TAKIN A LO NGHÎNG</span> a, leia mihring
+            awm achin chutianga nasa rêng rêng a la awm ngai lo, lîrnghîng chuti kauva nasa leh râpthlâk chu...
+            Thliarkâr tinrêng a bo ta vek a, tlângte pawh awm ta lova,” Thupuan 16:17, 18, 20.
+        </blockquote>
+
+        <p>Isua Krista lo kal leh hunah chuan lir nasa takin a lo nghîng ang a, chu chuan khua te, mihring kutchhuak
+            tinrêng te leh leilung hmêl lan dân zawng zawngte hi a rawn tidanglam vek dâwn a ni.</p>
+
+        <p>Kum 1908 khân Italy ram chhim lampangah khuan second tlêm te chhûng lîr a nghîng chiam a, mi 76,483 laiin an
+            thìhphah a. Kum 1923 khân Japan ramah second rei lo te chhûng lek bawk lîr a nghîng leh a, mihring 100,000
+            laiin an thìhphah leh ta a ni. Isua a lo inlâr huna lîrnghîngin lei pum a rawn sawi nghîn dur dur a,
+            chhiatna a rawn thlen tûr chu a va râpthlâk dâwn tehlul êm!</p>
+
+        <h2>KUM SÂNG ṬANTIRHA THIL THLENGTE</h2>
+
+        <div class="question">Isua lo kal hunah chuan chhandam ni ve lote chu an inchhanhim thei ang em?</div>
+
+        <blockquote>
+            “Chu mi.... hunah chuan Dân Bawhchhepa chu a lo lang tawh ang, Lalpa Isua'n ani chu a kâa thâwin a tihlum
+            ang.” 2 Thesalonika 2:8.
+        </blockquote>
+        <blockquote>
+            “Chu mi nia Lalpa thahte chuan lei tâwp aṭangin lei tâwp thlengin an dâp ang a; sûn loh leh khâwm loh leh
+            phûm lovin an awm ang a; lei chunga êkdûr mai an ni ang.” Jeremia 25:33.
+        </blockquote>
+
+        <p>Vân ṭhat famkimna hmaah chuan mi sualte chu an nung thei lo va; Isua ropuina êngin lei a han tuam vêl chu
+            chhandam ni ve lote chuan an tuar zo lo vang a, lei chungah hian an tlu hlum phiar ang.</p>
+
+        <div class="question">Krista rawn inlârna chuan engangin nge mi thianghlimte a khawih ve ang?</div>
+
+        <blockquote>
+            “Chu mi nîah chuan, ‘<span class="uppercase">NGAI TEH U, HEI HI KAN PATHIAN A NIH HI</span>; ani hi kan
+            nghâk reng a, tichuan, min chhandam ang: Hei hi Lalpa chu a nih hi; ani hi kan nghâk reng a, a chhandamnaah
+            chuan kan lâwmin kan hlim ang, an ti ang,” Isaia 25:9.
+        </blockquote>
+        <blockquote>
+            “Chu mi hnuah chuan keini nunga lo la awm renga te chi, boruakah Lalpa hmuak tûrin anmahni rualin chhûm
+            zîngahte khian lâk chhohvin kan awm ang; chutichuan kumkhuain Lalpa hnênah kan awm tawh ang,” 1 Thesalonika
+            4:17.
+        </blockquote>
+        <blockquote>
+            “Kan zain kan muhîl kher lo vang a, nimahsela, kan zain tâwtawrâwt hnuhnung ber rîk hunah chuan, rei lo
+            teah, mit khap kâr lovah, tihdanglamin kan awm vek tawh ang; tâwtawrâwt chu a ri dâwn si a ... keini pawh
+            tihdanglamin kan awm ang. He ṭawihthei hian ṭawihtheih lohna a sin tûr a ni a, he thithei hian thihtheih
+            lohna sin bawk tûr a ni,” 1 Korin 15:51-53.
+        </blockquote>
+
+        <p>Isua Krista a rawn inlâr leh hunah chuan tlante, nunga lo la awm rengate chuan lâwm takin an lo hmuak ang a,
+            mit khap kâr lovah an taksate chu ropuinaa thuam a ni ang a, thihtheih lohna, hun rei tak chhûng an lo thlîr
+            tawh ṭhin chu, an chang tawh ang.</p>
+
+        <div class="question">Isua lo kal lehnaah chuan mi fel thi tawh chungah eng danglamna nge lo thleng ang?</div>
+
+        <blockquote>
+            “Lalpa ngei chu âuthâwm nên, vântirhkoh chungnung ber âw nên, Pathian tâwtawrâwt ri nên, vân aṭangin a lo
+            chhuk dâwn si a; <span class="uppercase">KRISTAA THI TAWHTE CHU AN THO HMASA ANG</span>,” 1 Thesalonika 4:16
+        </blockquote>
+        <blockquote>
+            “Mithi tawhtte chu ṭawihtheih lova kaihthawhin an awm ang.” 1 Korin 15:52.
+        </blockquote>
+
+        <p>Mi thianghlim nunga awmte ang bawkin mi fel thi tawhte chu ṭawihthei lo leh thithei lova siam an ni ang a,
+            Krista'n a lo tiam lâwk tawh angin vân hmunah chuan a hruai chho ang.</p>
+
+        <blockquote>
+            “In tân hmun ka han siam chuan <span class="uppercase">KA LO KIR LEH ANG A</span>, ka hnênah ka la ang che
+            u, ka awmnaah nangni pawh in awm theih nân,” Johana 14:3.
+        </blockquote>
+
+        <p>Mi fel thi tawhte thawhlehna hi kum sâng rorêl inṭan tîrha lo thleng a ni tih chiang tak a hriat theihna kan
+            nei:</p>
+
+        <blockquote>
+            “. . . An lo nung a, kum sângkhat atân Krista nên rorêlin an awm a. Mithi dangte erawh chu kum sangkhat chu
+            a vei hmâ loh chuan an la nung rih lo va. Chu chu thawhlehna hmasa ber chu a ni. Thawhlehna hmasa bera telte
+            chu an engthâwlin an thianghlim a ni,” Thupuan 20:4-6.
+        </blockquote>
+
+        <p>Kan zir tawh zawng kha hetiang hian khaikhâwmna i lo nei teh ang. 1) Isua lo kal lehna. 2) Lei chung zawng
+            zawngah lîr a nghîng. 3) Chhandam lohte chu Isua ênnain a tihlum 4) Chhandam fate, nunga lo la awm rengate
+            erawhchu ṭawihtheih lohna leh thihtheihlohna sintîr an ni. 5) Mi fel thi tawhte chu thihtheih lohna leh
+            ṭawihtheih lohnaa thuam an ni bawk. 6) Chhandama awm zawng zawngte chuan vân hmun thlengin Isua an zui. 7)
+            Chhandam lohte erawhchu kum sângkhat atân mitthi an ni.</p>
+
+        <h2>KUM SÂNGKHAT CHHÛNGIN</h2>
+
+        <div class="question">He kum sângkhat chhûnga khawvêl awm dân zâwlnei Jeremian engtinnge a lo sawi?</div>
+
+        <blockquote>
+            “Leilung chu ka han en a, ngai teh, <span class="uppercase">ṬIAU LEH RUAKIN A AWM A</span>; vânte pawhin êng
+            an nei lo. Tlângte pawh an phe hlawk hlawk a. Ka han en a, ngai teh, <span class="uppercase">MIHRING AN AWM
+                LOVA</span>, chunglêng sava zawng zawng pawh an thlâwk bo zo ta. Ka han en a, ngai teh, thlawhhma ṭhate
+            chu thlalêr a chang ta, khawpui zawng zawng pawh a chim zo ta, Lalpa leh a thinurna nasa tak hmaah chuan,”
+            Jeremia 4:23-26.
+        </blockquote>
+        <blockquote>
+            “Ngai teh, Lalpa chuan lei hi a tiruakin, a tiram dâwn a, a khaikhup ang a, a awmate chu a tidarh dawn....
+            lei hi tihruah fai kêlhin leh tihchhiat fai kêlhin a awm ang; chu thu chu Lalpan a sawi tawh si a.... Lei hi
+            a keh chhe vek a, lei hi tihralin a awm zo va, lei hi nasa takin a nghîng a; Lei hi zu rui mi angin a pai
+            thlawk thlawk ang a, bâwktê sawi angin a sawi luai luai ang a; a bawhchhiatna chu a chungah rit takin a awm
+            ang a, tichuan a tlu ang a, a tho leh tawh lo vang,” Isaia 24:1, 3, 19, 20.
+        </blockquote>
+
+        <p>Hetiang hian mitthlaa chiang taka hmuh fiah uar theihin kum sâng rorêl chhûnga lei awm dân tûr chu ziak a ni
+            a. A ruak fai kêlh a, a chhûnga chêng rêng rêng an awm hauh lo a ni. Mi suaksual zawng zawngte an thih vek
+            tawh avâng leh, mi thianghlimte chu vâna hruai chhohva an awm vek bawk si avângin lei chu a ruak ngei a ni
+            tih kan hre thei.</p>
+
+        <p>Mi ṭhenkhat chuan kum sâng rorêl chhûng hian lei chungah muanna leh hlâwknate awmin an ring a, chûng ngaih
+            dân dik lo takte leh Baibul zirtîr dân hi a inpersan nasa hle a ni.</p>
+
+        <h2>SETANA PHUARNA</h2>
+
+        <div class="question">Lei chunga nungcha zawng zawng an awm tawh loh hnu chuan Setana din hmun eng ang nge ni
+            ta?</div>
+
+        <blockquote>
+            “Dragon, rûlpui tar chu (chu chu Diabola leh Setana a ni) a man a, kum sângkhat atân a phuar a, leilâwtah
+            chuan a paih lût a, a khâr khum a, kum sângkhat chu a vei hma loh chuan hnam tin a bum leh tawh lohna tûrin
+            a châr hnan ta a,” Thupuan 20: 2, 3.
+        </blockquote>
+
+        <p>Leilâwta Setana paih luh leh phuar tih awmzia hi hnamte bum theihna rêng rêng a neih lohna hi a ni. Chawlh
+            hun nei thei lo lêka buaite chu thil awm dâna phuar hlâwm reng an ni angin Setana pawh thil awm dan -a phuar
+            a ni ang a, bumna hna thawhna hun remchâng rêng a nei dâwn si lo va. Isua lo kal lehnaah chuan mi thianghlim
+            zawng zawngte vânah hruai chhohin an awm ang a, mi sualte zawng zawng lah chu tihhlum an ni vek tawh dâwn si
+            a, Setan chauh he khawvêl thim- leilâwtah hian – hnutchhiah a ni ang.</p>
+
+        <p>Kum sângruk lai chu Setana hian a kawng bawlhhlawh tak mai chu mihringte a lo zawhtir tawh a, chhiarsên
+            lohten, A bumna thangah chuan lo âwk tawhin, chatuan nunna an hloh phah tawh a. Sual rah leh mi sualte
+            hnuhma râpthlâk tak mai kum sangkhat chhûng lai han hmuh leh ngaihtuah chu Setana tân chuan a thaw ipik
+            thlâk hlê ang le. Zu bâwiha a lo siam tawh te, bawlhhlawh taka a lo nuntîr tawh te, Chawlhni a bawhchhittîr
+            te, chapona a neihtîr zawng zawng te, nimahsela, Isua Krista thiltihtheihna azara tihzalêna awm leh tâte
+            chanchin te chu a ngaihtuah chhuak leh vek dâwn a ni.</p>
+
+        <p>Chu mi nîah chuan harsatna leh dodâlna kâra Isua zui thlangte chu chhandam an lo nih tâk avânga inchhîr rêng
+            rêng an awm lo vang.</p>
+
+        <div class="question">Kum sângkhat chhûngin mi felten eng hamṭhatna nge an dawn ang?</div>
+
+        <blockquote>
+            “Lalṭhutphahte ka hmu a, a chungah mi an ṭhu a, an hnênah chuan rorêlna an pe a,” Thupuan 20:4.
+        </blockquote>
+        <blockquote>
+            “Thawhlehna hmasabera telte chu an engthâwlin an thianghlim a ni; chûngho chungah chuan thih hnihna chuan
+            thu rêng a nei lo va, Pathian leh Krista puithiamte an ni ang a, amah nên kum sângkhat rorêlin an awm zâwk
+            ang,” Thupuan 20:6.
+        </blockquote>
+        <blockquote>
+            “Mi thianghlimte chuan khawvêl an ngaihtuah dâwn tih in hre lo em ni le? Khawvêl mah hi in ngaihtuaha a awm
+            dâwn chuan, thil tê berte pawh chu ngaihtuah tlâk lo em ni in nih le? Tun dam chhûng khawsak thute chu sawi
+            loh, vântirhkohte lam pawh kan ngaihtuah dâwn tih in hre lo vem ni?” 1 Korin 6:2, 3.
+        </blockquote>
+
+        <p>Tlante hnênah chuan boralte nunna chanchin chhinchhiahna enfiah theihna pêk a ni ang a. Vâna chhinchhiahna
+            famkim takah chuan mi sualte chanchin chu kimtaka târlan vek a ni ang a, Pathian felna leh boralte thiam
+            lohzia hriatpuitu an ni ang. Pathian chu a fel tih leh A lâwmman pêk dân kawngah a fel a ni tih chu Pathian
+            mi thianghlimte chuan an hre chiang ang.</p>
+
+        <h2>KUM SANG RORÊL TÂWPNA</h2>
+
+        <div class="question">Kum Sâng rorêl tâwpah thil engtenge lo thleng ang?</div>
+
+        <blockquote>
+            “Khaw thianghlim <span class="uppercase">JERUSALEM THAR CHU</span> mo a pasal ela a inchei anga peih diamin,
+            <span class="uppercase">PATHIAN HNÊNA MI VÂN ATA LO CHHUK</span> ka hmu bawk a. Lalṭhutphah aṭangin aw ring
+            takin, “Ngai teh, Pathian bâwktê chu mihring zîngah a lo awm ta, ani chu an hnênah a awm ang a, anni chu A
+            mite an ni ang a, Pathian ngei chu an hnênah a awm ang a, an Pathian a ni bawk ang... Ani chuan, Thlarauvin
+            tlâng lian pui, sâng takah mi kalpui a, Jerusalem khaw thianghlim chu Pathian ropuina neiin, Pathian hnêna
+            mi vân ata lo chhuk mi entir a,” Thupuan 21:2, 3, 10
+        </blockquote>
+
+        <p>Khawpui thianghlim Jerusalem Thar chu he leiah hian a lo chhuk ang a. Tlante chuan lei, ram zo vek tawh hnu
+            leh chhe zo vek tawh chu an hmu ang a, chu mi hnua thil lo thleng zêlte pawh chu an hmu bawk ang.</p>
+
+        <div class="question">11. Setana chu phuar a nihna ata engtia phelhin nge a awm ang?</div>
+
+        <blockquote>
+            “<span class="uppercase">MITTHI DANGTE ERAWH CHU KUM SANGKHAT CHU A VEI HMA LOH CHUAN AN LA NUNG RIH LO
+                VA.</span> Kum sângkhat chu a vei hunah chuan <span class="uppercase">SETANA CHU A TÂNNA ATA CHU
+                CHHUAHIN A AWM ANG</span>, lei kil lia hnamte, Goga leh Magoga chu buma, indonaa hruai khâwm tûrin a kal
+            chhuak ang; chûngho tamzia chu tuifinriata ṭiauvut ang mai an ni,” Thupuan 20:7, 8.
+        </blockquote>
+
+        <p>Kum sângkhat a lo vei hnu chuan mitthi dangte–misual thite chu an lo nung leh ang a. Isua'n thu a han sawi
+            chuan hmasâng misual thi tawh zawng zawng chu an thlân, sual chhinchhiahna nei aṭang chuan an lo chhuak ang.
+            Chûng mi chitin reng infin khâwmte chuan an lâwmman dik tak, kum sâng rorêl chhûnga rêl thlûk diam tawh chu
+            an hmu tawh ang.</p>
+
+        <p>Misual thi tawh zawng zawngte kaihthawha an awm a, lei hi an rawn awh khahna chu Setana chhuah lehna chu a
+            ni. Setana, mihringte hmêlma lian ber chuan a hnathawh huatthlala tak mai, kum sângkhat lai a lo chawlhpui
+            tawh chu a rawn chhunzawm leh ang a, “lei kil lia hnamte chu bum” turin a kal chhuak leh ang.</p>
+
+        <p>Misualte chuan hlim taka chatuan lâwmnatea vûr tlante lêng vêl chu an thlîr ang a. Khaw duhawm–Isua kraws
+            putu leh Isua hniak hnung zuitu ni duh sela chuan an chênna ni ve thei mai tûr- pawh chu an thlîr vawng
+            vawng ang.</p>
+
+        <h2>SUALNA A TÂWP TA</h2>
+
+        <div class="question">12. Sual leh helna chu chatuan atân engtingne tihtâwp hlen a nih ang?</div>
+
+        <blockquote>
+            “Vân aṭangin mei alo tla a, anni chu a kângral ta a,” Thupuan 20:9
+        </blockquote>
+        <blockquote>
+            “Ngai teh u, ni chu a lo thleng e, rawhtuina mei angin a kâng a ni; zung leh zâr chenin a zuah lo vang....
+            mi suaksualte chu in rapbet ang.... in kephah hnuaia meivâp an ni dâwn si a,” Malakia 4:1-3.
+        </blockquote>
+        <blockquote>
+            “Akâng ral che, (Setana) leiah vaivutah ka chantîr che. I awm ngai rêng rêng tawh lo vang le,” Ezekiela
+            28:18, 19.
+        </blockquote>
+
+        <p>Sual laka he khawvêl tithianghlimtu mei vêk chuan Setana leh mi sualte chu a kângral vek ang a, sual hnuhma
+            zawng zawng pawh chatuan atân a boral tawh ang.</p>
+
+        <blockquote>
+            “Lalpa kalhin engnge in suangtuah? Tâwp derna a thlentîr dâwn a ni: hrehawm vawi hnihna a thleng lovang,”
+            Nahuma 1:9.
+        </blockquote>
+
+        <p>Baibul-a Setana chanchin târlan hmasak ber chu Eden huana kan zaa nu, Evi a bumnaa a hlawhtlin thu a ni
+            (Genesis 3:1-6). He zirlaiah hian lei mihringte bum tuma a beihna hnuhnung ber te, a hlawhchham thute leh
+            tihboral hlen a la nih tûr thute kan zir a ni (Thupuan 20:1-3).</p>
+
+        <p>Kum sâng rorêl zawha thil lo thlengte khai khâwmna lo nei ila: 1. Krista leh mi thianghlimte vân aṭangin an
+            lo chhuk, 2. Khaw thianghlim a lo chhuk a, leiah hian a innghat, 3. Mi sual thi tawhte kaih thawh an ni, 4.
+            Setana phelh a ni a, a bumna hna chhunzawm theihna a nei leh, 5. Mi sualte mei dîlah tihboral an ni.</p>
+
+        <h2>SUAL HNUHMA ZAWNG ZAWNG A BO TA</h2>
+
+        <p>“Pathianin A thil siam zawng zawng aṭang hian sual leh a hnuhma zawng zawng leh, Setana chu chatuan atân a
+            nuai bo ang a. He lei hi a tîra Eden huan mawina famkim chang leh tûrin a dinthar ang a, sualin a tihmêlhem
+            leh tawh lovang. Chutih hunah chuan Pathian kutchhuak zawng zawngte chu hlim tâwp rêng awm lovin, inremna
+            famkim biaia suih khâwmin an lêng za dial dial tawh ang. Ṭhian duh tak, nang, chu chatuan hmunah chuan chên
+            ve i duh lâwm ni?</p>
+
+        <blockquote>
+            “Ngai teh u, vân tharte leh lei thar ka siam a nih hi; tunhma thilte chu hriat rengin a awm tawh lo vang a,
+            rilruah pawh a lût tawh hek lo vang,” Isaia 65:17
+        </blockquote>
+        <blockquote>
+            “Vân thar leh lei thar ka hmu a; vân hmasa leh lei hmasa chu a boral tawh a, tuifinriat pawh a awm tawh lo a
+            ni.... An mit ata mittui zawng zawng (Pathianin) a hrufai ang a; thihna a awm leh tawh lovang a, lungngaih
+            te, ṭah te, nat te pawh a awm leh tawh hek lovang, thil hmasate chu a ral ta,” Thupuan 21:1, 4.
+        </blockquote>
+
+        <p>He zirlaia kan zir tâkte hi hmasâng aṭanga Pathian zâwlneiten nghâkhlel taka an lo thlîr ṭhin a ni.
+            Harsatna–manganna leh lungngaihna hual vêlin awm mah sela, thutak an hriat chu Pathian hnên ata a ni tih an
+            hriat tlat avângin Setana leh, sual leh lungngaihna zawng zawng lâk kian a nih a, Pathian faten felna rah
+            hlim taka an la seng hun tur chu an thlîr fan fan thei a ni. Zirtu duh tak, nang pawhin chutiang beiseina
+            chu lo nei ve mawlh teh.</p>
+        <!-- ZIRLAI TEXT DANG HETAH HIAN DAH ZEL RAWH -->
+
+        <hr style="margin: 40px 0;">
+        <h3>Zirlai Sawmparukna Zawhna:</h3>
+
+        <div class="q-box">
+            <p>1. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+
+        <!-- QUESTION 2 ATANGA 10 HETAH HIAN DAH LUT RAWH -->
+
+        <button class="submit-btn" onclick="submitQuiz()" id="submitBtn">Submit Answer</button>
+        <p id="errorMsg" class="error-msg"></p>
+    </div>
+
+    <script>
+        // ==========================================
+        // HEI CHIAH HI FILE DANG ATAN THLAK A NGAI:
+        // ==========================================
+        const currentLessonNumber = 16;
+        const nextLessonFile = "lesson17.html";
+
+        // Lesson 16 Chhanna dik
+        const correctAnswers = {
+            "q1": "B" // q2: "A", q3: "C" tiin 10 thleng i dah dawn nia
+        };
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwuk-FMfvgUsc4Do49O9D1XkEnE3qga-4M7hsbB9FPGuapxzMfOtVEryKvXugRfbBg-6A/exec'; // Apps Script URL
+
+        // Heta \anga a hnuai lam hi chu thlak a ngai lo
+        window.onload = function () {
+            let savedEmail = localStorage.getItem("vop_email");
+            let unlockedLessons = parseInt(localStorage.getItem("vop_progress"));
+
+            if (!savedEmail || !unlockedLessons) {
+                alert("Login hmasak a ngai!");
+                window.location.href = "index.html";
+            }
+            if (currentLessonNumber > unlockedLessons) {
+                alert("He lesson hi i la unlock lo!");
+                window.location.href = "index.html";
+            }
+        };
+
+        function submitQuiz() {
+            let allCorrect = true;
+            let wrongQuestions = [];
+            let totalQuestions = Object.keys(correctAnswers).length;
+            let questionNumber = 1;
+
+            for (let qName in correctAnswers) {
+                let selectedOption = document.querySelector(`input[name="${qName}"]:checked`);
+                if (!selectedOption || selectedOption.value !== correctAnswers[qName]) {
+                    allCorrect = false;
+                    wrongQuestions.push(questionNumber);
+                }
+                questionNumber++;
+            }
+
+            let errorMsgElement = document.getElementById("errorMsg");
+
+            if (!allCorrect) {
+                errorMsgElement.innerText = `A dik lo awm! Question no: ${wrongQuestions.join(", ")} te hi han chhang tha leh rawh.`;
+                return;
+            }
+
+            errorMsgElement.innerText = "Saving progress...";
+            document.getElementById("submitBtn").disabled = true;
+
+            let currentProgress = parseInt(localStorage.getItem("vop_progress"));
+            let nextLesson = currentLessonNumber + 1;
+
+            if (currentLessonNumber < 25) {
+                if (nextLesson > currentProgress) {
+                    localStorage.setItem("vop_progress", nextLesson);
+                    let formData = new URLSearchParams();
+                    formData.append("action", "update_progress");
+                    formData.append("email", localStorage.getItem("vop_email"));
+                    formData.append("progress", nextLesson);
+
+                    fetch(scriptURL, { method: 'POST', body: formData }).then(() => {
+                        document.getElementById("successModal").classList.remove("hidden");
+                    });
+                } else {
+                    document.getElementById("successModal").classList.remove("hidden");
+                }
+            } else {
+                // Lesson 25 zawhah Certificate trigger
+                document.getElementById("modalContinueBtn").classList.add("hidden");
+                document.getElementById("modalMessage").innerHTML = "Course zawng zawng i zo ta! Lawmpui a che.<br><br>⏳ I E-Certificate kan siam mek a, i email ah kan rawn thawn nghal e...";
+                document.getElementById("successModal").classList.remove("hidden");
+
+                let formData = new URLSearchParams();
+                formData.append("action", "finish_course");
+                formData.append("email", localStorage.getItem("vop_email"));
+                formData.append("name", localStorage.getItem("vop_name"));
+                fetch(scriptURL, { method: 'POST', body: formData }).then(res => res.json()).then(data => {
+                    if (data.status === "success") {
+                        document.getElementById("modalMessage").innerHTML = "Course i zo ta! ✅ I e-Certificate thawn a ni ta.";
+                    }
+                    document.getElementById("modalContinueBtn").classList.remove("hidden");
+                    document.getElementById("modalContinueBtn").innerText = "Dashboard ah Letna";
+                    document.getElementById("modalContinueBtn").onclick = function () { window.location.href = "index.html"; };
+                });
+            }
+        }
+
+        function goToNext() {
+            window.location.href = nextLessonFile;
+        }
+    </script>
+</body>
+
+</html>

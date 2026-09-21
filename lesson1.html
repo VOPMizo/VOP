@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zirlai 1 - VOP</title>
+    <style>
+        @font-face {
+            font-family: 'MizoCustomFont';
+            src: url('VNT-ARL.TTF') format('truetype');
+        }
+
+        body {
+            font-family: 'MizoCustomFont', Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+            line-height: 1.6;
+        }
+
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px #aaa;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        .q-box {
+            margin-bottom: 20px;
+            background: #eef;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .q-box p {
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        .q-box label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #008CBA;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .back-btn {
+            background-color: #555;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>🎉 Lawmpuiawm! 🎉</h2>
+            <p id="modalMessage">I chhang dik vek e. Lesson thar i zir chhunzawm thei tawh.</p>
+            <button id="modalContinueBtn" class="modal-btn" onclick="goToNext()">Lesson 2 ah Kalna ➔</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">⬅ Dashboard ah Letna</a>
+
+        <h1>ZIRLAI PAKHATNA</h1>
+
+        <h2>PATHIAN THUTAK ZAWNNA</h2>
+
+        <blockquote>
+            Châng Pawimawh: “I thu hi ka kê atânte hian khâwnvâr a ni a, ka kawng atân êng a ni.” Sâm 119:105
+        </blockquote>
+
+        <p>Mi tam takin Pathian thutak hi an nunnaa thil pawimawh bera ngaiin ṭhahnemngai takin an zawng ṭhin a, thutak
+            chu mihringte zawn ber tûr pawh a ni rêng a ni. Tunah thutak zawngtu sâng tam takte zinga mi i lo
+            nih ve tâk avang hian kan lâwm êm êm a ni. Thutak zawnna chuan a zawngtu tih tak zetna leh thutak
+            chu hmuh chhuah a nih hun apianga thinlung zawng zawnga pawmna a ngiat tlat a ni.</p>
+
+        <p>Pathian thutak kan han tih hi Pathian nihna nêna thliar hran theih loh khawpa inzawm tlat a nih avângin
+            thutak hmuh chhuahna chu Pathian hmuhna pawh a ni nghâl ṭhin a. Tin, Pathian hnên aṭang chauh lo
+            chuan thutak puan chhuahna famkim neih theih a ni lo. A aw chu thuneihnaa khat a ni a. A
+            awka thu ziakna lehkhabu pawh thutak bu a ni a, chu lehkhabu chu thutak zawngtute tâna himna leh kaihhruaitu
+            dik awm chhun a ni.</p>
+
+        <h2>“HAWH TEH U, I NGAIHTUAH TLANG TEH ANG U”</h2>
+
+        <p>Baibl Râlchhan Skul enkawltuten Pathian Lehkhabu Thianghlim hi Pathian thuneihna hriattirtu leh thutak
+            khurpui a ni tih leh, thutaka khat Pathian hnên min thlen theitu a ni tih kan ring a. Amaherawhchu,
+            Pathian Lehkhabu Thianghlim hi kan rinna innghahna a nih vang maia i Kaihruaitu atana lo pawm ve tûrin sâwm
+            che kan ni lo va; Isaia 1:18 a kan hmuh angin, “Hawh the u, i ngaihtuah tlang the ang u,” tiin, Pathianin mi
+            tin hi min sâwm ṭheuh zâwk a ni. Tin, Pathian Lehkhabu chu Pathian thuneihna aw a nih tak zet chuan
+            Pathian thâwk khum ngai a nihzia fiahna pawh a neih nghâl kan beisei thei ang.</p>
+
+        <p>Pathian Lehkhabu Thianghlim chu mihringte hnêna Pathian aw a nihzia achu hêng zirlaite hian fiah tâwk taka an
+            hriattir che kan beisei a, tin, ngun tak leh ṭhahnemngai taka lo zir tûrin kan ngên a che.</p>
+
+        <h2>MAMAWH BULPUI CHU</h2>
+
+        <div class="question">Eng vângin nge mihringin Pathian thâwk khum lehkhabu a mamawh?</div>
+
+        <blockquote>
+            “In khawlohnate chu nangni leh in Pathian kârat lain a tiṭhen zâwk che u a ni a, benga a hriat duh lohna
+            turin in sualnate chuan a hmai chu a hliah sak bawk che u a ni.” Isaia 59:2.
+        </blockquote>
+
+        <p>He châng thu dikzia hi rinhlelh rual a ni lo. Mihringte hi Pathian laka tih hranin an awm tawh
+            a. Khawvêl zawng zawng hi sualnain a lo khat zo ta a ni. Nimahsela, Pathianin misualte a
+            siam a ni lo va. Ama anpui ngeia mihringte hi A siam an ni. (Genesis 1:26,27). A tîrah
+            chuan mihringte chu thianghlim an nih avângin Pathian nêna inhmatawna an inpâwlna leh inbiakna dâltu engmah
+            a awm lova, amaherawhchu, mi sualten Pathian an hnaih theihna chu, an sual tâk aṭang khân, Pathian
+            thianghlimna chuan a phal ta lo a ni. Chutichuan, khawvela sual lo lût chuan, daidangtu awm lova
+            mihringin Pathian a pâwl ṭhinna chu a lo tichat ta a ni. Chutia Pathian hnên aṭanga mihringte chu
+            tihhran an lo nih tâk avâng chuan an inkâra inzawmna a awm leh theih nân Pathianin kawng engemaw a ruat a lo
+            ṭûl ta a ni.</p>
+
+        <div class="question">Suala khat mihringte leh Pathian inkarah inzawmna kawng Pathianin a zawng le hang tih eng
+            vângin nge kan rin?</div>
+
+        <blockquote>
+            “Hmangaihna nei lo chuan Pathian a hre lo; <span class="uppercase">PATHIAN CHU HMANGAIHNA A NI SI A</span>”
+            1Johana 4:8.
+        </blockquote>
+
+        <p>Pathian nungchang zepui ber chu hmangaihna hi a ni a, hmangaihna chu malsâwmna leh ṭanpuina thlentu a
+            ni. Mihring chuan Pathian lo hnar tawhin, Amah dodâlin leh A lakah helin malsâwmna dawng tlak lovah
+            lo insiam tawh mah sela, Pathian chuan A tiboral nghal mai lo va; an sualnate hre chhuak tur leh anmahni
+            duhthlanna ngeia Ama lam lo hawi a, A tâna rinawmna lo nei leh turin hruai kir leh A tum zawk a ni.
+            Mihringte A hmangaihzia leh chhandam A duhzia thu, Pathian thâwk khum lehkhabua puan chhuah aia mihringte
+            hnêna hriattir dan kawng ṭha zâwk engnge awm thei ang le? Chu lehkhabu hmang chuan suala khat
+            mihringte leh Ama inkârah inzawmna awm reng tûr chu Pathianin A lo thlung kai leh ta a ni.</p>
+
+        <div class="question">Pathianin mihringte chu inhmatawna a pâwl theih tak si loh chuan A thuneihnaa khat
+            lehkhabu chhûnga thute chu engtinnge mihringte hnênah A puan theih ang?</div>
+
+        <blockquote>
+            “In zingah hian zâwlnei in awm chuan amah chu kei Lalpa hi inlârnain ka inhriattir ang a, mang lamah ka bia
+            ang.” Numbers 12:6
+        </blockquote>
+        <blockquote>
+            “Miten <span class="uppercase">PATHIAN THLARAU THIANGHLIM TIRHIN</span> Pathian hnên ata an sawi zâwk ṭhin a
+            ni.” 2 Petera 1:21.
+        </blockquote>
+        <blockquote>
+            “Lalpa thlarau chuan keimah mi hmangin a sawi a, a thu chu ka leiah a awm a.” 2 Samuela 23:2.
+        </blockquote>
+
+        <p>Mi fing, thu rill eh bul chanchin ziaktuten Pathian chungchâng sawi tur an ngah hle ṭhin. Nimahsela,
+            Pathian thâwk khum lehkhabuah hian chuan Pathian chu mihringte hnêna thu sawi zâwkin kan hmu thung a
+            ni. Mihringten anmahni thua an ziakte hi chu suangtuahna mai a ni ṭhin a. Pathian
+            kaihhruainaa an ziak erawh chu thuneihnaa khat a ni ṭhin. Tin, mihring thil siam chhuahte rêng rêng
+            hian nunna an nei ve lo va, Pathian aṭanga chhuakte erawh chu nunna pe thei an ni. Mihringte hnêna
+            A duhzâwng puangtu atâna A mi thlante rilru chu inlârna leh mumang hmangin Pathianin A thunun a, mihring
+            duhna chu lâk kianin a awm zâwk ṭhin a ni. Petera pawhin, “Thu hril lâwk rêng rêng hi mihring thua
+            chhuak a ni ngai si lo va,” tiin, min hrilh. 2 Petera 1:21.</p>
+
+        <p>Chutianga mihringte chu zuk thunun an nih avang chuan Pathianin lehkhabu ṭha famkim – “nun tak khurpui chu A
+            siam thei a ni.</p>
+
+        <h2>KHAWVEL PAKHAT – LEHKHABU PAKHAT</h2>
+
+        <div class="question">Pathian thâwk khum lehkhabu pakhat chauh a awm ang tih rin theihna engnge awm?
+        </div>
+
+        <blockquote>
+            “Tin, lei chung zawng zawnga awm turin bul hmun khat vekin hnam tin mi a siam a.” Tirhkohte 17:26.
+        </blockquote>
+
+        <p>Khawvêla hnam tin hi kawng tam takin danglam ṭheuh mah sela, an zaa bul chu Pathian a ni tih chiang takin kah
+            hre thei; bul hmun khat vekin hnam tin hi A siam a ni. Taksa inrel dân leh awm dân te, taksain a
+            mamawh –ei leh bâr tur te, ni êng leh boruak thiang te, etc. leh chhûng lam awm dân te hi a inthuhmun vek a
+            ni. “Danglamna rêng a awm lo va, mi zawng zawngin thil an tisual tawh vek a, Pathian ropuina an
+            chang zo ta lo.” Rom 3:23. “Tumah mi fel tak rêng an awm lo, pakhat mah an awm hauh lo.” Rom
+            3:10. Khawvel mi zawng zawng hi, a hmei apain sual thiltih leh tih duhnain an khat zo vek tawh a
+            ni.</p>
+
+        <p>Chuvângin, hnam tina mi zawng zawng hian sual thiltihtheihna te, thiam loh chantîrna te leh ânchhia aṭanga
+            chhanchhuahna an mamawh êm êm vek a, a tîra mihringin thianghlimna leh sual tell ova a nunna kha din thar
+            sak leh an mamawh ṭheuh a ni. Tin, mihringte thlarau mamawh pe tûrin Pathian thil ruat leh ruahman
+            bâkah thil dang rêng a awm thei chuang lo. Tichuan Pathian thâwk khum lehkhabu, mihringte mamawh
+            zawng zawng puan chhuahna chauh lo hi chu mihringte mamawh petu lehkhabu dang a awm lo a ni.</p>
+
+        <h2>LEKHABU ROPUI</h2>
+
+        <div class="question">Pathian Lehkhabu hi engzâta ṭhen sawm nge a nih?</div>
+
+        <blockquote>
+            “Zawlnei thianghlimte thu sawi lâwk leh, in tirhkohte kaah Lalpa leh Chhandamtu thupêk chu in hriat rnegna
+            turin.” 2 Petera 3:2.
+        </blockquote>
+
+        <p>He châng thu hian zâwlnei thianghlimte thu sawi. Thuthlung Hlui leh, Isua Krista Tirhkohte chanchin
+            ziak, Thuthlung Thar thu a târlang a ni tih a lang chiang tâwk hle. Thuthlung Hluiah hian bu hrang
+            sawmthum leh pakua a awm a. Thuthlung Tharah bu sawmhnih leh pasarih: Pathian Lehkhabu pumpuiah bu
+            sawmruk leh paruk a awm a nih chu. Heng bu hrang hrangte hi mi sawmli laiin kum sângkhat leh saruk
+            lai chhûnga an ziak a ni.</p>
+
+        <p>A chanchin chu hetiang hian sawi a ni: “A chhûnga thute hi lal te, lalber te, lal fa te, hla phuahtu te, mi
+            thianghlim te, mi fing te, sangha mantu te, ram enkawl dân chungchânga mi thiam te, Aigupta finna lama
+            thiamna sâng tak nei te, Babulon skul chhuak te leh Jerusalem khuaa zirtirtu ke bula zirte ziak a ni
+            a. Thlalêra mi te, mahni ram aṭanga hnawh chhuah tâwk te, berâmpu puan ina khawsa te, hlobet hring
+            dup hmuna mi leh chawlhna tui kama awm te ziak a ni. An zinga ṭhenkhatte chu chhiahkhawntu te, mi
+            hausa te, pachhia te, thu hriltu te, sipai hotu te leh rorêltu te; mi chi hrang hrang, khawsak dân hrang leh
+            hnathawh hrang hrang neite an ni.. He lehkhabu ropui tak mai hi.. lehkhabu tam tak infinkhâwm a ni
+            a, khawvêl chanchin te, chi thlah tut e, dân te, nun dâ leh khawsak dân te, hril lâwkna thu te, hl ate,
+            damdawi lam leh taksa inenkawl thianghlimna dân te, ram enkawl dân leh rêlbâwl dân te, mimal leh mipui
+            khawsak dân te a fûn khawm vek a ni. Thil hrang hrang chanchin ziakna ni mahsela, inkalhna awm miah
+            lovin fel tak leh inrem takin a chhûnga thute chu an inzawm thliai vek a. An za chuan lehkhabu
+            pakhat an ni a; hiring ziak rêng rêngah he lehkhabu tluk emaw khûmtu emaw hi a awm lo va, chu chuan mihring
+            thiltihtheihna mai aṭanga lo chhuak a nih lohzia a tilang chiang hle a ni.</p>
+
+        <p>Pathian Lehkhabu kan han tih hi thâwk khuma pek lehkhabu, Pathian thu puan ziak chhuahna hi a ni a.
+            Chu lehkhabua thu puan chhuah, mihringin amaha a hmuh chhuah theih loh leh a hriat theih loh chu, Pathianin
+            mihring hnênah chuan A rawn hriattir a, tin, A thâwk khumna te, A kaihhruaina leh thununna te avângin
+            Pathian ngaihtuah te, thupêk te leh tum te chu mihring tân dik tak leh fiah taka ziak chhuahin a awm thei a
+            ni.</p>
+
+        <div class="question">Pathian Lehkhabu ziaktu zawng zawng ten an thu ziakte hi Pathian hnên aṭangin an dawn vek
+            em ni?</div>
+
+        <blockquote>
+            “Pathian Lehkha Thu tinrêng, Pathian thâwk khuma pêk…a ni.” 2 Tim. 3:16.
+        </blockquote>
+
+        <p>Hei hi Paulan Thuthlung Hlui thu a sawina a ni. “Pathianin a ti,” “Lalpan hetiangin a sawi,” “Lalpan
+            thu a pêk chu,” “Lalpa thu chu,” tihte hi Pathianin Lehkhabua a bu hmasa pangaahte ngawt pawh hian vawi
+            zasarih dâwn lai sawi lan a ni a, chu chuan hêng bu hmasa pangate hi Pathian Thu an ni tih chiang takin a
+            tilang. Tin, khawvel chanchin lam ziakna, Josua bu aṭanga Estheri bu thlenga kan en chuan a chunga
+            târlan ang khi vawi zali zet ziak a ni tih kan hmu bawk ang. Thuthlung Hluia hril lâwkna bu lamah
+            pawh vawi sângkhat leh zathum lai târlan a ni. Chutichuan Thuthlung Hlui pum puiah:</p>
+
+        <ul>
+            <li>“Lalpa thu ngai rawh u.”</li>
+            <li>“Lalpan a sawi tawh a ni.”</li>
+            <li>“Lalpa awin a sawi ka hria a.”</li>
+            <li>“Lalpa thu ka hnênah a lo thleng a.”</li>
+            <li>“Ka thu sawite hi an hnenah i hrilh tur a ni.”</li>
+        </ul>
+
+        <p>tihte hi vawi sânghnih leh zathum zet a chuang a ni.</p>
+
+        <p>Lalpa Isua Krista, A thuneihna leh nihna tumahin an el phâk rual loh chuan, a hun laia Pathian Lehkha Thu
+            awmte chu Mosia Dân te, Zâwlnei Lehkhabute leh Fakna Hla Bu te tein A vuah hlawm a. (Luka 21:11. 45)[cite:
+            7] Hetiang hian Thuthlung Hlui bu pum pui hi thâwk khum a nihzia Amah ngeiina hriattirin A nemnghet a
+            ni.</p>
+
+        <p>Zawhna pangana hnuaiah khan Pathian Thu châng pakhat, tirhkohte thu ziak sawina thu kan chhiar tawh a, chu
+            chuan Thuthlung Thar pawh hi thâwk khuma pêk a nihzia a tilang a. Tin, Pathianin Ama duh anga
+            mihringte ziaktirin A kaihruai a; ziaktute thu ziak dân kalhmangte pawh a hnâwl sak kher lo va, an thu ziak
+            dân te, an rilru put dân te leh an mihrinna zia te pawh A thununna hnuaiah chuan zalên takin a hmantir a,
+            nimahsela, A thununna chu a ṭhat tâwk êm avangin an thu ziak chu “Pathian thu nung reng leh awm reng” an lo
+            nit a vek a ni. 1Petera 1:23.</p>
+
+        <h2>PATHIAN LEHKHABU TUM</h2>
+
+        <div class="question">Pathian Lehkha Thu mihringte hnêna pêk thua Pathian thil tum engnge ni?</div>
+
+        <blockquote>
+            “Pathian Lehkha Thu tinrêng, Pathian thâwk khuma pêk tawh phawt chu, zirtir kawngah te, thiam loh chantir
+            kawngah te, felna zirtir kawngah te a sâwt bawk a ni; Pathian mi chu, hna ṭha tinrêng thawk tura kim taka
+            inthuamin a famkim theih nân.” 2 Timothea 3:16,17.
+        </blockquote>
+
+        <p>Thurin bulpui leh inzirtirna ṭhenkhatte chu sakhaw dik leh finna dik tungdingtu leh kengkawhtu an ni hlawm a,
+            chutiang thurin leh inzirtirna chu Pathian Lehkhabuah hian hmuh theih a ni.</p>
+
+        <p>Mihringte hian zilhhauna hi an lâwm ngai lo va, nimahsela, an mamawh a ni tih Pathianin A hriat avangin an
+            chungah A thlentîr ṭhin. Tin, Pathian Lehkhabu hian tumah duhsak bik leh thlei bik nei lovin, kan
+            zain kan sualnate min kawhhmuh ṭheuh a ni. Zilhhauna chauh hi kan chungah Lalpan A thlentir lova,
+            zirtirna pawh kan dawng tel ṭhin. Kan tih turte min hriattir a, felna kawng min kawhhmuh a.[cite:
+            7] A dân ropui takte nena inhmeh, thil ṭha tih kawngah te min zirtir ṭhin a ni. Pathian Thu
+            zirtirna dikzia hriaa zâwmtute chu mi famkim, “hna ṭha tinrêng thawk tura kim taka in thuam” an ni.
+            Rom 15:4 ah Pathian Lehkha Thua chhelna leh thlamuanna hmua beiseina kan neih theihna turin, hman laia ziak
+            apiangte chu keimahni min zirtirna turin ziak a ni si a,” tih thu kan chhiar bawk.</p>
+
+        <p>Chhelna, thlamuanna, beiseina – hêngte hi tun laiin khawvel hian a va mamawh nasa em! Khawvel hian
+            beidawngte hnenah beiseina thar neih leh dan kawng tam tak a kawhhmuhin a tiam tak nâ a, beiseina khurpui
+            awm chhun chu Pathian Lehkhabu chauh hi a ni a, thiltihtheihna pawh chuta ṭanga lo luang chhuak chu a
+            ni. Chu thiltihtheihna chuan mihring nunna a tidanglam thei a, nungchang a siam ṭha thei a, chak
+            lote hnênah chakna thar a pe thei bawk; lunghnualte hnênah huaisenna te, hnuk chat lek lek te hnenah
+            beiseina te a thlen ṭhin. Tirhkoh Paula chuan, “Pathian thu hi a nung a, thil a ti thei a, khandaih
+            hriam tawn eng ang ai pawhin a hriam a,” tiin, min hrilh. Hebrai 4:12. Tin, Peteran
+            Pathian thu chhe thei lo, “nung reng leh awm rengah chuan” piang thar kan ni tih min hrilh bawk. 1 Petera
+            1:23. Isua ngei pawhin hetiangin a sawi: “In hnêna thu ka sawite hi thlarau a ni, nunna pawh a ni,”
+            tiin. Johana 6:23.</p>
+
+        <h2>KHAWVEL THIMA ENNA</h2>
+
+        <div class="question">Pathian Lehkha Thu hlutzia engtinnge Lal Davida zawlnei ni bawk chuan a sawi?
+        </div>
+
+        <blockquote>
+            “I thu hi ka ke atânte hian khâwnvâr a ni a, ka kawng atân eng a ni.” Sâm 119:105.
+        </blockquote>
+
+        <p>Ephesi 5:13 ah hian, “tihlana awm apiang chu êng a ni si a,” tih thu kan chhiar a, chu chu Pathian Lehkhabuin
+            êng awmzia a hrilhfiahna a ni. Eng awmnaah chuan thimna rêng a awm thei ngai lo a ni.
+            Khawvêl hi thlarau lam leh tisa lama thimnain a khat zo ta a, mihringten kalna lam tur pawh an hr eta
+            lo. Anmahni thil siam chhuah ngeite chu an chunga thimna rawn thlentu an ni a, chu thimna hual vêl
+            chuan an awm a, êng an mamawh tak meuh a ni. Chu êng an mamawh êm êm chu Pathian Lehkhabu hi a ni
+            a, mihringten an zui a ṭûl a ni. Nunna mamawh leh châkkhai zawng zawngte hi chutah chuan a awm
+            vek. Dr.J.Wilbur Chapman chuan mawi takin Pathian Lehkhabu thu hetiangin a ziak a:</p>
+
+        <blockquote>
+            “I lu a natin a tluk a awm lova; i thinlung a nguiin a tluk a awm lo! Chhûna ni a lan loh lai leh
+            zâna arsite an lan loh laiin Pathian Lehkhabu tluk rêng a awm lo! Faten an nu an sûn lai te, i fa
+            duh ngawih ngawih i sûn lai te, hnuk chat ṭêpa I awm lai te leh, nunna kawng zawhnaa i zin kawng tâwp i
+            thlen a, i thih dâwn lai tein Pathian Lehkhabu ang rêng thil dang a awm mawlh lo!” tiin.
+        </blockquote>
+
+        <h2>TIHBORAL THEIH A NI LO</h2>
+
+        <div class="question">Pathian Lehkhabu tihchhiar tuma beituten eng ang chauha hlawhtlinna nge an neih tawh
+            ṭhin?</div>
+
+        <blockquote>
+            “Nangmah beihna tura hriamhrei chher rêng rêng a sâwt lo vang; lei tinrêng thupawia nangmah rawn khingtute
+            chu thiamloh i chantir ang.” Isaia 54:17.
+        </blockquote>
+
+        <p>Hêng thute hi Pathian ṭawngka ngei an ni a, an dik êm êm a ni. Pathian leh A Lehkhabu hi engti kawng
+            engti kawng maha tihboral leh hneh theih an ni lo. Kum sawmnga aia tam mah a nit a. Robert
+            Ingersoll-a chuan kum sâwm chhung lekin Pathian Lehkhabu hi miten an chhiar duh tawh lo vang a, hlui hlâwn
+            hlen a ni ang tiin, a sawi a. Amaherawhchu, 1945 chhûng ngawt pawh khan bu vaibelchhethum leh
+            maktaduaithum zet hralh chhuah a la nit a fo. Tin, kum 150 lai kal taah khân Voltaire-a Pathian thu
+            awi lo dang pakhat pawhin Pathian Lehkhabu hi puak darh (exploded) chhe zo vek tawh angin a sawi bawk.[cite:
+            7] Pathian Lehkhabu chu a puak darh the meuh mai, nimahsela, a puah darh dan erawh chu Voltaire-a ngaih dân
+            nen chuan a inang lo hle âwm e. Ṭawng hrang hrang sangkhat leh za aia tam mahah a lo puak darh ta
+            chum chum zâwk a ni. Lehkhabu dang rêng rêng, Pathian Lehkhabu anga ṭawng chi hrang tam taka chhut
+            hi a awm lo va, a tluka hralh chhuah tam a awm bawk hek lo. A kum atêlin a dinhmun hi a la nghet
+            zual sauh sauh zêl a ni.</p>
+
+        <p>Pathian Lehkha Thu hi a buin emaw, a lehlin tawh sain emawa kan neih hmain hetiang kawng li hian a lo awm
+            hmasa tawh a.</p>
+
+        <ol>
+            <li>Chatuan ata Pathian rilruah a lo awm hmasa phawt a.</li>
+            <li>Pathian rilru aṭang chuan mihringte rilruah hlan chhâwnin a awm a.</li>
+            <li>Mihring rilrua Pathianin A dah chu mihring ṭawng leh thuin siam chhuah a lo nil eh a. Chu chu
+                Pathian kaihhruaina leh thununna ang zela kaltir a nih avangin Pathian Thu a lo ni thei a ni.
+            </li>
+            <li>Chu mi hnuah chuan miten an ziak chhâwng a, an letling a, vawiin ni thleng pawh hian chu hna chu a la
+                kal zel a ni.</li>
+        </ol>
+
+        <p>Dik lo leh kim lo awm miah lova Pathian Lehkha Thu vawn him zel a nihna hi a makin a ropui êm êm a ni.[cite:
+            7] Kut ziak, Alexandrias Manuscript an tih (Protestant Kohhran kuta awm) te, Sinaitic Manuscript (tun hma
+            chuan Grik Kohhran kawl a ni a, tunah erawh chuan British thil hlui kawl ṭhatnaah a awm a) an tih te,
+            Katholik Kohhran kuta awm, Vatican Manuscript an tihte hi kawng mak takin vawn ṭhat vek an ni. Hêng
+            kutziak hrang pathumte hi khaikhinin entawn tlâng vek mah ila, thurin thuah an inremin an inhmurem thlap vek
+            a ni.</p>
+
+        <p>Hun inher zel te, dodâlna te leh thil dang rêng rêngin Pathian Thu hi an tichhe thei lo va, an tiboral thei
+            hek lo vang. Chatuan Pathian Thu a ni si a.</p>
+
+        <h2>THAWK KHUM CHHINCHHIAHNA</h2>
+
+        <div class="question">Pathianin pathiana inchâl vete hnên aṭangin engnge a ngiat?</div>
+
+        <blockquote>
+            “In thu chu rawn sawi rawh u, Lalpan a ti; pathian in intihna chhan berte chu lantir rawh u; Jakob-ho Lalin
+            a ti… Pathian in ni tih kan hriat theihna turin tun hnua thil lo la thleng turte chu sawi rawh u le” Isaia
+            41:21-23.
+        </blockquote>
+
+        <p>Pathian hriat lawktîrna dawngtu tan lo chuan nakin hun hi lehkhabu khup ang a ni. Mihringin dik
+            takin thil lo thleng tur chanchin a sawi lâwk thei lova, aienthiam leh kutzeenthiam bumin mi tam tak chu an
+            awm ṭhin. Heng mite sawi lâwkna hi chu dâwtah a tâwp fo ṭhin a ni.</p>
+
+        <p>Pathian chauhin daw hlek lovin nakin hnua thil lo thleng turte A hril lâwk thei. Chutichuan, dik
+            taka Pathian Lehkhabu hrilh lâwkna thleng famkimte hian chu Lehkhabu chu Pathian thâwk khum a nihzia an
+            tilang chiang hle a ni.</p>
+
+        <div class="question">Pathian chuan engnge nia A inchhâl?</div>
+
+        <blockquote>
+            “Tun hmasâng thilte chu hre reng rawh u: kei hi Pathian ka ni a, a dang rêng rêng an awm si lo; kei hi
+            Pathian ka ni, keimah ang rêng rêng an awm lo; keiin a tawp tur chu a tir aṭang rêngin ka sawi ṭhin a, thil
+            la tih lohte chu hmasâng aṭang rengin ka sawi ṭhîn; ‘Ka remruat chu a ding chhuak ang a, ka duhzawng zawng
+            zawng chu ka ti vek ang,’ ka ti a.” Isaia 46:8,10.
+        </blockquote>
+
+        <p>Leilung buaina chungah Pathian chu lalṭhutthlengah A ṭhu a, engkim mai hi A rawn hmu thei vek a, A
+            ngilneihnain ṭha bera A hriat angin ro A rêl ṭhin. Tun hma, tun lai leh nakin hun zawng zawngte
+            chiang takin A hre vek a. Khawvêl chanchin leh awm dan ur A hrilh lâwknaa khat daw hlek lova lo
+            thleng famkim ṭhinte hian Baibl hi Pathian thâwk khum leh hrilh lâwknaa khat a ni tih a lan chiantir
+            hle. Pathian Lehkhabu i zirnaah hian hrilh lâwkna thute i la zir zel dawn a, chûng chuan Pathian
+            thâwk khum a nihzia an hriattir chein, I thinlung an tivârin an tiharh zêl ang a, A thu thua thil ṭha ti
+            ṭhintu Pathian nung chuan A âng chhûngah a dah ang che.</p>
+
+        <p>Pathian Lehkhabu hi khawvel hnam leh chite chunga lêng, thiltihtheihna nei a ni a, a thiltihtheihnain mite a
+            hneh dân te pawh englai pawhin a pangngai reng a ni. Mihring nun dân leh chêt dante hian an thunun
+            lo va, mi tam takte tuarna a lak kian sakin, Pathianah hahchawlhna leh lungawina a hmuhtir zawk ṭhin.[cite:
+            7] Khawvel hmun tinah mi a siamṭha ṭhin a ni.</p>
+
+        <p>Khawvêl hnam khat tân emaw, ṭawng chi khat tan emaw chauha siam a nil ova, a thiltihtheihna chu hnam zawng
+            zawng chungah kumkhaw tlaitluanin a pangngai reng ang. Mi zawng zawng tân a ni.</p>
+
+        <p>Mihring ngaihtuahna a siam ṭhat sak a, ṭawngkam duhawm leh ziak dân mawi te rilru ngaihtuahna sawi chhuah
+            thiamna te, hla thu mawi tak tak ziak thiamna te a pe; khawvel lehkhabu ziak zawng zawngah Pathian Lehkhabu
+            tluka hnathawk nasal eh sulhnu ngah hi a awm lo.</p>
+
+        <p>Zirtu duh tak, A thu thianghlim aṭanga thil ropui tak takte i chhar chhuah theih nân Pathianin i mitte leh
+            thinlung te tihvâr sak che rawh se, tih hi i tana kan ṭawngṭaina a ni.</p>
+
+        <!-- ZIRLAI TEXT DANG HETAH HIAN DAH ZEL RAWH -->
+
+        <hr style="margin: 40px 0;">
+        <h3>Zirlai Pakhatna Zawhna:</h3>
+
+        <div class="q-box">
+            <p>1. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>2. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>3. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>4. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>5. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>6. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>7. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>8. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>9. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+        <div class="q-box">
+            <p>10. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+
+        <!-- QUESTION 2 ATANGA 10 HETAH HIAN DAH LUT RAWH -->
+
+        <button class="submit-btn" onclick="submitQuiz()" id="submitBtn">Submit Answer</button>
+        <p id="errorMsg" class="error-msg"></p>
+    </div>
+
+    <script>
+        // ==========================================
+        // HEI CHIAH HI FILE DANG ATAN THLAK A NGAI:
+        // ==========================================
+        const currentLessonNumber = 1;
+        const nextLessonFile = "lesson2.html";
+
+        // Lesson 1 Chhanna dik
+        const correctAnswers = {
+            "q1": "B" // q2: "A", q3: "C" tiin 10 thleng i dah dawn nia
+        };
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwuk-FMfvgUsc4Do49O9D1XkEnE3qga-4M7hsbB9FPGuapxzMfOtVEryKvXugRfbBg-6A/exec_HERE'; // Apps Script URL
+
+        // Heta \anga a hnuai lam hi chu thlak a ngai lo
+        window.onload = function () {
+            let savedEmail = localStorage.getItem("vop_email");
+            let unlockedLessons = parseInt(localStorage.getItem("vop_progress"));
+
+            if (!savedEmail || !unlockedLessons) {
+                alert("Login hmasak a ngai!");
+                window.location.href = "index.html";
+            }
+            if (currentLessonNumber > unlockedLessons) {
+                alert("He lesson hi i la unlock lo!");
+                window.location.href = "index.html";
+            }
+        };
+
+        function submitQuiz() {
+            let allCorrect = true;
+            let wrongQuestions = [];
+            let totalQuestions = Object.keys(correctAnswers).length;
+            let questionNumber = 1;
+
+            for (let qName in correctAnswers) {
+                let selectedOption = document.querySelector(`input[name="${qName}"]:checked`);
+                if (!selectedOption || selectedOption.value !== correctAnswers[qName]) {
+                    allCorrect = false;
+                    wrongQuestions.push(questionNumber);
+                }
+                questionNumber++;
+            }
+
+            let errorMsgElement = document.getElementById("errorMsg");
+
+            if (!allCorrect) {
+                errorMsgElement.innerText = `A dik lo awm! Question no: ${wrongQuestions.join(", ")} te hi han chhang tha leh rawh.`;
+                return;
+            }
+
+            errorMsgElement.innerText = "Saving progress...";
+            document.getElementById("submitBtn").disabled = true;
+
+            let currentProgress = parseInt(localStorage.getItem("vop_progress"));
+            let nextLesson = currentLessonNumber + 1;
+
+            if (currentLessonNumber < 25) {
+                if (nextLesson > currentProgress) {
+                    localStorage.setItem("vop_progress", nextLesson);
+                    let formData = new URLSearchParams();
+                    formData.append("action", "update_progress");
+                    formData.append("email", localStorage.getItem("vop_email"));
+                    formData.append("progress", nextLesson);
+
+                    fetch(scriptURL, { method: 'POST', body: formData }).then(() => {
+                        document.getElementById("successModal").classList.remove("hidden");
+                    });
+                } else {
+                    document.getElementById("successModal").classList.remove("hidden");
+                }
+            } else {
+                // Lesson 25 zawhah Certificate trigger
+                document.getElementById("modalContinueBtn").classList.add("hidden");
+                document.getElementById("modalMessage").innerHTML = "Course zawng zawng i zo ta! Lawmpui a che.<br><br>⏳ I E-Certificate kan siam mek a, i email ah kan rawn thawn nghal e...";
+                document.getElementById("successModal").classList.remove("hidden");
+
+                let formData = new URLSearchParams();
+                formData.append("action", "finish_course");
+                formData.append("email", localStorage.getItem("vop_email"));
+                formData.append("name", localStorage.getItem("vop_name"));
+                fetch(scriptURL, { method: 'POST', body: formData }).then(res => res.json()).then(data => {
+                    if (data.status === "success") {
+                        document.getElementById("modalMessage").innerHTML = "Course i zo ta! ✅ I e-Certificate thawn a ni ta.";
+                    }
+                    document.getElementById("modalContinueBtn").classList.remove("hidden");
+                    document.getElementById("modalContinueBtn").innerText = "Dashboard ah Letna";
+                    document.getElementById("modalContinueBtn").onclick = function () { window.location.href = "index.html"; };
+                });
+            }
+        }
+
+        function goToNext() {
+            window.location.href = nextLessonFile;
+        }
+    </script>
+</body>
+
+</html>

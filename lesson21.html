@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zirlai 21 - VOP</title>
+    <style>
+        @font-face {
+            font-family: 'MizoCustomFont';
+            src: url('VNT-ARL.TTF') format('truetype');
+        }
+
+        body {
+            font-family: 'MizoCustomFont', Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px #aaa;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        .q-box {
+            margin-bottom: 20px;
+            background: #eef;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .q-box p {
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        .q-box label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #008CBA;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .back-btn {
+            background-color: #555;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>🎉 Lawmpuiawm! 🎉</h2>
+            <p id="modalMessage">I chhang dik vek e. Lesson thar i zir chhunzawm thei tawh.</p>
+            <button id="modalContinueBtn" class="modal-btn" onclick="goToNext()">Lesson 22 ah Kalna ➔</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">⬅ Dashboard ah Letna</a>
+
+        <h1>ZIRLAI SAWMHNIH LEH PAKHATNA</h1>
+
+        <h2>THU SAWM PEK KHAWIH BUAINA</h2>
+
+        <blockquote>
+            Châng Pawimawh Bîk: “Chungnungbera kalhin thu a sawi ang a, Chungnungbera mi thianghlimte a tichau ang,
+            hunte leh dân chu tihdanglam a tum ang.” Daniela 7:25.
+        </blockquote>
+
+        <div class="note">
+            Note: He zirlai i zir ṭan hma hian zirlai 20-na kha chhiar nawn leh phawt ang che.
+        </div>
+
+        <p>Zirlai 20-naah khân inlârnaa Daniela'n “ki tê tak tê” a hmuh kha engnge a nih a, engnge a entîr tih kan zir
+            tawh a. Thil tam tak avângin chu ki tê tak tê chuan Rom Kohhran an entîrzia chiang takin kan hmu nghe nghe.
+            He zirlaiah pawh hian chu mi tifiah lehzual tûr chanchin dang kan zir belh dâwn a ni.</p>
+
+        <h2>KI TÊ TAK TÊ LO ṬHAN ZÊLNA</h2>
+
+        <div class="question">1. Khawvêl chung zawng zawnga thuneihna nei, “ki tê tak tê” chu thâwklehkhata lo ṭhang
+            thut em ni?</div>
+
+        <blockquote>
+            “Ka kal hnuin <span class="uppercase">CHINGHNE KAWLHTE IN ZINGAH AN LO LÛT ANG A</span>, pawlho chu an zuah
+            lo vang tih ka hria e.” Tirhkohte 20:29.
+        </blockquote>
+
+        <p>A ni, Pathian laka helna thlarau hi Krista zirtîrte zîngah ngei pawh khân a lo awm tawh a, Paulan hêng thu a
+            sawi lai ngei pawh hian a awm a ni.:</p>
+
+        <blockquote>
+            “In zinga mi ngei pawh hi, zirtîrhote in hnêna pakaitir tûrin thu hran sawiin lo la awm ang.” Tirhkohte
+            20:30.
+        </blockquote>
+
+        <p>Thessalonika mite hnêna Tirhkoh Paula lehkhathawna kan hmuh anga Pathian mite inralring tûra ngenna nasa hi
+            Pathian Lehkhabu châng dangah kan hmu lovang.</p>
+
+        <blockquote>
+            “Tuman engmahin tihder che u suh se; tluksanna chu a lo thlen hmasak zeta, <span class="uppercase">DAN
+                BAWHCHHEPA</span>, boral fapa chu a lo lan loh chuan chu mi ni chu a thleng dâwn si lo va.” 2
+            Thessalonika 2:3.
+        </blockquote>
+
+        <p>Sualna awm zêl hi “dân bawhchhepa” leh “boral fapa” angin Paula hian a sawi chauh a ni lova, a hnathawhte
+            pawh chiang takin a târlang nghâl a ni:</p>
+
+        <blockquote>
+            Ani chuan Pathiana an vuah apiang leh, sakhua zawng zawng dovin, an chunga awm tumin a inchawimawi ang:
+            Chutichuan Pathian biak Ina ṭhuin Pathian ang hialin a intâr chhuak ang.” 2 Thess. 7:4
+        </blockquote>
+
+        <p>Thutak aṭanga kal sualna nasa tak hi chu a ṭiak tîr mêk a ni tih chiang takin Paula hian a hria a ni.</p>
+
+        <h2>THU ROPUI TAK SAWI</h2>
+
+        <div class="question">2. Tu dodâlin nge ki tê tak tê (Papacy) chuan thu a sawi?</div>
+
+        <blockquote>
+            “Chungnungbera kalhin thu a sawi ang a.” Daniels 7:25.
+        </blockquote>
+
+        <p>Pope thuneihnain Pathian chauhin a neih, thuneihna te, nihna te leh thiltihtheihna te chu ama neih ve rêng
+            anga kenkawh a tumna hian he hrilh lawkna mak tak hi a tithleng famkim ta a ni. Chu mi tifiah turin tam
+            takte zînga tlêm tê chauh kan han târlang e:</p>
+
+        <blockquote>
+            “Pathian Lehkhabua Krista hming zawng zawng kohhran lu ber a nihna kâwktute chu Pope nihna anga chhiar an
+            ni.” Bellarmine, “On the Authority of Councils,” Book 2, chap. 17.
+        </blockquote>
+        <blockquote>
+            “Pope chu lei leh vân leh purgatory (Infernorum) lal ber angin lallukhum chhâwng thuma khumtîr a ni.” –
+            “Prompta Bibliotheca,” Ferraris, vol. 6, p. 26, Article “Papa.” (the Pope)
+        </blockquote>
+        <blockquote>
+            “Pope thu tihtlûkna leh Pahtian thu tihtlûkna chu pakhat a ni ..... chuvângin, tumahin Pope hnên aṭangin
+            Pathian hnênah an zualko (appeal) ngai lo.” - Writings of Augustinus de Ancons, “On an Appeal from the
+            Decision of the Pope.”
+        </blockquote>
+        <blockquote>
+            “Nang hi leia Pathian dang i ni e.” – From Oration of Christopher Marcellus. “History of the Councils,” vol.
+            19, column 109.
+        </blockquote>
+
+        <h2>MI THIANGHLIMTE A TICHAU ANG</h2>
+
+        <div class="question">3. “Ki tê tak tê” thiltihtheihnaa thil danglam tak dang chu engnge ni?</div>
+
+        <blockquote>
+            “Chungnungbera mi thianghlimte a tichau ang,” Daniela 7:25
+        </blockquote>
+
+        <p>He hrilh lâwkna thu hrilhfiahin Albert Barnes chuan hetiang hian a sawi:</p>
+
+        <blockquote>
+            “He hrilh lâwkna hian Pope thuneihna thu a sawi a ni tih hi ringhlel an awm thei dâwn em ni le? Spain rama
+            rinna hrang nei hremna (Inquisition) te, Waldenses-ho tihduhdahna te, Duke of Alva nunrâwn chhuahna te,
+            Smithfields meipui te, Goa-a nghaisakna te hi; - Pope thiltihtheihna chu a ni ang tih loh theih a ni love.”
+            – “Notes on the Old Testament,” commenting on Daniel 7.
+        </blockquote>
+        <blockquote>
+            “Kum 1208 khân Pope Innocent 3-nain Waldesnes leh Albigenses dona tûr thu a puang a, mi maktaduai tam takin
+            an boral phah ta nghe nghe a. Kum 1540-80 chhûnga Jesuits din tirh aṭangin Protestant 900,000 lai tihboral
+            an ni a, kum 30 chhûngin rinna hrang nei hremnaah mi 150,000 an boral bawk.” Ibid.
+        </blockquote>
+
+        <h2>PATHIAN DÂN THLÂK TUMNA</h2>
+
+        <div class="question">4. Engtiangin nge ki tê tak têin Pathian dân tihdanglam a tum?</div>
+
+        <blockquote>
+            “Hunte leh dân chu tihdanglam a tum ang a.” Daniela 7:25.
+        </blockquote>
+
+        <p>Chiang taka he hrilhlâwknain a târlan chu Rom Kohhranin thu sâwm pêk dân tihdanglam a tum thu hi a ni. Chu
+            dânah chuan ni sarih ni hi thianghlim a ni a, serh tûra tih a ni bawk.</p>
+
+        <p>Pope thuneihna erawh chuan ni sarih ni hmasa ber (Sunday) hi Chawlhni (Saturday) aia serh zâwk tûr leh,
+            Pathian biakna nia hman zâwk tûr a ni e, tiin, thu a pe thung a ni. Chutianga thupêk tihdanglam a lo nih dân
+            thu chu he zirlaiah hian kan zir ang.</p>
+
+        <h2>DAN TIHDANGLAM CHU</h2>
+
+        <div class="question">5. Chawlhni (Sabbath) thu Pathian dânin a sawi dân chu engtinnge ni?</div>
+
+        <blockquote>
+            “Chawlhni hi thianghlim taka serh tûrin hre reng rawh. Ni ruk chhûngin i thawk tûr a ni a, i hna zawng zawng
+            chu i thawk tûr a ni: A ni sarih ni erawh chu Lalpa i Pathian tân chawlhni a ni e: ... Chuvângin Lalpan
+            Chawlhni chu MAL A SAWM A, a TITHIANGHLIM ta a ni.” Exodus 20:8-11.
+        </blockquote>
+
+        <p>Pathianin Amah pâwlna ni atân leh biak ni bîk atân a ruat, Ni Sarih Ni hi, kalendar aṭang pawh hian a lang
+            chiang êm êm a ni.</p>
+
+        <div class="question">6. Kristian tam zâwkten Pathianni (Sunday) hi chawlhna niah leh Pathian biak ni atâna an
+            lo hman tâkna chhan engnge ni?</div>
+
+        <p>He thil mak tak hi hrilhfiahna pakhat chauh a awm-sakhaw thiltihtheihna, ki tê tak têin a entîrin Pathian dân
+            a tihdanglam vâng a ni.</p>
+
+        <blockquote>
+            “Hunte leh dânte, chu tihdanglam a tum ang a.” Daniela 7:25.
+        </blockquote>
+
+        <h2>POPE-IN A TIHDANGLAM ANGIN</h2>
+
+        <div class="question">7. Ki tê tak tê emaw, Pope emawin eng angin nge Pathian dân tihdanglam tuma a beih?</div>
+
+        <ol type="a">
+            <li>A thu inchhâng tam berah thupêk pahnihna hi a hmaih hlauh, kohhran kalhmâng nên a inkalh avângin.</li>
+            <li>Thupêk palina aṭangin serh tûra thupêk a nihna chhan tak leh, thupêk theihna lantîrtu tak chu a la kiang
+                hlauh bawk.</li>
+            <li>Tin, thupêk sâwmna a khak buai leh a, a zavaia sâwm a tlin theih nân thupêk sâwmna chu pahnihah a ṭhen
+                sawm hlauh a ni.</li>
+        </ol>
+
+        <p>“Hunte leh dân chu tihdanglam a tum ang” tih hrilh lâwkna hi Katholik Kohhran hian a tithleng famkim takzet a
+            ni.</p>
+
+        <h2>REMTIHNA RINAWM</h2>
+
+        <div class="question">8. Thu sâwm pêka Chawlhni tihdanglam tuma beihnaah. Pope thuneihna chu a mawhphurtu a ni
+            tih hi chu thuneihna chuan a nemngheh pui rêng em?</div>
+
+        <p>Chutiang a nihzia a pawmpui bâkah a chhuang êm êm bawk a ni.</p>
+
+        <blockquote>
+            Cardinal Gibbons hun laia Katholik Kohhran chanchinbu, September 23, 1893-a chhuaka kan hmuh angin:
+            “Katholic Kohhran chuan ...... Pathian rawngbâwltu a nihna hmangin Inrinni aṭanga Pathianniah nî a thlâk ta
+            a.”
+        </blockquote>
+
+        <p>Katholikte ngeiin Bible aṭanga fiahna a awm lohzia an sawi:</p>
+
+        <blockquote>
+            Cardinal Gibbons chuan, “Pathian Lehkhabu hi Genesis aṭanga Thu Puan thlengin chhiar chhuak parh mah la,
+            Pathianni (Sunday) tihthianghlim thu rêng rêng, tlar khat tê pawh i hmu lo vang. Pathian Lehkhabu chuan
+            Inrinni (Saturday) serh tûr thu a sawi zâwk a ni,” tiin, a sawi – “Faith of our Fathers,” p. 89.
+        </blockquote>
+
+        <blockquote>
+            KATHOLIC PRESS : Sydney, Australia – August 25, 1900: “Pathianni hi Katholik din a ni a, serh tûr a nih
+            chungchângah pawh Katholic rin dân bulpui aṭang chauhin ṭanfung siam theih a ni... Pathian Lehkhabu pum
+            puiah hian, a bul aṭanga a tâwp thlengin, hapta kâr tina miten Pathian biakna an neihna ni tûr hi ni sarih
+            ni aṭanga ni sarih ni hmasa bera suan tâkna thu rêng rêng a chuang hauh lo.” AMERICAN SENTINEL (N.Y), June
+            1,1893, page 173 (K.C. Father T. Enright, C.SS.R., of Redemptorist College): “Baibul chuan “Chawlhni vawng
+            thianghlim tûrin hre reng rawh,” a ti a, Katholik Kohhran thung erawh chuan, ‘Chutiang ni lo ve, Pathian
+            hnên aṭanga thiltihtheihna ka neih hmangin Chawlhni chu ka tibo tawh a, ni sarih ni hmasa ber serh tûrin thu
+            ka pe zâwk a che,’ a ti a ni.”
+        </blockquote>
+
+        <h2>ROMAN KATHOLIC THU INCHHÂNG HAI LANNA</h2>
+
+        <div class="question">9. Roman Katholic Kohhran thu inchhângin Kohhranina Pathian dân thianghlim a tihdanglam
+            thu a zirtîr em?</div>
+
+        <blockquote>
+            “Zawhna – Eng ni hi nge Chawlhni chu?”
+        </blockquote>
+        <blockquote>
+            “Chhânna – Inrinni (Saturday) hi Chawlhni a ni.”
+        </blockquote>
+        <blockquote>
+            “Zawhna – Eng vângin nge Pathianni hi Inrinni aia kan serh zâwk si?”
+        </blockquote>
+        <blockquote>
+            “Chhânna – Katholic Kohhranin Laudikei Inkhâwmpuiah (A.D 336) Inrinni thianghlimna chu Pathiannia a suan tâk
+            avângin Pathianni hi Inrinni aiah kan serh a ni.” – “The Convert's Catechism of Catholic Doctrine,” Rev.
+            Peter Gierman, C.SS.R., p. 50, 2nd edition 1910.
+        </blockquote>
+
+        <p>Suala khat leh sual thei mihringin Pathian dân danglam thei lo tihdanglam tuma a beihna hi ngaihtuah teh.
+            Tirhkoh Paulan hun lo awm zêl tûr thlîra, he thiltihtheihna lo ṭhang lian zêl tûr a hmuh a, “dân bawhchhepa,
+            boral fapa, .... Pathiana an vuah apiang leh, sakhua zawng zawng dovin, an chunga awm tumin a inchawimawi
+            ang; Chutichuan Pathian biak ina ṭhuin Pathian ang hialin a intâr chhuak ang,” a ti pawh hi a mak lo ve. 2
+            Thes. 2:3,4.</p>
+
+        <h2>PROTESTANT-HOIN AN NGEMNGHET</h2>
+
+        <div class="question">10. He ni thlâk thuah hian Protestan-ten engnge sawi tûr an neih?</div>
+
+        <p>Pathianniah hian Pathian thuneihna a lang lo va, a lan lohzia chu Kohhrana mi thiam sângten vawi tam tak an
+            sawi lang tawh ṭhîn:</p>
+
+        <blockquote>
+            Canon Robert Eyton:<br>
+            “Thuthlung Tharah hian Pathiannia hna thawh loh tûr thu sawina kam khat emaw, chuti hawizâwnga sawi thawina
+            emaw rêng rêng a awm lo.” – “The Ten Commandments,” p. 62 (Kegan Paul, 1894)
+        </blockquote>
+
+        <blockquote>
+            Sir William Dimville:<br>
+            “Kristian hun inṭan hnua kum za engemaw zât lai a ral hnuah chauh Kristian Kohhranin Pathianni hi chawlhni
+            angin a hmang ṭan chauh a ni.” – “Examination of Six Texts,” p. 291 (Chapman and Hall. 1894)
+        </blockquote>
+
+        <blockquote>
+            Watchman (Baptist):<br>
+            “Pathian Lehkha Thuah hian ni hmasa ber hi Chawlhni anga a sawina rêng rêng a lang lova. Chawlhni anga serh
+            chu tihmâkmawh a ni hek lo, chutianga sawina a awm na hek lo.”
+        </blockquote>
+
+        <blockquote>
+            Presbyterian mi pakhat ziak:<br>
+            “Chawlhni hi dân – thu sâwm pêka pakhat a ni a. Chu ngawt pawh chuan he thupêk hi kumkhaw tlaitluana ding
+            tûr a nihzia a tilang chiang hle.... Ṭhatna Dân pumpui hi ṭhiat tawh anga sawina fel tak a awm si loh chuan
+            Chawlhni hi a ding reng tûr a ni... Krista zirtîrna pawhin Chawlhni hi chatuana ding tûr a nihzia a kâwk vek
+            a ni.” – “Theology Condensed,” by T. C Blake, D.D., pp. 474, 475.
+        </blockquote>
+
+        <blockquote>
+            Khawvêl chanchin ziaktu sawi:<br>
+            “Pathianni kût (festival of Sunday) hi kût dangte ang bawka mihring din chhuah chawp mai a ni a, Pathian
+            thupêk ni anga chutianga hmana chu a postolte rin dân nên chuan nasa takin a inpersan a, Pathiannia Chawlhni
+            va suanna pawh hi apostolte tum dân aṭanga nasa taka pênna a ni.” – History of the Christian Religion and
+            Church,” by Neander, p. 136.
+        </blockquote>
+
+        <blockquote>
+            Encyclopedia:<br>
+            “Pathianni tih hming hi Kristian lote sak a ni a, ni sarih ni hmasa ber atân an hming sak a ni, chu mi ni
+            chu ni (sun) biak nâna an hman ṭhin a nih avângin; ... Ni sarih ni erawh hi chu Pathian ngeiin A malsâwm leh
+            tihthianghlim a ni a...... a tâna serh thianghlim tûrin A thil siamte hi a ngiat a ni. He thupêk hi mi zawng
+            zawngin kumkhuaa tihmâkmawha an neih tûr a ni.... Siamtuin ‘nisarih ni chu mal a sâwm a’ – ni dang zawng aia
+            chungnung zâwk a nihzia a puang a, A duhsakna awmna bîk ni a ni.... Chutichuan mihringte hi an awm chhûng
+            chuan leh khawvêl hi a awm chhûng chuan Chawlhni pawh hi a ding reng ang. A innghahna a awm chhûng chuan
+            hnâwl mai theih a ni lo... An sawi fo ṭhin anga Judate Chawlhni, thupêk palinaa siam ngheh tâk mai a ni lo
+            ve. Serh thianghlim tûra thupêkah hian Judate chungchang lanna rêng rêng a awm lo, thupêk pathumna emaw,
+            parukna emawa a lang lo ang bawk hian.” – “Eadie's Biblical Eyclopedia,” 1872, p. 551.
+        </blockquote>
+
+        <blockquote>
+            Dictionary:<br>
+            “Chawlhni hi Pathian din a nih avângin Lalpa tâna serh thianghlim tûr a ni. Mihringte hian sakhaw lam
+            rawngbâwlna atân ni ruat a pui an ngah a, nimahsela, chûngte chuan, mihring din chawp an nih avangin, tumah
+            a phuar lo. Chawlhni erawh hi chu chutiang a ni awzâwng lo mai. Thupêk palina hi chuan ‘Chawlhni hi
+            thianghlim taka serh tûrin hre reng rawh,’ tiin, uar takin a sawi a ni..... Tihbo ngawt chu thiltih âwm lo
+            tak a ni ang.” – “A Theological Dictionart,” by Rev. Charles Buck, 1830 Edition, p. 537.
+        </blockquote>
+
+        <h2>PATHIAN DÂN DANGLAM THEI LO</h2>
+
+        <div class="question">11. Pathianin A dân a danglam theih lohzia chu engtinnge A sawi?</div>
+
+        <blockquote>
+            “A thununna thu zawng zawngte chu a rinawm a ni. Chûng chu kumkhaw tlaitluan atân tihnghehin a awm a.” Sâm
+            111:7,8.
+        </blockquote>
+        <blockquote>
+            “Hmasângin, i thuhriattirte aṭangin, Chûng chu kumkhua atân i tinghet tih ka lo hre tawh.” Sâm 119:152.
+        </blockquote>
+
+        <div class="question">12. Krista Isuan A dân chu danglam thei a ni tiin, A zirtîr rêng em?</div>
+
+        <blockquote>
+            “Lei leh vân hi a boral hma loh chuan Dân thua mi chhun han tê tak tê emaw, thai han tê tak tê emaw, pakhat
+            mah a boral tawp lo vang, a zaa a thlen kim hma loh zawng.” Matthaia 5:18.
+        </blockquote>
+
+        <p>Lalpa Isua Krista hian a va sawi chiang ṭha êm! Hawrap mal “i” chunga chhun han tê tak tê emaw, “t” han thai
+            phei hlek emaw pawh hi, a zaa a thlen kim hma loh zawng, pakhat mah a boral lo vang, tih thu a sawi a ni.
+            “Chhun han tê tak tê emaw, thai han tê tak tê emaw, pakhat mah a boral tawp lo vang.”</p>
+
+        <h2>PATHIAN REMTIH LOHNA</h2>
+
+        <div class="question">13. Pathianin A dân khawih buai a remtih lohzia Baibul-in engtinnge min hrilh? Tihdanglam
+            chawp mai mai zawmna chu chibai bûkna thlâwn mai a nihzia thu a sawi, hetiangin: “An zirtîrnaah mihring
+            thupek an zirtîr avângin an mi biak ṭhin hi a thlâwn mai a ni.” Matthaia 15:9.</div>
+
+        <p>Chutichuan, Pathian Thu kan zirna aṭanga Pathian Chawlhni serh aia Pathianni serhna hi Baibul zirtîrna
+            kalhzâwng thil a ni tih kan hriat tawh a, kan la serh tho si chuan kan biak chu a “thlâwn” mai a ni ang.</p>
+
+        <p>Pi pu dân zawma, thil dik lo tih kan chhunzawm phawt chuan Pathian dân hi engmah lovah kan siam tihna a ni
+            tih thu pawh chiang taka hrilh kan ni.</p>
+
+        <blockquote>
+            “Tichuan, thurochhiah vângin Pathian thu chu in bawh bo ta a nih hi.” Matthaia 15:6.
+        </blockquote>
+
+        <p>Nisarih ni hmasa ber, Pathianni, ni sarih ni Chawlhni aia serhna hi mihring siam chawp thil zuina a ni a,
+            chutiang chu Pathianin a pawt phawng vek ang tih hi kan hre tûr a ni.</p>
+
+        <blockquote>
+            “Kung zawng zawng ka Pa vâna mi phun loh chu pawh chhuahin a awm ang.” Matthaia 15:13.
+        </blockquote>
+
+        <h2>NI HNUHNUNGAH THU AWI TURA MITE NGENNA</h2>
+
+        <div class="question">14. Ni hnuhnunga ram tina siam ṭhatna thuchah puandarh tûr chu engnge ni?</div>
+
+        <blockquote>
+            “Hêng thu zawng zawng khaikhâwmna hi ngaithla teh ang: Pathian ṭih la, a thupêkte vawng rawh; hei hi mihring
+            zawng zawng tihtûr chu a ni mai.” Thuhriltu 12:13.
+        </blockquote>
+        <blockquote>
+            “Nunna Thing chungah chuan thu an neih theihna tûr leh, kawngkaah chuan khuaa an luh theihna tûra A thupêkte
+            zâwm chu an eng a thâwl e.” Thupuan 22:14 (Sapṭawnga mi angin).
+        </blockquote>
+        <blockquote>
+            “Tin leia awmte hnênah leh, hnam tinrêng te, chi tinrêng te, ṭawng tinrêng te, mi tinrêng te hnêna
+            tlângaupui tûr chatuan Chanchin Ṭha nei vantirhkoh dang vanlaizâwla thlâwk ka hmu a; tin, ani chuan aw ring
+            takin, ‘A rorêl hun chu a lo thlen tak avângin Pathian chu hlau ula, chawimawi rawh u; vân te, lei te,
+            tuifinriat te, tuihna te siamtu chu chibai bûk rawh u,” a ti a..... Hetah hian mi thianghlim, Pathian
+            thupêkte leh Isua rinna thu zâwmtute chhelna lan theihna a awm.” Thupuan 14:6, 7, 12.
+        </blockquote>
+
+        <p>Ni hnuhnunga harhna awm tûra hrilh lâwkna chu Thu Sâwm Pêk zawm tûra kohna nêna inzawm tlat a ni. Tin, chu
+            kohna chu rinna avânga felna thuchah nên inzawm a ni bawk. Thupêk zawmna leh Isua pawmna chu a kal kawp zêl
+            tûr a ni. Dîk tak phei chuan pakhat an ni; Isua kan zui phawt chuan A thupêkte kan zawm lo thei si lo va.
+        </p>
+
+        <p>Amaherawhchu, mi tam tak, hre hauh lova Pathianni hi Chawlhni anga serhtute an awm. Chûng mite chu anmahni
+            huna êng an hmuh ang zêla ngaihtuah an ni ang. Keini ni hnuhnunga chêngte chuan Thupêk palina chungchânga
+            kal sualna nasa tak hi mi dangte hnêna kawhhmuh tûrin mawhphurhna kan nei a ni.</p>
+
+        <h2>PATHIAN THU I ZAWM ANG EM?</h2>
+
+        <p>Chawlhni thu hi ni thu satliah mai emaw, Pathianni emaw, Chawlhni emaw chawlhna thu ringawt a ni lo va,
+            Pathian thu nge i zawm ang a, mihring thu, tih a ni zâwk e. Pathian chuan ni sarih ni hi serh rawh, a ti a.
+            (Exodus 20:10) Katholik thuneihna erawh chuan ni sarih ni hmasa ber serh rawh, a ti ve thung a ni. Chu ni
+            chu Isuan mihringte tâna a tihthianghlim sa tawh aia hman tûr a lo din ve a ni. Tu thu nge i awi zâwk dâwn?
+            Krista nge, mihring? Kan zain Petera anga mihring thu aia Pathian thu awi zâwk i thlang ṭheuh ang u. (Tirh.
+            5:29).</p>
+
+        <!-- ZIRLAI TEXT DANG HETAH HIAN DAH ZEL RAWH -->
+
+        <hr style="margin: 40px 0;">
+        <h3>Zirlai Sawmhnih leh Pakhatna Zawhna:</h3>
+
+        <div class="q-box">
+            <p>1. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+
+        <!-- QUESTION 2 ATANGA 10 HETAH HIAN DAH LUT RAWH -->
+
+        <button class="submit-btn" onclick="submitQuiz()" id="submitBtn">Submit Answer</button>
+        <p id="errorMsg" class="error-msg"></p>
+    </div>
+
+    <script>
+        // ==========================================
+        // HEI CHIAH HI FILE DANG ATAN THLAK A NGAI:
+        // ==========================================
+        const currentLessonNumber = 21;
+        const nextLessonFile = "lesson22.html";
+
+        // Lesson 21 Chhanna dik
+        const correctAnswers = {
+            "q1": "B" // q2: "A", q3: "C" tiin 10 thleng i dah dawn nia
+        };
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwuk-FMfvgUsc4Do49O9D1XkEnE3qga-4M7hsbB9FPGuapxzMfOtVEryKvXugRfbBg-6A/exec'; // Apps Script URL
+
+        // Heta \anga a hnuai lam hi chu thlak a ngai lo
+        window.onload = function () {
+            let savedEmail = localStorage.getItem("vop_email");
+            let unlockedLessons = parseInt(localStorage.getItem("vop_progress"));
+
+            if (!savedEmail || !unlockedLessons) {
+                alert("Login hmasak a ngai!");
+                window.location.href = "index.html";
+            }
+            if (currentLessonNumber > unlockedLessons) {
+                alert("He lesson hi i la unlock lo!");
+                window.location.href = "index.html";
+            }
+        };
+
+        function submitQuiz() {
+            let allCorrect = true;
+            let wrongQuestions = [];
+            let totalQuestions = Object.keys(correctAnswers).length;
+            let questionNumber = 1;
+
+            for (let qName in correctAnswers) {
+                let selectedOption = document.querySelector(`input[name="${qName}"]:checked`);
+                if (!selectedOption || selectedOption.value !== correctAnswers[qName]) {
+                    allCorrect = false;
+                    wrongQuestions.push(questionNumber);
+                }
+                questionNumber++;
+            }
+
+            let errorMsgElement = document.getElementById("errorMsg");
+
+            if (!allCorrect) {
+                errorMsgElement.innerText = `A dik lo awm! Question no: ${wrongQuestions.join(", ")} te hi han chhang tha leh rawh.`;
+                return;
+            }
+
+            errorMsgElement.innerText = "Saving progress...";
+            document.getElementById("submitBtn").disabled = true;
+
+            let currentProgress = parseInt(localStorage.getItem("vop_progress"));
+            let nextLesson = currentLessonNumber + 1;
+
+            if (currentLessonNumber < 25) {
+                if (nextLesson > currentProgress) {
+                    localStorage.setItem("vop_progress", nextLesson);
+                    let formData = new URLSearchParams();
+                    formData.append("action", "update_progress");
+                    formData.append("email", localStorage.getItem("vop_email"));
+                    formData.append("progress", nextLesson);
+
+                    fetch(scriptURL, { method: 'POST', body: formData }).then(() => {
+                        document.getElementById("successModal").classList.remove("hidden");
+                    });
+                } else {
+                    document.getElementById("successModal").classList.remove("hidden");
+                }
+            } else {
+                // Lesson 25 zawhah Certificate trigger
+                document.getElementById("modalContinueBtn").classList.add("hidden");
+                document.getElementById("modalMessage").innerHTML = "Course zawng zawng i zo ta! Lawmpui a che.<br><br>⏳ I E-Certificate kan siam mek a, i email ah kan rawn thawn nghal e...";
+                document.getElementById("successModal").classList.remove("hidden");
+
+                let formData = new URLSearchParams();
+                formData.append("action", "finish_course");
+                formData.append("email", localStorage.getItem("vop_email"));
+                formData.append("name", localStorage.getItem("vop_name"));
+                fetch(scriptURL, { method: 'POST', body: formData }).then(res => res.json()).then(data => {
+                    if (data.status === "success") {
+                        document.getElementById("modalMessage").innerHTML = "Course i zo ta! ✅ I e-Certificate thawn a ni ta.";
+                    }
+                    document.getElementById("modalContinueBtn").classList.remove("hidden");
+                    document.getElementById("modalContinueBtn").innerText = "Dashboard ah Letna";
+                    document.getElementById("modalContinueBtn").onclick = function () { window.location.href = "index.html"; };
+                });
+            }
+        }
+
+        function goToNext() {
+            window.location.href = nextLessonFile;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zirlai 22 - VOP</title>
+    <style>
+        @font-face {
+            font-family: 'MizoCustomFont';
+            src: url('VNT-ARL.TTF') format('truetype');
+        }
+
+        body {
+            font-family: 'MizoCustomFont', Arial, sans-serif;
+            padding: 20px;
+            background: #f4f4f4;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px #aaa;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 5px;
+        }
+
+        .q-box {
+            margin-bottom: 20px;
+            background: #eef;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .q-box p {
+            font-weight: bold;
+            margin: 0 0 10px 0;
+        }
+
+        .q-box label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #008CBA;
+            color: white;
+            padding: 12px 15px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .error-msg {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .back-btn {
+            background-color: #555;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="successModal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>🎉 Lawmpuiawm! 🎉</h2>
+            <p id="modalMessage">I chhang dik vek e. Lesson thar i zir chhunzawm thei tawh.</p>
+            <button id="modalContinueBtn" class="modal-btn" onclick="goToNext()">Lesson 23 ah Kalna ➔</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-btn">⬅ Dashboard ah Letna</a>
+
+        <h1>ZIRLAI SAWMHNIH LEH PAHNIHNA</h1>
+
+        <h2>BAPTISMA NUNTHAR</h2>
+
+        <blockquote>
+            Châng thlàn: “Petera chuan an hnênah, ‘Sim ula, in sual ngaihdam nan Isua Krista hmingin baptisma chang
+            ṭheuh rawh u,’ a ti a.” Tirhkohte 2:38.
+        </blockquote>
+
+        <p>Awm hmun nghet tak tak nei lova insuan insuan ṭhin kan nih avang hian kan khua leh tui nihna pawh a danglam
+            fo a ṭul ṭhîn a. Chutianga mi, ram khat aṭanga ram danga a va pêm luh chuan chu ram thar mi leh sa nih tâkna
+            chhinchiah nân vantlang hriata chhechham a ṭul ṭhîn.</p>
+
+        <p>Thlarau lam khawvelah hian thiltihtheihna pahnih—Setana lalram leh Pathian lalram an ni. Heng thiltihtheihna
+            pahnihte hi “thim thuneihna” leh “A fapa hmangaih taka ram” tia sawi an ni bawk (Kolosa 1:13).</p>
+
+        <p>Hmun dang lehah chuan “thim ata chhuak a, a êng mak taka lût tûra” koh kan nihzia hrilh kan ni (1 Petera
+            2:9). Mithianghlim Paula chu koh a nih khân a hnathawh tûr chungchâng hetiangin hrilh a ni:</p>
+
+        <blockquote>
+            “An mit tivâr turin an hnenah ka tirh che hi, chutichuan thim chu êng lamah an hawisan ang, sual
+            ngaihhnathiamna an hmuh nân leh mi rin avânga thianghlim tawhte zingâ ro chan an neih nân,” tiin (Tirhkohte
+            26:18).
+        </blockquote>
+
+        <p>Pathian chuan thim thuneihna leh Setana thuneihna aṭanga intihrang tawhte chu thinlung thar pu an nihna
+            vantlang hmuha puang chhuak tûrin a duh a ni. Isua ngeiin hetiangin a sawi:</p>
+
+        <blockquote>
+            “Chuti chuan mite hmâa mi ṭan apiang, ka Pa vana mi hmaah ka ṭan ve ang. Nimahsela, tupawh mite hmaa mi phat
+            apiang ka Pa vâna mi hmâah ka phat vê ang,” Matthaia 10:32, 33.
+        </blockquote>
+
+        <p>Pathian rama mi chêngte zinga mi nih theihna kawng chu baptisma hi a ni. Baptisma channaah hian miin ram
+            danga mi cheng a lo nih tâkna chu vântlang mithmuhin a tilang a, Pathian khawngaihnain a thinlung chhûnga
+            danglamna a rawn thlensak pawn lama hmuh theiha a lantirna a ni.</p>
+
+        <p>Baptisma chan avânga khua leh tui thar kan lo nihna hi he khawvel lalte khua leh tui thu sawina a ni lova,
+            Pathian ram, thlarau lam lalram, lalram thianghlima mi chengte kan lo nihna thu a ni zâwk. Chu chuan he
+            khawvêla ram khata mi chêng kan nihna emaw, ram hmangaihtu kan nihna hi rawn khak buaina a nei lo, Kristian
+            chu khawi rama chêng pawh ni mah sela, ram tâna mi rinawm, ram hmangaihtu a ni zel si a.</p>
+
+        <h2>KOHHRAN—KRISTA TAKSA</h2>
+
+        <div class="question">1. Kohhran hi enge vuah a nih?</div>
+
+        <blockquote>
+            “Amah chu engkim zawng zawng chungah lu atân kohhran ho chûngah chuân a pe a, kohhran ho chu a taksa a ni.”
+            (Efesi 1:22, 23). “Chutichuan nangniho hi Krista taksa chu in ni a, a pengte in ni ṭheuh bawk a.” (1 Korin
+            12:27). “Tuna ka tuarsakna cheah hian ka lawm a, Krista hrehawm tuar bâk chu a taksa avângin ka tisaah hian
+            ka chhunzawm zêl a ni; a taksa chu kohhranho hi an ni,” (Kolosa 1:24).
+        </blockquote>
+
+        <p>Kohhranho chu mihring taksa nen hian tehkhin a ni a. Taksa pêng hrang hrangte zîngah thawhho dial dialna a
+            awm ang bawk hian thla-rau lama Krista taksa, kohhranah pawh hian inzawm khâwmna ṭha tak a awm tûr a ni.</p>
+
+        <div class="question">2. He thlarau lam taksa, kohhranah hian eng-tiangin nge mi an lo luh theih?</div>
+
+        <blockquote>
+            “Krista chu amah ngei taksa chhandamtu a ni a, kohhranho lu a ni ang bawk hian,”(Efesi 5:23). Taksa pumkhata
+            awm turin Thlarau pakhat chauhvah baptis-in kan awm ṭheuh si a,” (1 Korin 12:13).
+        </blockquote>
+
+        <p>Isuâ Krista chu kohhranho lu a nih avangin taksa pumkhata baptis tih awmzia chu Krista a baptis tihna a ni.
+        </p>
+
+        <h2>BAPTISMA HMUN KHAT</h2>
+
+        <div class="question">3. Baptisma engzat nge awm?</div>
+
+        <blockquote>
+            “Taksa pakhat…Lalpa pakhat, rinna hmunkhat, baptisma hmunkhat…chauh a awm,” (Efesi 4:4, 6).
+        </blockquote>
+
+        <p>Matheilovin Paula hian tuia baptisma channa thu a sawi niin a rinawm a, Baptisma chandân chu KAWNG KHAT CHAUH
+            a awm a, vawi khat aia tam chan theih loh tih thu a sawi tumna erawh chu a ni lo ve, amah ngeiin mi ṭhenkhat
+            baptisma a chan nawntîr si a. Chu chu Efesi khaw ropui takah a nih nghe nghe kha. Chu khuaah chuan tun hmaa
+            Baptistu Johanan tuia a lo baptis (hnim phum) tawhte a va hmu a, an hnenah chuan Johanan a chanchin a lo
+            sawi ṭhin, Isua chanchian te a zirtirna an han dawn leh chuan êng an hmuh ang zela kal tûr an nihzia an hre
+            chhuak ta a, tichuan Lalpa Isua Krista hmingin an chang nawn leh ta a ni, (Tirhkohte 19:1-5).</p>
+
+        <p>Pathian chuan lei mihringte hi êng an hmuh ang zela kal turin a duh a. Efesi khua a mite tan thil thar lo
+            thleng a, Isua chu a lo kal ta. Krista Isuaa baptisma chan chu an tân a lo ṭul ta a ni.</p>
+
+        <p>Tunah hian keiniho hi ni hnuhnunga cheng kan ni a, he hunah hian Pathianin kohhran a nei a, chu kohhran chuan
+            Pathian thupekte vawngin, Isua rinna a nei bawk a ni, (Thupuan 14:12). He kohhran emaw, taksaah emaw hian
+            lâwi lût tûrin Pathian chuan A fate a ko mek a, chu kohhrana lûtte chuan baptisma chan pawh an duh ngei ang.
+            Chu kohhran huang chhûnga lo lut, tun hmaa Bible zirtirna anga baptisma la chang ngai lote chuan Bible
+            zirtirna ang ngeia baptisma chu an kal tlang ngei turah an ngai tûr a ni. Pathian lehkhathu anga baptisma
+            chang tawhte tan pawh he ni hnuhnunga Pathian kohhrana lo lut tûra baptisma chan leh chu a thiang a ni tih
+            chu kan Bible chang taran tâkte khian an sawi chiang tawk hle a ni.</p>
+
+        <h2>BAPTISMA CHAN HRIATPUINA</h2>
+
+        <div class="question">4. Baptisma chan hi Isuan a rem tiin a hriatpui reng em?</div>
+
+        <blockquote>
+            “Tichuan Isua chu an hnênah a lo kal a, anniho chu a bia a, ‘Lei leh vâna thuneihna zawng zawng ka hnênah
+            pek a ni tawh. Chutichuan kal ula, hnam tina mi zirtirahte siam ula, thu ka pêk zawng zawng apiang che u
+            pawm turin zirtir rawh u. Ngai teh u, kei kumkhuain, khawvêl tawp thlengin in hnênah ka awm zel ang,’ a ti
+            a,” (Matthaia 28:18-20).
+        </blockquote>
+
+        <p>He thupêk, baptisma chang tûr leh chantîr tûra thupêk hi thiltihtheihnain a zui zel dawn a ni. Isua
+            hmangaihtu, Amah chawimawi leh zui duhtu thinlungah chuan baptisma thua zirtirna hi a chiang êm êm a, thil
+            pawimawh tak a ni bawk. Thil pawimawh tak ni lo selang chuan vâna a lawn hma lawk thleng khan uar takin
+            Isuan a sawi hauh lovang. Thil pawimawh a nih leh nih loh hi kan zawh pawh a ṭul love, a chiang tâwk êm êm a
+            ni. Thlarau Thianghlim baptisma hian tuia baptisma channa a lân a ni lova, Thlarau Thianghlim baptisma chang
+            tawhte chu tuia baptisma changtu an la ni fo zawk a ni (Tirhkohte 10:45-48).</p>
+
+        <h2>ISUAN HMA A HRUAI</h2>
+
+        <div class="question">5. Isuan baptisma a chang em?</div>
+
+        <blockquote>
+            “Chumi lai chuan a hnêna baptisma chang turin Isua Galili ram aṭangin Jordan luiah Johana hnênah a lo kal a,
+            ‘I mi baptis ka ṭul zawk si a, ka hnênah i lo kal zawk a ni maw? tiin khap a tum a. Nimahsela, Isuan a
+            hnenah, ‘Tunah rem ti hram rawh, hetianga felna hlen chhuah hi ka tan a mawi a ni,’ tiin a chang a. Tichuan
+            rem a ti ta a. Isuan baptisma a chan veleh tui ata a chhuak ta nghal a, ngaiteh, a tân vân a lo inhawng a,
+            Pathian thlarau chu ṭhuro anga lo chhukin, a chunga lo fu a hmu a, ngai teh, vân aṭangin âwin, ‘Hei hi ka
+            fapa duh tak, ka lawm êm êma chu a ni,’ a ti a,” (Matthaia 3:13-17).
+        </blockquote>
+
+        <p>Krista baptisma channaah hian zir tûr pawimawh tak kan hmu. Baptistu Johana hian mipuite hnenah an sualte
+            sima baptisma chang tûrin a lo zirtir ṭhin a. Nimahsela Isua hi chuan sual sim tur a nei ve lo tih chiang
+            takin a hria a. Pathian Beram No, “khawvêl sual kalpuitu tûr” a ni tih a hre bawk. Chutiang sual neilo tân
+            chuan baptisma chan a ṭul em ni? Johana pawhin Isua meuh han baptistu nih chu tling lo a inti hliah hliah a
+            ni. Isua erawh chuan hnial buai lovin, “hetianga felna zawng zawng hlen chhuah hi ka tan a mawi a ni,” tiin
+            tawi tê awmzenei tak siin a chhang ta hlauh zawk a. Isuaah chuan engmah sual a awm ve loh avangin sual
+            ngaihdam nâna baptisma chan chu a tan thil ṭul a ni lo.</p>
+
+        <p>Amaherawh chu mi zawng zawng sual chu a phur tur a ni. Adama hnuhnung niin emaw, lei mihringte aiawha dingin
+            sual phurtu anga Amah pawmtute kaltlang atâna ruat chu A kal tlang ta a ni. Kan hma min hruaisak ta.
+            Baptisma channaah pawh kan tan Entawn tûr a lo ni ta. Isua khan baptisma lo chang lo selang chuan mi
+            ṭhenkhat chuan thil tih ṭul leh pawimawh lovah an ngai mai thei ang, nimahsela, Isuan kan entawn tûrin min
+            lo hnutchhiah tak avangin kan tih tur a nih zia hai rual a ni ta lo. Baptisma chantir turin mite hnenah thu
+            a pe chauh a ni lova, Amah ngei pawhin baptisma a chang a ni. A hniak hnungah chuan kal ṭheuh ang u.</p>
+
+        <h2>BAPTISMA CHANG TURTE</h2>
+
+        <div class="question">6. Baptisma chang tlâkte chu tutenge?</div>
+
+        <blockquote>
+            “Baptisma channa turin enginnge mi dal kher? Philipan, <span class="uppercase">I THINLUNG ZAWNG ZAWNGA I RIN
+                CHUAN</span> i chang thei e,’ a ti a. Anin a chhâng a, ‘Krista Isua chu Pathian Fapa a ni tih ka ring
+            e,’ a ti a.” (Tirhkohte 8:36,37. Sâp ṭawng aṭanga lehlin).
+        </blockquote>
+        <blockquote>
+            “Petera chuan an hnenah, ‘Sim ula in sual ngaihdam nân Isua Krista hmingin baptisma chang ṭheuh rawh u;
+            tichuan, Thlarau Thiang-hlim pêk hi in hmu ang,’ a ti a,” (Tirhkohte 2:38).
+        </blockquote>
+        <blockquote>
+            “Chutichuan, kal ula, hnam tina mi zirtirahte siam ula,… baptis ula,” (Matthaia 28:19).
+        </blockquote>
+
+        <p>Pathian lehkhain a zirtir ang a baptisma chang tur chuan miin thil ṭhenkhat kal tlang hmasak tûr a nei tih
+            kan hria. A hmasa berin Isua chanchin ṭha, Amah azara misualte hnena chhandamna thlen thei chanchin hi
+            zirtir a ni phawt tûr a ni. Chumi thu zirtirna aṭang chuan misual chuan Isua hi Pathian Fapa a ni tih leh
+            boralte zawnga lo kal a ni tih a <span class="uppercase">RING</span> tur a ni. Chumi hnuah chuan sual avanga
+            thiamloh chang a nihzia hriain <span class="uppercase">SUAL SIMNA</span> a nei tur a ni. Suala thi a ni tih
+            hriatna, Krista thihna azara <span class="uppercase">NUN THIANGHLIMA NUNNA</span> leh chutiang taka nunreng
+            tumna nghet tak a nei reng tur a ni.</p>
+
+        <p>Hêng aṭangte hian baptisma chang tûrte chu an channa chhan awmziate chiang taka hrethiam rual an ni tûr a ni
+            tih kan hmu. Chutiang te chauh chu zirtir theih an ni a, rinna nei tham leh sual simna nei thei rual an ni
+            bawk. Nausênte chu baptisma chang thei rual an la ni lova, Bible pawh hian, apostolte hun lai pawh khan,
+            nausên baptisma chan thu reng min hrilh lo. An tân baptisma chan pawh a ṭûl lo reng a ni. Thil sual pawh an
+            la ti si lova. An nu leh pa sualna lah chu an chunga tla tur a ni si lo. Zâwlnei Ezekiela chuan Pathian hnen
+            aṭanga hriattirna dawngin hêng thute hi min hrilh:</p>
+
+        <blockquote>
+            “Thil tisualtu chu a thi tûr a ni:fapa chuan a pa khawlohna chu a tuar lovang.” (Ezekiela 18:20).
+        </blockquote>
+
+        <p>Mi ṭhenkhat chuan nausên an nih laia tui thlawr chu an duhtawk mai a, baptisma diktak kal tlangin Isua Krista
+            hniak hnung zui ṭûl an ti tawh ṭhin lo.</p>
+
+        <p>Thuthlung thar hunah nausên baptisma chan thu reng reng Bible-in a tarlang lo va. Isuan naupang tê tê ko
+            khawmin mal a sawm ṭhin tih thu erawh chu kan hmu. Hetianga naupangte tâna ṭawngṭaina bîk neihsakna hi
+            kohhrante tana thil mawi tak leh duhawm tak a ni. Galili dung leh vang fang ṭhintu, Lalpa chuan naupangte hi
+            a la hmangaih cheu a ni.</p>
+
+        <h2>BIBLE ZIRTIRNA ANGA BAPTISMA</h2>
+
+        <div class="question">7. Bible zirtir dan anga baptisma chu engtiang nge?</div>
+
+        <blockquote>
+            “Tawlailir chu a dintir a, an pahnihin, Philipa leh mitilreh chu, tuiah chuan an zuk kal dûn a; Philipa
+            chuan ani chu a baptis ta a. Tui ata an chhuah chhuah veleh Lalpa Thlarau chuan Philipa chu a la bo a;
+            mitilreh chuan ani chu a hmu leh ta lo,” (Tirhkohte 8:38, 39).
+        </blockquote>
+
+        <p>He laia Baptisma channa hi Pathian Thlarau kaihhruaina hnuaia awm a ni tih chiang takin a lang a. Philipa hi
+            Thlarau kaihhruaina mak tak dawng hmasa zeta kal ta chu a ni.</p>
+
+        <blockquote>
+            “Tho la, chhim lama Jerusalem khua aṭanga Gaza khaw zuk chhun kawngah khân kal rawh.” (Tirhkohte 8:26).
+        </blockquote>
+
+        <p>Chumi hmunah chuan Philipa chuan Ethiopia lalnu ro zawng zawng enkawltu, Jerusalem aṭanga a lo kir lam chu a
+            va hmu a., a kal pah chuan Isaia bung sawmnga leh pathumna hi a chhiar a. Philipa hnênah chuan thupek dang a
+            lo thleng leh ta nghal a:</p>
+
+        <blockquote>
+            “Thlarau chuan Philipa hnênah, ‘Saw tawlailir saw va hnaih la, va pawl rawh,’a ti a” (Tirhkohte 8:29).
+        </blockquote>
+
+        <p>Tichuan, Philipa chuan Ethiopia mi hnenah chuan a Bible chhiarlai thu chu Isua, Pathian Fapaah a thlen famkim
+            tâkzia thute leh, Krista chu a rin a, baptisma chang tûr a nihzia te a hrilhfiah ta a. Mitilrehin Isua
+            Krista a rin thu a puan hnu chuan baptisma a chang ta a ni.</p>
+
+        <p>He laia baptisma chan chungchâng thu hi Pathian Thlarau Thianghlimin a sawi hnem hlein a lang a ni thei e.
+            Baptisma chungchâng thu hi miten an hriat theih nan a ni phawt ang. Baptisma changa leh chantirtu chungthu
+            sawi nan, “An pahnihin” tih kan hmu a, an pahnih hian tuiah chuan an zuk kal dun a, an pahnih vekin tui ata
+            an lo chhuak chho dun leh a ni.</p>
+
+        <p>Hemi thu aṭang hian baptisma chu tui chhunga taksa pum hnim phumna bâk ngaidan dang kan nei thei dawn em ni?
+            Tuia inthlawr satliah mai hi Bible zirtirna anga baptisma chu ni selang chuan an pahnih hniha tuia zuk kal
+            dun kher kher a ṭul lovang le.</p>
+
+        <p>“Isua baptisma a chan veleh tui ata a chhuak ta nghal a,” (Matthaia 3:16). Heta tui a tih hi Jordan lui a ni.
+            Mite baptisma chantîr nân Johana hian Jordan lui pawn lai a thlang lo tih kan hria.</p>
+
+        <blockquote>
+            “Johana pawhin Ainon- ah, Salim khaw kiangah a baptis bawk a, chutah chuan tui a tam avângin,” (Johana
+            3:23).
+        </blockquote>
+
+        <p>He châng hian baptisma chan nân tui tamtak a mamawhzia min hriattîr a ni.</p>
+
+        <p>Baptis (baptize) tih hi Grik ṭawng, BAPTIZO aṭanga lâk a ni a, chu chu a bul lehzual BAPTO aṭanga lak chhuah
+            a ni. A awmzia chu “hnim phum,” “hnim pil,” “luang thei thila khuh,”etc.,tihna a ni. Rawng dumna tuia thil
+            zuk hnim ang te leh, thirdengin a thir rawhlin, bura tuia a zuk thlak thawih ang hi a ni. Engpawhnise, a
+            awmzia chu “thlawr” emaw, “theh” emaw zawng a ni hauh lo mai. Hnuai lama hnim phum, chiah pil tihna a ni
+            zâwk.</p>
+
+        <h2>BIBLE ZIRNA SANG NEITEN BAPTISMA CHAN DAN AN HRILHFIAH</h2>
+
+        <p>John Calvina chuan hetiang hian a zirtir:</p>
+        <blockquote>
+            “Baptis (baptize) tih hi hnim phum tihna a ni a; chutiang hnim phûm chu HMASANG Kohhran zînga an tih dan
+            ṭhin a ni tih a lang chiang.”–Institudes of Christian Religion.
+        </blockquote>
+
+        <p>Martin Luthera chuan hetiang hian a ziak:</p>
+        <blockquote>
+            “Baptisma tih hi Grik ṭawng a ni a; Latin ṭawng chuan “hnim phum” tia lehlin theih a ni. Chu chu thil eng
+            emaw pil daih khawpa tuia kan hnim ang hi a ni.”—Baptist Encyclopedia, article, “Baptism.”
+        </blockquote>
+
+        <p>Dean A P Stanley-a chuan hetiang hian a ziak:</p>
+        <blockquote>
+            “Kum zabi sâwmpathumna tirlam chhung zawng kha chuan baptisma hi Thuthlung Thara mi ang, hnim phumin chan a
+            ni reng a, chu chu a thu, baptis tih awmzia a ni rêng a ni.”– Christian Institution, chap. 1, pp. 19, 20.
+        </blockquote>
+
+        <h2>BAPTISMA AWMZIA</h2>
+
+        <div class="question">8. Engtiangin nge Paulan baptisma hi a hrilh-fiah?</div>
+
+        <blockquote>
+            “Baptismaah chuan a hnena phum in lo ni ve tawh si a, chumi vekah chuan mithi zing ata amah kaithotu Pathian
+            hnathawh rinna avanga a hnena kaihthawh in nih ve tawh kha.” (Kolosa 2:12).
+        </blockquote>
+        <blockquote>
+            “Keini zingah Krista Isuaa baptima chang apiangte chu a thihnaah baptis-in kan awm tih in hre lo emaw ni?
+            Chuvangin, a thihnaah baptisma kan chanin, a hnenah phum vein kan awm. Pa ropuinain mithi zing ata Krista a
+            kaihthawh ang khân, keini pawh nunna tharin kan awm theih nan,” (Rom 6:3, 4).
+        </blockquote>
+
+        <p>Baptisma hi dik taka, a nih dân tûr ang taka chan a nih chuan kan chhandamtu Krista Isua <span
+                class="uppercase">THIHNA, PHUMNA</span> leh <span class="uppercase">THAWHLEHNA</span> entîrtu a ni.
+            Chhinchiahna rilru khawih tak leh mawi tak a va ni em!</p>
+
+        <div class="question">9. Bible zirtirna anga baptisma channa hian engtiangin nge sual sim lehte thihna, phumna
+            leh thawhlehna a lo entîr ve?</div>
+
+        <blockquote>
+            “Krista hnenah khenbehin ka awm ta, nimahsela, ka nung a ni; keimah erawh chu ka ni tawh lo, Krista chu
+            keimahah a nûng tawh zawk a ni; tunah tisaah ka nung hi rinnaa nung ka ni, Pathian Fapa, mi hmangaih a, ka
+            aia inpetu rinnaah chuan,” (Galatia 2:20).
+        </blockquote>
+        <blockquote>
+            “Chutichuan, Krista hnênah kaihthawhin in awm ve tawh chuan, chung lam, Pathian dinglama ṭhu Krista awmnaa
+            thil awmte chu zawng rawh u,” (Kolosa 3:1).
+        </blockquote>
+
+        <p>Mi sual, a sualte a sim tawh chu a nun hlui sual thihsan anga entîr a ni ṭhîn. Chutianga simna neite chuan
+            Pathian dân a bawhchhiat avângin inchhir ngawih ngawihna a nei a, milem biakna te, tual thahna te, ruk rûk
+            te, uirena te, depdena te, dâwt sawina te, insum theihlohna te, nawmsipbawlna leh hlimhlawpna khawlo te,
+            etc., an hawisanin an hnuchhawn ṭhin a ni.</p>
+
+        <p>Mi reng reng an thih hnuah chauh phûm an ni ṭhîn a. Chutiang bawkin baptisma channaa mi phûm a nih dawn chuan
+            suala thihna a awm hmasa tê tê tûr a ni.</p>
+
+        <p>Thihna aṭanga Isua kaihthawha a awm ang bawkin sual simte chu nun thara an nun theih nan baptismaa phûma an
+            awmna aṭangin an tho chhuak a, chutianga piantharna chu Thlarau Thianghlim avanga lo awm a ni. Isua Kristaah
+            chuan thil siam thar a lo ni a, khawvel rem zawnga che tawh lovin, nitina rilru thara nun reng tawh tur a
+            ni.</p>
+
+        <p>Inhnim phuma baptisma channaah chauh hian <span class="uppercase">THIHNAA PHUMNA</span> leh <span
+                class="uppercase">THAWH-LEHNAIN ENTIRMAWI TAK</span> chu an vawng ṭha reng thei a, chu entirna nei thil
+            chu misual sim lehten rinna avanga nun thara nung tur leh, thitihtheihna leh hnehna an neih theih nana an
+            kal tlang ṭhin chu a ni. Lalpa chu thuhnuai-rawlh takin i zui zel ang u.</p>
+
+        <h2>KRISTA THAWHLEHNA</h2>
+
+        <div class="question">10. Isua Krista thawhlehna hriatrengna tur, Bible-in a sawi chu enge ni?</div>
+
+        <blockquote>
+            “A thihna anpuiin amah nen kan inzawm tawh si chuan, a thawhlehna anpui pawhin kan inzawm bawk ang.” (Rom
+            6:5).
+        </blockquote>
+
+        <p>Hêng châng thu hi baptisma chanchin sawi chhunzawm zelna a ni a, baptisma hi thawhlehna hriatrengna a ni tih
+            a sawi chiang hle. Thawhlehna hriatreng nâna Pathiannî (Sunday) hmanna erawh hi chu Bible aṭanga fiah
+            theihna reng a awm lo.</p>
+
+        <p>Mihringte chhandam nana Pathian thil ruahmanah hian Krista thihna leh thawhlehna hi rahbi pawimawh tak an ni
+            a, chu Pathian thil ruahman rah chu thianghlimna hi a ni. Chatuan Pa chuan A Fapa Isua Krista chu siamtu leh
+            siamthar lehtu atan a ruat tawh a, tichuan thil siam leh siamthar lehna hriat-rengna atân Pathianin Chawlhni
+            (Sabbath) hi a ruat ta a ni, (Ezekiela 20:20; Exodus 20:20, 12; Exodus 20:8–11; 31:17, 13; Johana 1:1-3 te
+            hi en la).</p>
+
+        <p>Zirtu duhtak, kawng him awm chhun chu Bible zirtîrna chiang takte zawm hi a ni. Mihring inzirtîrna leh pi-pu
+            thurochhiahte hi zawng zui an hlauhawm. Chuvangin, Isua Krista thihna, thawhlehnaa i rinna entîr turin
+            chhandamtu nen chuan baptisma changin, phûmin i awm ve dawn lawm ni? He kailawn hi tihtak zeta rinawma i
+            zawh phawt chuan, “Hei hi ka fapa duh tak, ka lawm êm êma chu a ni,” tih thu hi Pa hnen aṭangin i hre ve
+            thei ang.</p>
+        <!-- ZIRLAI TEXT DANG HETAH HIAN DAH ZEL RAWH -->
+
+        <hr style="margin: 40px 0;">
+        <h3>Zirlai Sawmhnih leh Pahnihna Zawhna:</h3>
+
+        <div class="q-box">
+            <p>1. Thutak zawnna chuan engnge a ngiat?</p>
+            <label><input type="radio" name="q1" value="A"> A. Sum</label>
+            <label><input type="radio" name="q1" value="B"> B. Tih tak zetna leh thinlung</label>
+            <label><input type="radio" name="q1" value="C"> C. Finna</label>
+            <label><input type="radio" name="q1" value="D"> D. Hun awl</label>
+        </div>
+
+        <!-- QUESTION 2 ATANGA 10 HETAH HIAN DAH LUT RAWH -->
+
+        <button class="submit-btn" onclick="submitQuiz()" id="submitBtn">Submit Answer</button>
+        <p id="errorMsg" class="error-msg"></p>
+    </div>
+
+    <script>
+        // ==========================================
+        // HEI CHIAH HI FILE DANG ATAN THLAK A NGAI:
+        // ==========================================
+        const currentLessonNumber = 22;
+        const nextLessonFile = "lesson23.html";
+
+        // Lesson 22 Chhanna dik
+        const correctAnswers = {
+            "q1": "B" // q2: "A", q3: "C" tiin 10 thleng i dah dawn nia
+        };
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwuk-FMfvgUsc4Do49O9D1XkEnE3qga-4M7hsbB9FPGuapxzMfOtVEryKvXugRfbBg-6A/exec'; // Apps Script URL
+
+        // Heta \anga a hnuai lam hi chu thlak a ngai lo
+        window.onload = function () {
+            let savedEmail = localStorage.getItem("vop_email");
+            let unlockedLessons = parseInt(localStorage.getItem("vop_progress"));
+
+            if (!savedEmail || !unlockedLessons) {
+                alert("Login hmasak a ngai!");
+                window.location.href = "index.html";
+            }
+            if (currentLessonNumber > unlockedLessons) {
+                alert("He lesson hi i la unlock lo!");
+                window.location.href = "index.html";
+            }
+        };
+
+        function submitQuiz() {
+            let allCorrect = true;
+            let wrongQuestions = [];
+            let totalQuestions = Object.keys(correctAnswers).length;
+            let questionNumber = 1;
+
+            for (let qName in correctAnswers) {
+                let selectedOption = document.querySelector(`input[name="${qName}"]:checked`);
+                if (!selectedOption || selectedOption.value !== correctAnswers[qName]) {
+                    allCorrect = false;
+                    wrongQuestions.push(questionNumber);
+                }
+                questionNumber++;
+            }
+
+            let errorMsgElement = document.getElementById("errorMsg");
+
+            if (!allCorrect) {
+                errorMsgElement.innerText = `A dik lo awm! Question no: ${wrongQuestions.join(", ")} te hi han chhang tha leh rawh.`;
+                return;
+            }
+
+            errorMsgElement.innerText = "Saving progress...";
+            document.getElementById("submitBtn").disabled = true;
+
+            let currentProgress = parseInt(localStorage.getItem("vop_progress"));
+            let nextLesson = currentLessonNumber + 1;
+
+            if (currentLessonNumber < 25) {
+                if (nextLesson > currentProgress) {
+                    localStorage.setItem("vop_progress", nextLesson);
+                    let formData = new URLSearchParams();
+                    formData.append("action", "update_progress");
+                    formData.append("email", localStorage.getItem("vop_email"));
+                    formData.append("progress", nextLesson);
+
+                    fetch(scriptURL, { method: 'POST', body: formData }).then(() => {
+                        document.getElementById("successModal").classList.remove("hidden");
+                    });
+                } else {
+                    document.getElementById("successModal").classList.remove("hidden");
+                }
+            } else {
+                // Lesson 25 zawhah Certificate trigger
+                document.getElementById("modalContinueBtn").classList.add("hidden");
+                document.getElementById("modalMessage").innerHTML = "Course zawng zawng i zo ta! Lawmpui a che.<br><br>⏳ I E-Certificate kan siam mek a, i email ah kan rawn thawn nghal e...";
+                document.getElementById("successModal").classList.remove("hidden");
+
+                let formData = new URLSearchParams();
+                formData.append("action", "finish_course");
+                formData.append("email", localStorage.getItem("vop_email"));
+                formData.append("name", localStorage.getItem("vop_name"));
+                fetch(scriptURL, { method: 'POST', body: formData }).then(res => res.json()).then(data => {
+                    if (data.status === "success") {
+                        document.getElementById("modalMessage").innerHTML = "Course i zo ta! ✅ I e-Certificate thawn a ni ta.";
+                    }
+                    document.getElementById("modalContinueBtn").classList.remove("hidden");
+                    document.getElementById("modalContinueBtn").innerText = "Dashboard ah Letna";
+                    document.getElementById("modalContinueBtn").onclick = function () { window.location.href = "index.html"; };
+                });
+            }
+        }
+
+        function goToNext() {
+            window.location.href = nextLessonFile;
+        }
+    </script>
+</body>
+
+</html>
