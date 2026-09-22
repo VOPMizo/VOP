@@ -400,7 +400,7 @@
 
         <!-- FOREWORD -->
         <div id="forewardSection" class="glass foreword">
-            <h3>Kan lo lawm a che</h3>
+            <h3 style="text-align: center;">Kan lo lawm a che</h3>
             <p>Pathian thutak hi an nunnaa thil pawimawh bera ngaiin |hahnemngai takin an zawng \hin a. Tûnah thutak
                 zawngtu sâng tam takte zînga mi i lo nih ve tâk avâng hian kan lâwm êm êm a ni.</p>
         </div>
@@ -662,7 +662,7 @@
                     username, email, name, veng, khua,
                     house_no: houseNo, district, pin, mobile,
                     progress: 1,
-                    registeredAt: new Date()
+                    registeredAt: Date.now()
                 });
                 // onAuthStateChanged will show the dashboard
             } catch (err) {
