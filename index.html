@@ -4,307 +4,738 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOP</title>
+    <title>VOP — Zirlai Course</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         @font-face {
             font-family: 'MizoCustomFont';
             src: url('VNT-ARL.TTF') format('truetype');
+            font-display: swap;
+        }
+
+        :root {
+            --bg-deep: #0a0d1a;
+            --bg-violet: #241454;
+            --bg-purple: #4c1d95;
+            --accent-gold: #e8b54b;
+            --accent-gold-dim: rgba(232, 181, 75, 0.35);
+            --text-primary: #f6f4ee;
+            --text-muted: rgba(246, 244, 238, 0.62);
+            --glass-fill: rgba(255, 255, 255, 0.06);
+            --glass-fill-strong: rgba(255, 255, 255, 0.11);
+            --glass-border: rgba(255, 255, 255, 0.16);
+            --danger: #ef8177;
+            --success: #7fcb9e;
+            --radius-lg: 22px;
+            --radius-md: 14px;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
         }
 
         body {
-            font-family: 'MizoCustomFont', Arial, sans-serif;
-            padding: 20px;
-            background: #f4f4f4;
+            margin: 0;
+            font-family: 'Manrope', 'MizoCustomFont', Arial, sans-serif;
+            color: var(--text-primary);
+            background: var(--bg-deep);
+            min-height: 100vh;
             line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+            padding: 48px 20px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 15px #aaa;
+        /* Ambient background */
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(600px 500px at 15% 10%, rgba(76, 29, 149, 0.55), transparent 60%),
+                radial-gradient(520px 460px at 85% 20%, rgba(36, 20, 84, 0.6), transparent 60%),
+                radial-gradient(700px 600px at 50% 100%, rgba(232, 181, 75, 0.08), transparent 65%);
         }
 
-        .hidden {
-            display: none !important;
+        .bg-noise {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
         }
 
-        .lesson-btn {
-            margin: 5px;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            font-weight: bold;
-            display: inline-block;
-            width: 120px;
+        .wrap {
+            position: relative;
+            z-index: 1;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* Brand header with radiant halo behind it */
+        .brand {
             text-align: center;
-            text-decoration: none;
+            margin-bottom: 28px;
+            position: relative;
         }
 
-        .locked {
-            background-color: #ccc;
-            color: #666;
-            cursor: not-allowed;
+        .brand::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: -30px;
+            width: 260px;
+            height: 260px;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, var(--accent-gold-dim) 0%, transparent 70%);
+            filter: blur(6px);
+            z-index: -1;
         }
 
-        .unlocked {
-            background-color: #4CAF50;
-            color: white;
+        .brand h1 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 2.6rem;
+            letter-spacing: 0.02em;
+            margin: 0 0 4px;
+            background: linear-gradient(180deg, #fff, var(--accent-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .brand p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Glass panel base */
+        .glass {
+            background: var(--glass-fill);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-lg);
+            backdrop-filter: blur(22px) saturate(140%);
+            -webkit-backdrop-filter: blur(22px) saturate(140%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        .hidden { display: none !important; }
+
+        /* Foreword */
+        .foreword {
+            padding: 22px 24px;
+            margin-bottom: 20px;
+            border-left: 2px solid var(--accent-gold-dim);
+        }
+
+        .foreword h3 {
+            font-family: 'Fraunces', serif;
+            font-weight: 500;
+            margin: 0 0 10px;
+            font-size: 1.15rem;
+            color: var(--accent-gold);
+        }
+
+        .foreword p {
+            margin: 0;
+            color: var(--text-muted);
+            text-align: justify;
+            font-size: 0.95rem;
+        }
+
+        /* Auth card */
+        .auth-card {
+            padding: 28px 26px 26px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 4px;
+            padding: 4px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 999px;
+            margin-bottom: 24px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 9px 8px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-family: 'Manrope', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 999px;
             cursor: pointer;
+            transition: background 0.25s ease, color 0.25s ease;
         }
 
-        .unlocked:hover {
-            background-color: #45a049;
+        .tab-btn.active {
+            background: var(--accent-gold);
+            color: #241407;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 14px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
+            margin-bottom: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-muted);
         }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-row .form-group { flex: 1; }
 
         .form-group input {
             width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 11px 13px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .form-group input::placeholder { color: rgba(246, 244, 238, 0.32); }
+
+        .form-group input:focus {
+            border-color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         .submit-btn {
-            background-color: #008CBA;
-            color: white;
-            padding: 12px 15px;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 16px;
             width: 100%;
-            font-weight: bold;
+            padding: 13px 15px;
+            margin-top: 6px;
+            background: var(--accent-gold);
+            color: #241407;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: 'Manrope', sans-serif;
+            font-weight: 700;
+            font-size: 0.97rem;
+            cursor: pointer;
+            transition: filter 0.2s ease, transform 0.1s ease;
         }
 
-        .submit-btn:hover {
-            background-color: #005f7a;
+        .submit-btn:hover { filter: brightness(1.08); }
+        .submit-btn:active { transform: scale(0.99); }
+        .submit-btn:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+            filter: none;
+        }
+
+        .link-btn {
+            background: none;
+            border: none;
+            color: var(--accent-gold);
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+            text-decoration: none;
+        }
+
+        .link-btn:hover { text-decoration: underline; }
+
+        .form-foot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 14px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .msg {
+            margin-top: 14px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-align: center;
+            min-height: 1.2em;
+        }
+
+        .msg.info { color: var(--accent-gold); }
+        .msg.error { color: var(--danger); }
+        .msg.success { color: var(--success); }
+
+        /* Dashboard */
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 22px;
+        }
+
+        .dash-welcome h2 {
+            font-family: 'Fraunces', serif;
+            font-weight: 600;
+            font-size: 1.4rem;
+            margin: 0 0 4px;
+        }
+
+        .dash-welcome p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.88rem;
         }
 
         .logout-btn {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
+            background: rgba(239, 129, 119, 0.14);
+            color: var(--danger);
+            border: 1px solid rgba(239, 129, 119, 0.3);
+            padding: 8px 14px;
+            border-radius: 999px;
             cursor: pointer;
-            float: right;
-            font-size: 12px;
-            margin-bottom: 20px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .logout-btn:hover { background: rgba(239, 129, 119, 0.22); }
+
+        .progress-track {
+            height: 6px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            margin-bottom: 22px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), #fff0cf);
+            border-radius: 999px;
+            transition: width 0.4s ease;
+        }
+
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(92px, 1fr));
+            gap: 10px;
+        }
+
+        .lesson-btn {
+            padding: 13px 6px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.2s ease;
+        }
+
+        .lesson-btn.unlocked {
+            background: rgba(232, 181, 75, 0.14);
+            border-color: var(--accent-gold-dim);
+            color: var(--accent-gold);
+        }
+
+        .lesson-btn.unlocked:hover {
+            background: rgba(232, 181, 75, 0.24);
+            transform: translateY(-2px);
+        }
+
+        .lesson-btn.locked {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--glass-border);
+            color: rgba(246, 244, 238, 0.32);
+        }
+
+        .lesson-btn.locked:hover { transform: none; }
+
+        footer.note {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 0.78rem;
+            color: rgba(246, 244, 238, 0.35);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; }
+        }
+
+        @media (max-width: 480px) {
+            .brand h1 { font-size: 2.1rem; }
+            .auth-card, .glass.dash-card { padding: 22px 18px; }
+            .form-row { flex-direction: column; gap: 0; }
         }
     </style>
 </head>
 
 <body>
+    <div class="bg-glow"></div>
+    <div class="bg-noise"></div>
 
-    <div class="container">
-        <button id="logoutBtn" class="logout-btn hidden" onclick="resetCourse()">🔄 Log out</button>
-        <h1 style="text-align: center; color: #333; margin-top: 0;">VOP Online Course</h1>
+    <div class="wrap">
+        <div class="brand">
+            <h1>VOP</h1>
+            <p>Zirlai Lawmluhna Online Course</p>
+        </div>
 
-        <!-- FOREWARD / INHMELHRIATTIRNA -->
-        <div id="forewardSection"
-            style="text-align: justify; margin-bottom: 30px; padding: 15px; background: #eef; border-radius: 5px;">
+        <!-- FOREWORD -->
+        <div id="forewardSection" class="glass foreword">
             <h3>Zirlai Lawmluhna</h3>
-            <p>Pathian thutak hi an nunnaa thil pawimawh bera ngaiin \hahnemngai takin an zawng \hin a. Tûnah thutak
+            <p>Pathian thutak hi an nunnaa thil pawimawh bera ngaiin hahnemngai takin an zawng hin a. Tûnah thutak
                 zawngtu sâng tam takte zînga mi i lo nih ve tâk avâng hian kan lâwm êm êm a ni. I course i chhunzawm
                 theih nân a hnuaiah hian in-register (emaw login) rawh le.</p>
         </div>
 
-        <!-- LOGIN SECTION -->
-        <div id="loginSection">
-            <h3>Email hmangin Login rawh:</h3>
-            <div class="form-group"><label>Email Address:</label><input type="email" id="loginEmail"
-                    placeholder="Entirnan: i_hming@gmail.com" required></div>
-            <button class="submit-btn" onclick="loginUser()" id="loginBtn">Login / Continue</button>
-            <p id="loginMsg" style="color: #008CBA; margin-top: 15px; font-weight: bold; text-align: center;"></p>
-        </div>
+        <!-- LOGIN -->
+        <div id="loginSection" class="glass auth-card">
+            <div class="tabs">
+                <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">Login</button>
+                <button class="tab-btn" id="tabRegister" onclick="switchTab('register')">Register</button>
+                <button class="tab-btn" id="tabForgot" onclick="switchTab('forgot')">Forgot</button>
+            </div>
 
-        <!-- REGISTRATION FORM -->
-        <div id="registerSection" class="hidden">
-            <h3 style="color: #d9534f;">He Email hi hmuh a ni lo! Register hmasa rawh:</h3>
-            <p style="font-weight: bold; color: #008CBA;">Email: <span id="displayRegEmail"></span></p>
-            <div class="form-group"><label>Name:</label><input type="text" id="userName" required></div>
-            <div class="form-group"><label>Veng:</label><input type="text" id="userVeng" required></div>
-            <div class="form-group"><label>Khua:</label><input type="text" id="userKhua" required></div>
-            <div class="form-group"><label>House no:</label><input type="text" id="userHouseNo"></div>
-            <div class="form-group"><label>District:</label><input type="text" id="userDistrict" required></div>
-            <div class="form-group"><label>Pin:</label><input type="text" id="userPin"></div>
-            <div class="form-group"><label>Mobile:</label><input type="text" id="userMobile" required></div>
-            <button class="submit-btn" onclick="registerUser()" id="regBtn">Start Course</button>
-            <p id="regMsg" style="color: green; margin-top: 15px; font-weight: bold; text-align: center;"></p>
+            <!-- Login form -->
+            <div id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="loginUsername" placeholder="i username" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+                </div>
+                <button class="submit-btn" onclick="loginUser()" id="loginBtn">Log In</button>
+                <div class="form-foot">
+                    <span></span>
+                    <button class="link-btn" onclick="switchTab('forgot')">Password i forget em?</button>
+                </div>
+                <p id="loginMsg" class="msg"></p>
+            </div>
+
+            <!-- Register form -->
+            <div id="registerForm" class="hidden">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="regUsername" placeholder="username thar" autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="regEmail" placeholder="i_hming@gmail.com" autocomplete="email">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" id="regPassword" placeholder="••••••••" autocomplete="new-password">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm</label>
+                        <input type="password" id="regPasswordConfirm" placeholder="••••••••" autocomplete="new-password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="userName">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Veng</label>
+                        <input type="text" id="userVeng">
+                    </div>
+                    <div class="form-group">
+                        <label>Khua</label>
+                        <input type="text" id="userKhua">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>House No</label>
+                        <input type="text" id="userHouseNo">
+                    </div>
+                    <div class="form-group">
+                        <label>Pin</label>
+                        <input type="text" id="userPin">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>District</label>
+                    <input type="text" id="userDistrict">
+                </div>
+                <div class="form-group">
+                    <label>Mobile</label>
+                    <input type="text" id="userMobile">
+                </div>
+                <button class="submit-btn" onclick="registerUser()" id="regBtn">Start Course</button>
+                <p id="regMsg" class="msg"></p>
+            </div>
+
+            <!-- Forgot password form -->
+            <div id="forgotForm" class="hidden">
+                <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 0;">I username emaw email chhu lut la, password reset link kan email-ah kan rawn thawn ang.</p>
+                <div class="form-group">
+                    <label>Username emaw Email</label>
+                    <input type="text" id="forgotIdentifier" placeholder="username emaw email">
+                </div>
+                <button class="submit-btn" onclick="forgotPassword()" id="forgotBtn">Send Reset Link</button>
+                <p id="forgotMsg" class="msg"></p>
+            </div>
         </div>
 
         <!-- DASHBOARD -->
-        <div id="dashboardSection" class="hidden">
-            <h3 style="border-bottom: 2px solid #4CAF50; padding-bottom: 5px;">I Zirlai (Lesson List)</h3>
-            <p id="welcomeMsg" style="color: #008CBA; font-weight: bold;"></p>
-            <div id="lessonButtons" style="display: flex; flex-wrap: wrap; gap: 10px;">
-                <!-- JS in a rawn siam ang -->
+        <div id="dashboardSection" class="glass dash-card hidden" style="padding: 28px 26px 26px;">
+            <div class="dash-header">
+                <div class="dash-welcome">
+                    <h2 id="welcomeMsg">Chibai!</h2>
+                    <p id="progressLabel"></p>
+                </div>
+                <button class="logout-btn" onclick="logoutUser()">Log out</button>
             </div>
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill" style="width: 4%;"></div>
+            </div>
+            <div id="lessonButtons" class="lesson-grid"></div>
         </div>
+
+        <footer class="note">VOP Online Course</footer>
     </div>
 
     <script type="module">
-        // Firebase Library kan la lut
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+        import {
+            getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,
+            sendPasswordResetEmail, onAuthStateChanged, signOut
+        } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import {
+            getFirestore, doc, getDoc, setDoc
+        } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-        // HETAH HIAN I FIREBASE CONFIG KHA DAH RAWH (API KEY, PROJECT ID, ETC.)
+        // ---- YOUR FIREBASE CONFIG ----
         const firebaseConfig = {
-           apiKey: "AIzaSyAOB4q01251P4tkJ_KKmveVpbe7EDU_NwY",
-  authDomain: "vop-student-list.firebaseapp.com",
-  projectId: "vop-student-list",
-  storageBucket: "vop-student-list.firebasestorage.app",
-  messagingSenderId: "230421900101",
-  appId: "1:230421900101:web:ca7dc791606570697aec2c",
-  measurementId: "G-XTWVGCTLKS"
+            apiKey: "AIzaSyAOB4q01251P4tkJ_KKmveVpbe7EDU_NwY",
+            authDomain: "vop-student-list.firebaseapp.com",
+            projectId: "vop-student-list",
+            storageBucket: "vop-student-list.firebasestorage.app",
+            messagingSenderId: "230421900101",
+            appId: "1:230421900101:web:ca7dc791606570697aec2c",
+            measurementId: "G-XTWVGCTLKS"
         };
 
-        // Firebase ti nungin Database (Firestore) kan thlunzawm
         const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // type="module" kan hman avangin HTML-a onclick function ten an hmuh theih nan 'window' ah kan dah a ngai
-        window.unlockedLessons = 1;
-        window.currentUserEmail = "";
-        window.studentName = "";
+        const TOTAL_LESSONS = 25;
+        let currentUid = null;
 
-        window.onload = function () {
-            let savedEmail = localStorage.getItem("vop_email");
-            let savedProgress = localStorage.getItem("vop_progress");
-            let savedName = localStorage.getItem("vop_name");
-
-            if (savedEmail && savedProgress) {
-                window.currentUserEmail = savedEmail;
-                window.unlockedLessons = parseInt(savedProgress);
-                window.studentName = savedName;
-                window.showDashboard();
-            }
+        // ---------- UI HELPERS ----------
+        window.switchTab = function (tab) {
+            document.getElementById("loginForm").classList.toggle("hidden", tab !== "login");
+            document.getElementById("registerForm").classList.toggle("hidden", tab !== "register");
+            document.getElementById("forgotForm").classList.toggle("hidden", tab !== "forgot");
+            document.getElementById("tabLogin").classList.toggle("active", tab === "login");
+            document.getElementById("tabRegister").classList.toggle("active", tab === "register");
+            document.getElementById("tabForgot").classList.toggle("active", tab === "forgot");
         };
 
-        // LOGIN FUNCTION
-        window.loginUser = async function () {
-            let email = document.getElementById("loginEmail").value.trim().toLowerCase();
-            if (email === "") { alert("Email chhu lut rawh."); return; }
-            document.getElementById("loginMsg").innerText = "Checking record... Lo nghak lawk rawh.";
-            document.getElementById("loginBtn").disabled = true;
+        function setMsg(id, text, type) {
+            const el = document.getElementById(id);
+            el.textContent = text;
+            el.className = "msg" + (type ? " " + type : "");
+        }
 
-            try {
-                // 'users' collection ah email hmangin kan zawng
-                const docRef = doc(db, "users", email);
-                const docSnap = await getDoc(docRef);
+        function normUsername(u) {
+            return u.trim().toLowerCase().replace(/\s+/g, "");
+        }
 
-                if (docSnap.exists()) {
-                    // A lo in-register tawh a nih chuan
-                    let data = docSnap.data();
-                    window.currentUserEmail = email;
-                    window.studentName = data.name;
-                    window.unlockedLessons = parseInt(data.progress || 1);
-
-                    localStorage.setItem("vop_email", window.currentUserEmail);
-                    localStorage.setItem("vop_name", window.studentName);
-                    localStorage.setItem("vop_progress", window.unlockedLessons);
-                    window.showDashboard();
+        // ---------- AUTH STATE ----------
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUid = user.uid;
+                const snap = await getDoc(doc(db, "users", user.uid));
+                if (snap.exists()) {
+                    showDashboard(snap.data());
                 } else {
-                    // A la in-register loh chuan Register Form ah kan hruai ang
-                    document.getElementById("loginSection").classList.add("hidden");
-                    document.getElementById("registerSection").classList.remove("hidden");
-                    window.currentUserEmail = email;
-                    document.getElementById("displayRegEmail").innerText = window.currentUserEmail;
+                    // Signed in but no profile doc — send back to login rather than break
+                    await signOut(auth);
                 }
-            } catch (error) {
-                alert("Database check theih a ni lo. Network emaw Firebase Rules check rawh.");
-                console.error(error);
+            } else {
+                currentUid = null;
+                document.getElementById("dashboardSection").classList.add("hidden");
+                document.getElementById("forewardSection").classList.remove("hidden");
+                document.getElementById("loginSection").classList.remove("hidden");
+            }
+        });
+
+        // ---------- LOGIN ----------
+        window.loginUser = async function () {
+            const username = normUsername(document.getElementById("loginUsername").value || "");
+            const password = document.getElementById("loginPassword").value;
+
+            if (!username || !password) {
+                setMsg("loginMsg", "Username le password chhu lut zawng rawh.", "error");
+                return;
+            }
+
+            document.getElementById("loginBtn").disabled = true;
+            setMsg("loginMsg", "Checking... lo nghak lawk rawh.", "info");
+
+            try {
+                const uSnap = await getDoc(doc(db, "usernames", username));
+                if (!uSnap.exists()) {
+                    setMsg("loginMsg", "Hei username hi hmuh a ni lo.", "error");
+                    document.getElementById("loginBtn").disabled = false;
+                    return;
+                }
+                const email = uSnap.data().email;
+                await signInWithEmailAndPassword(auth, email, password);
+                // onAuthStateChanged will handle showing the dashboard
+            } catch (err) {
+                console.error(err);
+                setMsg("loginMsg", "Login a chhuk lo — password i check leh rawh.", "error");
+            } finally {
                 document.getElementById("loginBtn").disabled = false;
-                document.getElementById("loginMsg").innerText = "";
             }
         };
 
-        // REGISTER FUNCTION
+        // ---------- REGISTER ----------
         window.registerUser = async function () {
-            let name = document.getElementById("userName").value.trim();
-            let veng = document.getElementById("userVeng").value.trim();
-            let khua = document.getElementById("userKhua").value.trim();
-            let district = document.getElementById("userDistrict").value.trim();
-            let mobile = document.getElementById("userMobile").value.trim();
-            let house_no = document.getElementById("userHouseNo").value.trim();
-            let pin = document.getElementById("userPin").value.trim();
+            const username = normUsername(document.getElementById("regUsername").value || "");
+            const email = document.getElementById("regEmail").value.trim();
+            const password = document.getElementById("regPassword").value;
+            const passwordConfirm = document.getElementById("regPasswordConfirm").value;
+            const name = document.getElementById("userName").value.trim();
+            const veng = document.getElementById("userVeng").value.trim();
+            const khua = document.getElementById("userKhua").value.trim();
+            const houseNo = document.getElementById("userHouseNo").value.trim();
+            const district = document.getElementById("userDistrict").value.trim();
+            const pin = document.getElementById("userPin").value.trim();
+            const mobile = document.getElementById("userMobile").value.trim();
 
-            if (name === "" || veng === "" || khua === "" || district === "" || mobile === "") {
-                alert("A pawimawh ho fill-up vek rawh."); return;
+            if (!username || !email || !password || !name || !veng || !khua || !district || !mobile) {
+                setMsg("regMsg", "A pawimawh ho fill-up vek rawh.", "error");
+                return;
+            }
+            if (password.length < 6) {
+                setMsg("regMsg", "Password hi char 6 aia tam a ngai.", "error");
+                return;
+            }
+            if (password !== passwordConfirm) {
+                setMsg("regMsg", "Password a inang lo.", "error");
+                return;
             }
 
-            document.getElementById("regMsg").innerText = "Data saving...";
             document.getElementById("regBtn").disabled = true;
+            setMsg("regMsg", "Data saving...", "info");
 
             try {
-                // Firebase Firestore ah kan save dawn
-                const docRef = doc(db, "users", window.currentUserEmail);
-                await setDoc(docRef, {
-                    name: name,
-                    veng: veng,
-                    khua: khua,
-                    house_no: house_no,
-                    district: district,
-                    pin: pin,
-                    mobile: mobile,
-                    progress: 1,  // A tirin Lesson 1
+                const uSnap = await getDoc(doc(db, "usernames", username));
+                if (uSnap.exists()) {
+                    setMsg("regMsg", "He username hi mi dang in hmang tawh a ni.", "error");
+                    document.getElementById("regBtn").disabled = false;
+                    return;
+                }
+
+                const cred = await createUserWithEmailAndPassword(auth, email, password);
+                const uid = cred.user.uid;
+
+                await setDoc(doc(db, "usernames", username), { email, uid });
+                await setDoc(doc(db, "users", uid), {
+                    username, email, name, veng, khua,
+                    house_no: houseNo, district, pin, mobile,
+                    progress: 1,
                     registeredAt: new Date()
                 });
-
-                // A save hlawhtlin chuan Dashboard ah kan luhtir nghal ang
-                window.studentName = name;
-                window.unlockedLessons = 1;
-                localStorage.setItem("vop_email", window.currentUserEmail);
-                localStorage.setItem("vop_name", window.studentName);
-                localStorage.setItem("vop_progress", window.unlockedLessons);
-
-                document.getElementById("registerSection").classList.add("hidden");
-                window.showDashboard();
-            } catch (error) {
-                alert("Data save theih a ni lo.");
-                console.error(error);
+                // onAuthStateChanged will show the dashboard
+            } catch (err) {
+                console.error(err);
+                let text = "Register a chhuk lo. Tro leh rawh.";
+                if (err.code === "auth/email-already-in-use") text = "He email hi mi dang in hmang tawh a ni.";
+                if (err.code === "auth/invalid-email") text = "Email format hi dik lo.";
+                setMsg("regMsg", text, "error");
+            } finally {
                 document.getElementById("regBtn").disabled = false;
-                document.getElementById("regMsg").innerText = "";
             }
         };
 
-        // DASHBOARD TILLANGTU
-        window.showDashboard = function () {
+        // ---------- FORGOT PASSWORD ----------
+        window.forgotPassword = async function () {
+            const raw = document.getElementById("forgotIdentifier").value.trim();
+            if (!raw) {
+                setMsg("forgotMsg", "Username emaw email chhu lut rawh.", "error");
+                return;
+            }
+
+            document.getElementById("forgotBtn").disabled = true;
+            setMsg("forgotMsg", "Sending...", "info");
+
+            try {
+                let email = raw;
+                if (!raw.includes("@")) {
+                    const uSnap = await getDoc(doc(db, "usernames", normUsername(raw)));
+                    if (!uSnap.exists()) {
+                        setMsg("forgotMsg", "Hei username hi hmuh a ni lo.", "error");
+                        document.getElementById("forgotBtn").disabled = false;
+                        return;
+                    }
+                    email = uSnap.data().email;
+                }
+                await sendPasswordResetEmail(auth, email);
+                setMsg("forgotMsg", "Reset link kan thawn tawh — i email box chu check rawh.", "success");
+            } catch (err) {
+                console.error(err);
+                setMsg("forgotMsg", "A chhuk lo. Email chhu dik em i check leh rawh.", "error");
+            } finally {
+                document.getElementById("forgotBtn").disabled = false;
+            }
+        };
+
+        // ---------- DASHBOARD ----------
+        function showDashboard(data) {
             document.getElementById("forewardSection").classList.add("hidden");
             document.getElementById("loginSection").classList.add("hidden");
             document.getElementById("dashboardSection").classList.remove("hidden");
-            document.getElementById("logoutBtn").classList.remove("hidden");
-            document.getElementById("welcomeMsg").innerText = "Chibai, " + window.studentName + "! I course i chhunzawm thei e.";
+
+            const unlocked = parseInt(data.progress || 1);
+            document.getElementById("welcomeMsg").textContent = "Chibai, " + (data.name || "") + "!";
+            document.getElementById("progressLabel").textContent =
+                "Lesson " + Math.min(unlocked, TOTAL_LESSONS) + " / " + TOTAL_LESSONS;
+            document.getElementById("progressFill").style.width =
+                Math.max(4, (unlocked / TOTAL_LESSONS) * 100) + "%";
 
             let html = "";
-            for (let i = 1; i <= 25; i++) {
-                if (i <= window.unlockedLessons) {
+            for (let i = 1; i <= TOTAL_LESSONS; i++) {
+                if (i <= unlocked) {
                     html += `<a href="lesson${i}.html" class="lesson-btn unlocked">Lesson ${i}</a>`;
                 } else {
                     html += `<button class="lesson-btn locked" onclick="alert('A hma ami chhang dik phawt rawh!')">Lesson ${i}</button>`;
                 }
             }
             document.getElementById("lessonButtons").innerHTML = html;
-        };
+        }
 
-        // LOG OUT FUNCTION
-        window.resetCourse = function () {
+        // ---------- LOGOUT ----------
+        window.logoutUser = async function () {
             if (confirm("I chhuak (log out) dawn chiang em?")) {
-                localStorage.clear();
-                location.reload();
+                await signOut(auth);
             }
         };
     </script>
