@@ -591,6 +591,11 @@
 
         const TOTAL_LESSONS = 25;
         let currentUid = null;
+        // While a registration is actively writing its profile, ignore
+        // onAuthStateChanged's "no profile yet" check — it fires the
+        // instant the auth account is created, which is BEFORE the
+        // profile write below has had a chance to run.
+        let suppressAuthCheck = false;
 
         // ---------- UI HELPERS ----------
         window.switchTab = function (tab) {
@@ -621,6 +626,7 @@
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUid = user.uid;
+                if (suppressAuthCheck) return; // registerUser() is handling the UI itself
                 const snap = await get(ref(db, "users/" + user.uid));
                 if (snap.exists()) {
                     showDashboard(snap.val());
@@ -735,6 +741,7 @@
 
             document.getElementById("regBtn").disabled = true;
             setMsg("regMsg", "Data saving...", "info");
+            suppressAuthCheck = true;
 
             try {
                 const uSnap = await get(ref(db, "usernames/" + username));
@@ -747,7 +754,7 @@
                 if (recovering) {
                     // Account already exists and is signed in — just finish the profile.
                     await writeProfile(currentUid, username, profileFields);
-                    // onAuthStateChanged will re-check and show the dashboard
+                    showDashboard({ name, progress: 1 });
                     return;
                 }
 
@@ -784,7 +791,7 @@
 
                 try {
                     await writeProfile(uid, username, profileFields);
-                    // onAuthStateChanged will show the dashboard
+                    showDashboard({ name, progress: 1 });
                 } catch (writeErr) {
                     // The database write failed after the auth account was
                     // created (or recovered). Delete the freshly created auth
@@ -804,6 +811,7 @@
                 setMsg("regMsg", text + "  [" + (err.code || err.message || "unknown error") + "]", "error");
             } finally {
                 document.getElementById("regBtn").disabled = false;
+                suppressAuthCheck = false;
             }
         };
 
