@@ -568,16 +568,18 @@
 
         // ---------- AUTH STATE ----------
         onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                currentUid = user.uid;
-                const snap = await get(ref(db, "users/" + user.uid));
-                if (snap.exists()) {
-                    showDashboard(snap.val());
-                } else {
-                    // Signed in but no profile doc — send back to login rather than break
-                    await signOut(auth);
-                }
-            } else {
+    if (user) {
+        currentUid = user.uid;
+        const snap = await get(ref(db, "users/" + user.uid));
+        if (snap.exists()) {
+            showDashboard(snap.val());
+            document.getElementById("loginMsg").textContent = ""; // Clear message on success
+        } else {
+            // Signed in but no profile doc — send back to login rather than break
+            await signOut(auth);
+            setMsg("loginMsg", "Registration incomplete. Please register a new account.", "error"); // Add this error message
+        }
+    } else {
                 currentUid = null;
                 document.getElementById("dashboardSection").classList.add("hidden");
                 document.getElementById("forewardSection").classList.remove("hidden");
