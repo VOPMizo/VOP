@@ -547,7 +547,27 @@
         <p id="errorMsg" class="error-msg"></p>
     </div>
 
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getDatabase, ref, get, update } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+        // ---- SAME FIREBASE CONFIG AS index.html ----
+        const firebaseConfig = {
+            apiKey: "AIzaSyAOB4q01251P4tkJ_KKmveVpbe7EDU_NwY",
+            authDomain: "vop-student-list.firebaseapp.com",
+            databaseURL: "https://vop-student-list-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "vop-student-list",
+            storageBucket: "vop-student-list.firebasestorage.app",
+            messagingSenderId: "230421900101",
+            appId: "1:230421900101:web:ca7dc791606570697aec2c",
+            measurementId: "G-XTWVGCTLKS"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getDatabase(app);
+
         // ==========================================
         // HEI CHIAH HI FILE DANG ATAN THLAK A NGAI:
         // ==========================================
@@ -566,8 +586,83 @@
             "q8": "C",
             "q9": "C"
         };
+
+        let currentUid = null;
+
+        // Make sure only a logged-in student can take the quiz. If nobody
+        // is signed in, send them back to the login/dashboard page.
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUid = user.uid;
+            } else {
+                window.location.href = "index.html";
+            }
+        });
+
+        window.submitQuiz = async function () {
+            const errorMsgEl = document.getElementById("errorMsg");
+            errorMsgEl.textContent = "";
+
+            if (!currentUid) {
+                errorMsgEl.textContent = "Please log in first.";
+                return;
+            }
+
+            const questionNames = Object.keys(correctAnswers);
+            const answers = {};
+            const unanswered = [];
+
+            questionNames.forEach((q) => {
+                const selected = document.querySelector('input[name="' + q + '"]:checked');
+                if (selected) {
+                    answers[q] = selected.value;
+                } else {
+                    unanswered.push(q);
+                }
+            });
+
+            if (unanswered.length > 0) {
+                errorMsgEl.textContent = "Zawhna zawng zawng chhang tirh rawh, i han hnawl lo la a awm.";
+                return;
+            }
+
+            const allCorrect = questionNames.every((q) => answers[q] === correctAnswers[q]);
+
+            if (!allCorrect) {
+                errorMsgEl.textContent = "Chhanna i pêk ṭhenkhat a dik lo. Ngaihtuah leh la, chhan leh rawh.";
+                return;
+            }
+
+            const submitBtn = document.getElementById("submitBtn");
+            submitBtn.disabled = true;
+            submitBtn.textContent = "Saving...";
+
+            try {
+                // Only ever move progress forward — never overwrite a
+                // student's progress with a lower value (e.g. if they're
+                // retaking an earlier lesson after finishing later ones).
+                const userRef = ref(db, "users/" + currentUid);
+                const snap = await get(userRef);
+                const currentProgress = snap.exists() ? parseInt(snap.val().progress || 1) : 1;
+                const newProgress = Math.max(currentProgress, currentLessonNumber + 1);
+
+                await update(userRef, { progress: newProgress });
+                localStorage.setItem("vop_progress", newProgress);
+
+                document.getElementById("successModal").classList.remove("hidden");
+            } catch (err) {
+                console.error(err);
+                errorMsgEl.textContent = "Progress i dahchhuah a har. Try leh rawh.";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Submit Answer";
+            }
+        };
+
+        window.goToNext = function () {
+            window.location.href = nextLessonFile;
+        };
     </script>
-    <script type="module" src="vop-lesson.js"></script>
 </body>
 
 </html>
