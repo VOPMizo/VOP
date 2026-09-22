@@ -629,7 +629,13 @@
                 if (suppressAuthCheck) return; // registerUser() is handling the UI itself
                 const snap = await get(ref(db, "users/" + user.uid));
                 if (snap.exists()) {
-                    showDashboard(snap.val());
+                    const data = snap.val();
+                    localStorage.setItem("vop_uid", user.uid);
+                    localStorage.setItem("vop_email", user.email || data.email || "");
+                    localStorage.setItem("vop_name", data.name || "");
+                    localStorage.setItem("vop_progress", data.progress || 1);
+                    localStorage.setItem("vop_username", data.username || "");
+                    showDashboard(data);
                     document.getElementById("loginMsg").textContent = ""; // Clear message on success
                 } else {
                     // Signed in, but the profile write never completed last time.
@@ -645,6 +651,7 @@
                 }
             } else {
                 currentUid = null;
+                localStorage.clear();
                 document.getElementById("dashboardSection").classList.add("hidden");
                 document.getElementById("forewardSection").classList.remove("hidden");
                 document.getElementById("loginSection").classList.remove("hidden");
@@ -697,6 +704,11 @@
                 registeredAt: Date.now()
             };
             await update(ref(db), updates);
+            localStorage.setItem("vop_uid", uid);
+            localStorage.setItem("vop_email", profileFields.email);
+            localStorage.setItem("vop_name", profileFields.name);
+            localStorage.setItem("vop_progress", 1);
+            localStorage.setItem("vop_username", username);
         }
 
         window.registerUser = async function () {
@@ -874,6 +886,7 @@
         // ---------- LOGOUT ----------
         window.logoutUser = async function () {
             if (confirm("Are you sure you want to log out?")) {
+                localStorage.clear();
                 await signOut(auth);
             }
         };
