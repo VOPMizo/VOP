@@ -156,11 +156,30 @@
         </div>
     </div>
 
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwuk-FMfvgUsc4Do49O9D1XkEnE3qga-4M7hsbB9FPGuapxzMfOtVEryKvXugRfbBg-6A/exec'; // I Google Script URL dah rawh
-        let unlockedLessons = 1;
-        let currentUserEmail = "";
-        let studentName = "";
+    <script type="module">
+        // Firebase Library kan la lut
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
+        // HETAH HIAN I FIREBASE CONFIG KHA DAH RAWH (API KEY, PROJECT ID, ETC.)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAOB4q01251P4tkJ_KKmveVpbe7EDU_NwY",
+            authDomain: "vop-student-list.firebaseapp.com",
+            projectId: "vop-student-list",
+            storageBucket: "vop-student-list.firebasestorage.app",
+            messagingSenderId: "230421900101",
+            appId: "1:230421900101:web:ca7dc791606570697aec2c",
+            measurementId: "G-XTWVGCTLKS"
+        };
+
+        // Firebase ti nungin Database (Firestore) kan thlunzawm
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // type="module" kan hman avangin HTML-a onclick function ten an hmuh theih nan 'window' ah kan dah a ngai
+        window.unlockedLessons = 1;
+        window.currentUserEmail = "";
+        window.studentName = "";
 
         window.onload = function () {
             let savedEmail = localStorage.getItem("vop_email");
@@ -168,54 +187,60 @@
             let savedName = localStorage.getItem("vop_name");
 
             if (savedEmail && savedProgress) {
-                currentUserEmail = savedEmail;
-                unlockedLessons = parseInt(savedProgress);
-                studentName = savedName;
-                showDashboard();
+                window.currentUserEmail = savedEmail;
+                window.unlockedLessons = parseInt(savedProgress);
+                window.studentName = savedName;
+                window.showDashboard();
             }
         };
 
-        function loginUser() {
+        // LOGIN FUNCTION
+        window.loginUser = async function () {
             let email = document.getElementById("loginEmail").value.trim().toLowerCase();
             if (email === "") { alert("Email chhu lut rawh."); return; }
             document.getElementById("loginMsg").innerText = "Checking record... Lo nghak lawk rawh.";
             document.getElementById("loginBtn").disabled = true;
 
-            let formData = new URLSearchParams();
-            formData.append("action", "login");
-            formData.append("email", email);
+            try {
+                // 'users' collection ah email hmangin kan zawng
+                const docRef = doc(db, "users", email);
+                const docSnap = await getDoc(docRef);
 
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        currentUserEmail = email;
-                        studentName = data.name;
-                        unlockedLessons = parseInt(data.progress);
-                        localStorage.setItem("vop_email", currentUserEmail);
-                        localStorage.setItem("vop_name", studentName);
-                        localStorage.setItem("vop_progress", unlockedLessons);
-                        showDashboard();
-                    } else {
-                        document.getElementById("loginSection").classList.add("hidden");
-                        document.getElementById("registerSection").classList.remove("hidden");
-                        currentUserEmail = email;
-                        document.getElementById("displayRegEmail").innerText = currentUserEmail;
-                    }
-                })
-                .catch(err => {
-                    alert("Network error.");
-                    document.getElementById("loginBtn").disabled = false;
-                    document.getElementById("loginMsg").innerText = "";
-                });
-        }
+                if (docSnap.exists()) {
+                    // A lo in-register tawh a nih chuan
+                    let data = docSnap.data();
+                    window.currentUserEmail = email;
+                    window.studentName = data.name;
+                    window.unlockedLessons = parseInt(data.progress || 1);
 
-        function registerUser() {
+                    localStorage.setItem("vop_email", window.currentUserEmail);
+                    localStorage.setItem("vop_name", window.studentName);
+                    localStorage.setItem("vop_progress", window.unlockedLessons);
+                    window.showDashboard();
+                } else {
+                    // A la in-register loh chuan Register Form ah kan hruai ang
+                    document.getElementById("loginSection").classList.add("hidden");
+                    document.getElementById("registerSection").classList.remove("hidden");
+                    window.currentUserEmail = email;
+                    document.getElementById("displayRegEmail").innerText = window.currentUserEmail;
+                }
+            } catch (error) {
+                alert("Database check theih a ni lo. Network emaw Firebase Rules check rawh.");
+                console.error(error);
+                document.getElementById("loginBtn").disabled = false;
+                document.getElementById("loginMsg").innerText = "";
+            }
+        };
+
+        // REGISTER FUNCTION
+        window.registerUser = async function () {
             let name = document.getElementById("userName").value.trim();
             let veng = document.getElementById("userVeng").value.trim();
             let khua = document.getElementById("userKhua").value.trim();
             let district = document.getElementById("userDistrict").value.trim();
             let mobile = document.getElementById("userMobile").value.trim();
+            let house_no = document.getElementById("userHouseNo").value.trim();
+            let pin = document.getElementById("userPin").value.trim();
 
             if (name === "" || veng === "" || khua === "" || district === "" || mobile === "") {
                 alert("A pawimawh ho fill-up vek rawh."); return;
@@ -224,55 +249,64 @@
             document.getElementById("regMsg").innerText = "Data saving...";
             document.getElementById("regBtn").disabled = true;
 
-            let formData = new URLSearchParams();
-            formData.append("action", "register");
-            formData.append("email", currentUserEmail);
-            formData.append("name", name);
-            formData.append("veng", veng);
-            formData.append("khua", khua);
-            formData.append("house_no", document.getElementById("userHouseNo").value.trim());
-            formData.append("district", district);
-            formData.append("pin", document.getElementById("userPin").value.trim());
-            formData.append("mobile", mobile);
-
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(res => res.json())
-                .then(data => {
-                    studentName = name;
-                    unlockedLessons = 1;
-                    localStorage.setItem("vop_email", currentUserEmail);
-                    localStorage.setItem("vop_name", studentName);
-                    localStorage.setItem("vop_progress", unlockedLessons);
-                    document.getElementById("registerSection").classList.add("hidden");
-                    showDashboard();
+            try {
+                // Firebase Firestore ah kan save dawn
+                const docRef = doc(db, "users", window.currentUserEmail);
+                await setDoc(docRef, {
+                    name: name,
+                    veng: veng,
+                    khua: khua,
+                    house_no: house_no,
+                    district: district,
+                    pin: pin,
+                    mobile: mobile,
+                    progress: 1,  // A tirin Lesson 1
+                    registeredAt: new Date()
                 });
-        }
 
-        function showDashboard() {
+                // A save hlawhtlin chuan Dashboard ah kan luhtir nghal ang
+                window.studentName = name;
+                window.unlockedLessons = 1;
+                localStorage.setItem("vop_email", window.currentUserEmail);
+                localStorage.setItem("vop_name", window.studentName);
+                localStorage.setItem("vop_progress", window.unlockedLessons);
+
+                document.getElementById("registerSection").classList.add("hidden");
+                window.showDashboard();
+            } catch (error) {
+                alert("Data save theih a ni lo.");
+                console.error(error);
+                document.getElementById("regBtn").disabled = false;
+                document.getElementById("regMsg").innerText = "";
+            }
+        };
+
+        // DASHBOARD TILLANGTU
+        window.showDashboard = function () {
             document.getElementById("forewardSection").classList.add("hidden");
             document.getElementById("loginSection").classList.add("hidden");
             document.getElementById("dashboardSection").classList.remove("hidden");
             document.getElementById("logoutBtn").classList.remove("hidden");
-            document.getElementById("welcomeMsg").innerText = "Chibai, " + studentName + "! I course i chhunzawm thei e.";
+            document.getElementById("welcomeMsg").innerText = "Chibai, " + window.studentName + "! I course i chhunzawm thei e.";
 
-            // Link hranga luh theih dan siamna
             let html = "";
             for (let i = 1; i <= 25; i++) {
-                if (i <= unlockedLessons) {
+                if (i <= window.unlockedLessons) {
                     html += `<a href="lesson${i}.html" class="lesson-btn unlocked">Lesson ${i}</a>`;
                 } else {
                     html += `<button class="lesson-btn locked" onclick="alert('A hma ami chhang dik phawt rawh!')">Lesson ${i}</button>`;
                 }
             }
             document.getElementById("lessonButtons").innerHTML = html;
-        }
+        };
 
-        function resetCourse() {
+        // LOG OUT FUNCTION
+        window.resetCourse = function () {
             if (confirm("I chhuak (log out) dawn chiang em?")) {
                 localStorage.clear();
                 location.reload();
             }
-        }
+        };
     </script>
 </body>
 
