@@ -685,10 +685,15 @@
 
                 // Student details a tira submit tawhte lakchhuahna
                 const payload = {
-                    name: userData.name || userData.fullName || "",
-                    phone: userData.phone || userData.phoneNumber || "",
                     email: userData.email || (auth.currentUser ? auth.currentUser.email : ""),
-                    address: userData.address || ""
+                    name: userData.name || "",
+                    veng: userData.veng || "",
+                    khua: userData.khua || "",
+                    house_no: userData.house_no || "",
+                    district: userData.district || "",
+                    pin: userData.pin || "",
+                    mobile: userData.mobile || "",
+                    progress: "Completed Lesson 25"
                 };
 
                 // Google Apps Script-a POST request thawnna
