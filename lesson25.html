@@ -667,7 +667,8 @@
             try {
                 const userRef = ref(db, "users/" + currentUid);
                 const snap = await get(userRef);
-                const currentProgress = snap.exists() ? parseInt(snap.val().progress || 1) : 1;
+                const userData = snap.exists() ? snap.val() : {};
+                const currentProgress = snap.exists() ? parseInt(userData.progress || 1) : 1;
                 const newProgress = Math.max(currentProgress, 25);
 
                 await update(userRef, {
@@ -676,6 +677,29 @@
                     completedAt: Date.now()
                 });
                 localStorage.setItem("vop_progress", newProgress);
+
+                // ==========================================
+                // GOOGLE SHEET-A DETAILS THAWNNA:
+                // ==========================================
+                const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxa6OYQ64-31v2d9siGYAZkfTaoy7H1FromK6RsLjPlOHBWbr3bkQI-D7rLzdRBmqAEuA/exec";
+
+                // Student details a tira submit tawhte lakchhuahna
+                const payload = {
+                    name: userData.name || userData.fullName || "",
+                    phone: userData.phone || userData.phoneNumber || "",
+                    email: userData.email || (auth.currentUser ? auth.currentUser.email : ""),
+                    address: userData.address || ""
+                };
+
+                // Google Apps Script-a POST request thawnna
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: "POST",
+                    mode: "no-cors", // CORS block loh nan
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                }).catch(e => console.error("Sheet error:", e));
 
                 document.getElementById("successModal").classList.remove("hidden");
             } catch (err) {
