@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -123,11 +123,11 @@
 
 <body>
 
-    <div id="successModal" class="modal-overlay hidden">
+        <div id="successModal" class="modal-overlay hidden">
         <div class="modal-content">
-            <h2>🎉 Lawmpuiawm! 🎉</h2>
-            <p id="modalMessage">I chhang dik vek e. Lesson thar i zir chhunzawm thei tawh.</p>
-            <button id="modalContinueBtn" class="modal-btn" onclick="goToNext()">Lesson 2 ah Kalna ➔</button>
+            <h2>&#127881; Congratulations! &#127881;</h2>
+            <p id="modalMessage">I chhang dik vek e. Lesson thar i zir chhunzawm thei e.</p>
+            <button id="modalContinueBtn" class="modal-btn" onclick="goToNext()">Lesson 2-a Kalna &#10148;</button>
         </div>
     </div>
 
@@ -591,9 +591,16 @@
 
         // Make sure only a logged-in student can take the quiz. If nobody
         // is signed in, send them back to the login/dashboard page.
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentUid = user.uid;
+                const userRef = ref(db, "users/" + currentUid);
+                const snap = await get(userRef);
+                const currentProgress = snap.exists() ? parseInt(snap.val().progress || 1) : 1;
+                if (currentLessonNumber > currentProgress) {
+                    alert("He lesson hi i la unlock lo!");
+                    window.location.href = "index.html";
+                }
             } else {
                 window.location.href = "index.html";
             }
